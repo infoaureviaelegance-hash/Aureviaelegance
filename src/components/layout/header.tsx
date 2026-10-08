@@ -380,7 +380,7 @@ export function Header() {
 
         {/* ───────── logo — kept tight to the left edge ───────── */}
         <Link href="/" className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-1.5 sm:gap-2">
-          <div className="relative h-8 w-8 sm:h-10 sm:w-10 lg:h-14 lg:w-14">
+          <div className="relative h-9 w-9 sm:h-11 sm:w-11 lg:h-15 lg:w-15">
             <Image
               src="/logo/icon.png"
               alt=""
@@ -389,7 +389,7 @@ export function Header() {
               priority
             />
           </div>
-          <div className="relative h-6 w-[80px] min-[400px]:w-[90px] sm:h-8 sm:w-[102px] min-[400px]:sm:w-[118px] sm:h-10 sm:w-[140px] lg:h-12 lg:w-[156px]">
+          <div className="relative h-7 w-[86px] min-[400px]:w-[96px] sm:h-11 sm:w-[148px] lg:h-13 lg:w-[164px]">
             <Image
               src="/logo/logotext.png"
               alt="Auerviamaison"
