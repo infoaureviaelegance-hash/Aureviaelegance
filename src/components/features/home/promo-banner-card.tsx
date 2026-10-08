@@ -41,7 +41,7 @@ export function PromoBannerCard({ banner }: { banner: PromoBanner }) {
         </Link>
       </div>
 
-      <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-white/30 bg-white/15 backdrop-blur-[2px]">
+      <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-white/30">
         <Image
           src={banner.image}
           alt={banner.imageAlt || banner.title}
