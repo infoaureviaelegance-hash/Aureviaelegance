@@ -49,7 +49,10 @@ export function PromoBannerSection({ banners }: { banners: PromoBanner[] }) {
         }}
         >
           {visibleBanners.map((banner) => (
-            <div key={banner.id} className="w-full shrink-0 snap-start">
+            <div
+              key={banner.id}
+              className={`w-full shrink-0 snap-start ${visibleBanners.length > 1 ? "lg:w-[calc((100%-1.25rem)/2)]" : ""}`}
+            >
               <PromoBannerCard banner={banner} />
             </div>
           ))}

@@ -226,10 +226,10 @@ export function StoreProductCard({
   };
 
   return (
-    <article className="group flex aspect-[3/4] w-full max-w-[336px] flex-col overflow-hidden rounded-[14px] border border-[#d9c9a8] bg-white shadow-[inset_0_0_0_1px_rgba(132,96,42,0.08),0_3px_12px_rgba(36,29,17,0.09)] transition-[border-color,box-shadow,transform] duration-500 ease-out hover:-translate-y-1 hover:border-[#c6a24a]/70 hover:shadow-[inset_0_0_0_1px_rgba(132,96,42,0.08),0_12px_28px_rgba(36,29,17,0.14)]">
+    <article className="group flex aspect-[3/4] w-full max-w-[336px] flex-col overflow-hidden rounded-[14px] border border-[#d9c9a8] bg-white transition-colors duration-300 hover:border-[#c6a24a]/70">
       <div className="group/image relative min-h-0 flex-1 overflow-hidden rounded-[14px] bg-[#fffdf8]">
         {discount !== null ? (
-          <div className="absolute left-2 top-2 z-20 flex h-9 w-9 flex-col items-center justify-center rounded-full bg-[#f7194f] text-center text-white shadow-[0_4px_12px_rgba(247,25,79,0.32)] sm:left-2.5 sm:top-2.5 sm:h-11 sm:w-11">
+          <div className="absolute left-2 top-2 z-20 flex h-9 w-9 flex-col items-center justify-center rounded-full bg-[#f7194f] text-center text-white sm:left-2.5 sm:top-2.5 sm:h-11 sm:w-11">
             <span className="text-[0.7rem] font-extrabold leading-none tracking-[-0.04em] sm:text-[0.8rem]">
               -{discount}%
             </span>
@@ -239,26 +239,26 @@ export function StoreProductCard({
           </div>
         ) : null}
 
-        <div className="absolute right-2 top-1/2 z-30 flex -translate-y-1/2 flex-col gap-2 sm:right-2.5 sm:gap-2.5 sm:opacity-0 sm:transition-opacity sm:duration-500 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
+        <div className="absolute right-1.5 top-1/2 z-30 flex -translate-y-1/2 flex-col gap-1.5 sm:right-2.5 sm:gap-2.5 sm:opacity-0 sm:transition-opacity sm:duration-500 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
           <button
             type="button"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#bfe5cc] bg-gradient-to-br from-[#f2fff6] via-[#d9f5e2] to-[#b9e8c8] text-[#14883f] shadow-[0_4px_12px_rgba(20,136,63,0.2)] transition duration-200 hover:scale-110 hover:from-[#74d99a] hover:via-[#35b86b] hover:to-[#087a35] hover:text-white hover:shadow-[0_6px_16px_rgba(8,122,53,0.45)] sm:h-11 sm:w-11"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#bfe5cc] bg-gradient-to-br from-[#f2fff6] via-[#d9f5e2] to-[#b9e8c8] text-[#14883f] transition-colors duration-200 hover:from-[#74d99a] hover:via-[#35b86b] hover:to-[#087a35] hover:text-white sm:h-11 sm:w-11"
             aria-label={`Order ${title} on WhatsApp`}
             onClick={() => {
               window.open(whatsappUrl, "_blank", "noopener,noreferrer");
               trackContact("WhatsApp product order");
             }}
           >
-            <FaWhatsapp className="h-4 w-4 sm:h-5 sm:w-5" />
+            <FaWhatsapp className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
           </button>
           <button
             type="button"
             onClick={handleAddToCart}
             disabled={loading || !effectiveVariantId}
             aria-label={loading ? `Adding ${title} to cart` : `Add ${title} to cart`}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#ead8b5] bg-gradient-to-br from-[#fff8ed] via-[#f7e8c8] to-[#e9c985] text-[#75491e] shadow-[0_4px_12px_rgba(111,75,28,0.22)] transition duration-300 hover:scale-110 hover:from-[#f4d9a0] hover:via-[#e7bd70] hover:to-[#d9a84e] hover:text-[#542d10] hover:shadow-[0_6px_16px_rgba(185,137,59,0.4)] disabled:cursor-not-allowed disabled:opacity-60 sm:h-11 sm:w-11"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#ead8b5] bg-gradient-to-br from-[#fff8ed] via-[#f7e8c8] to-[#e9c985] text-[#75491e] transition-colors duration-300 hover:from-[#f4d9a0] hover:via-[#e7bd70] hover:to-[#d9a84e] hover:text-[#542d10] disabled:cursor-not-allowed disabled:opacity-60 sm:h-11 sm:w-11"
           >
-            <ShoppingCart aria-hidden="true" className="h-4 w-4 sm:h-5 sm:w-5" />
+            <ShoppingCart aria-hidden="true" className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
           </button>
           <button
             type="button"
@@ -266,10 +266,10 @@ export function StoreProductCard({
               const added = await wishlist.toggle({ productId: effectiveProductId, handle, title, price: Number(price.amount), image: normalizedFeaturedImage });
               toast.success(added ? "Added to wishlist" : "Removed from wishlist", { description: title });
             }}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#f5c5d0] bg-gradient-to-br from-[#fff2f5] via-[#f9dce4] to-[#f0b9c9] text-[#a62c50] shadow-[0_4px_12px_rgba(166,44,80,0.2)] transition duration-300 hover:scale-110 hover:from-[#efb5c5] hover:via-[#df8fa6] hover:to-[#c96380] hover:text-white hover:shadow-[0_6px_16px_rgba(201,99,128,0.42)] sm:h-11 sm:w-11"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#f5c5d0] bg-gradient-to-br from-[#fff2f5] via-[#f9dce4] to-[#f0b9c9] text-[#a62c50] transition-colors duration-300 hover:from-[#efb5c5] hover:via-[#df8fa6] hover:to-[#c96380] hover:text-white sm:h-11 sm:w-11"
             aria-label={`Save ${title}`}
           >
-            <Heart aria-hidden="true" className={`h-4 w-4 sm:h-5 sm:w-5 ${wishlist.has(effectiveProductId) ? "fill-current" : ""}`} />
+            <Heart aria-hidden="true" className={`h-3.5 w-3.5 sm:h-5 sm:w-5 ${wishlist.has(effectiveProductId) ? "fill-current" : ""}`} />
           </button>
         </div>
 
