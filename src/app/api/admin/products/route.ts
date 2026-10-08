@@ -82,8 +82,8 @@ export async function GET(request: Request) {
     const where: Prisma.ProductWhereInput = {};
     if (search) {
       where.OR = [
-        { title: { contains: search, mode: "insensitive" } },
-        { handle: { contains: search, mode: "insensitive" } },
+        { title: { contains: search } },
+        { handle: { contains: search } },
       ];
     }
     if (status) {

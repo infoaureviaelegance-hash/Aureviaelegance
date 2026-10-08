@@ -54,7 +54,7 @@ export async function getProductsPage(params: {
   const where: Prisma.ProductWhereInput = {
     status: "ACTIVE",
     AND: [
-      ...(params.q ? [{ OR: [{ title: { contains: params.q, mode: "insensitive" as const } }, { description: { contains: params.q, mode: "insensitive" as const } }, { seoTitle: { contains: params.q, mode: "insensitive" as const } }] }] : []),
+      ...(params.q ? [{ OR: [{ title: { contains: params.q } }, { description: { contains: params.q } }, { seoTitle: { contains: params.q } }] }] : []),
       ...(category?.parentId ? [{ subcategoryId: category.id }] : []),
     ],
     ...(params.min !== undefined || params.max !== undefined ? { price: { ...(params.min !== undefined ? { gte: params.min } : {}), ...(params.max !== undefined ? { lte: params.max } : {}) } } : {}),
@@ -167,9 +167,9 @@ export async function getProductsAdvanced(params: {
       ...(params.q
         ? {
             OR: [
-              { title: { contains: params.q, mode: "insensitive" } },
-              { description: { contains: params.q, mode: "insensitive" } },
-              { seoTitle: { contains: params.q, mode: "insensitive" } },
+              { title: { contains: params.q } },
+              { description: { contains: params.q } },
+              { seoTitle: { contains: params.q } },
             ],
           }
         : {}),

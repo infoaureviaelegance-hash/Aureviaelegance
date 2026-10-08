@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -11,8 +11,8 @@ model Product {
   id                     String             @id @default(cuid())
   handle                 String             @unique
   title                  String
-  description            String?
-  descriptionHtml        String?
+  description            String?            @db.Text
+  descriptionHtml        String?            @db.LongText
   price                  Float
   compareAtPrice         Float?
   generalDiscountPercent Float              @default(0)
@@ -22,14 +22,14 @@ model Product {
   availableForSale       Boolean            @default(true)
   status                 String             @default("ACTIVE")
   seoTitle               String?
-  seoDescription         String?
-  canonicalUrl           String?
+  seoDescription         String?            @db.Text
+  canonicalUrl           String?            @db.VarChar(2048)
   robots                 String             @default("index,follow")
-  openGraphImage         String?
-  imageAlt               String?
+  openGraphImage         String?            @db.VarChar(2048)
+  imageAlt               String?            @db.Text
   focusKeyword           String?
   images                 Json               @default("[]")
-  featuredImage          String?
+  featuredImage          String?            @db.VarChar(2048)
   productType            String?
   categoryId             String?
   subcategoryId          String?
@@ -71,7 +71,7 @@ model ProductVariation {
   id               String   @id @default(cuid())
   name             String
   value            String   @default("")
-  description      String?
+  description      String?  @db.Text
   price            Float
   compareAtPrice   Float?
   sku              String?
@@ -99,15 +99,15 @@ model Collection {
   id              String   @id @default(cuid())
   handle          String   @unique
   title           String
-  description     String?
-  descriptionHtml String?
-  image           String?
+  description     String?  @db.Text
+  descriptionHtml String?  @db.LongText
+  image           String?  @db.VarChar(2048)
   seoTitle        String?
-  seoDescription  String?
-  canonicalUrl    String?
+  seoDescription  String?  @db.Text
+  canonicalUrl    String?  @db.VarChar(2048)
   robots          String   @default("index,follow")
-  openGraphImage  String?
-  imageAlt        String?
+  openGraphImage  String?  @db.VarChar(2048)
+  imageAlt        String?  @db.Text
   focusKeyword    String?
   productHandles  Json     @default("[]")
   isFeatured      Boolean  @default(false)
@@ -180,13 +180,13 @@ model Order {
   couponCode              String?
   paymentMethod           String    @default("pending")
   paymentStatus           String    @default("pending")
-  paymentProofUrl         String?
+  paymentProofUrl         String?   @db.VarChar(2048)
   transactionReference    String?
   confirmationEmailSentAt DateTime?
   orderStatus             String    @default("pending")
-  notes                   String?
+  notes                   String?   @db.Text
   trackingNumber          String?
-  trackingUrl             String?
+  trackingUrl             String?   @db.VarChar(2048)
   createdAt               DateTime  @default(now())
   updatedAt               DateTime  @updatedAt
   customerId              String?
@@ -205,11 +205,11 @@ model Customer {
   phone           String?
   address         Json?
   dateOfBirth     DateTime?
-  notes           String?
+  notes           String?            @db.Text
   cartSnapshot    Json               @default("[]")
-  lastActiveAt    DateTime            @default(now())
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  lastActiveAt    DateTime           @default(now())
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
   orders          Order[]
   wishlistItems   WishlistItem[]
   activities      CustomerActivity[]
@@ -233,13 +233,13 @@ model WishlistItem {
 }
 
 model CustomerActivity {
-  id         String   @id @default(cuid())
-  customerId String
-  type       String
-  description String
-  metadata   Json?
-  createdAt  DateTime @default(now())
-  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  customerId  String
+  type        String
+  description String   @db.Text
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
   @@index([customerId, createdAt])
 }
@@ -250,10 +250,10 @@ model Inquiry {
   email     String
   phone     String?
   subject   String
-  message   String
+  message   String   @db.LongText
   type      String   @default("contact")
   status    String   @default("unread")
-  adminNote String?
+  adminNote String?  @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -262,17 +262,17 @@ model Category {
   id             String   @id @default(cuid())
   name           String   @unique
   slug           String   @unique
-  description    String?
-  image          String?
+  description    String?  @db.Text
+  image          String?  @db.VarChar(2048)
   parentId       String?
   order          Int      @default(0)
   featured       Boolean  @default(false)
   seoTitle       String?
-  seoDescription String?
-  canonicalUrl   String?
+  seoDescription String?  @db.Text
+  canonicalUrl   String?  @db.VarChar(2048)
   robots         String   @default("index,follow")
-  openGraphImage String?
-  imageAlt       String?
+  openGraphImage String?  @db.VarChar(2048)
+  imageAlt       String?  @db.Text
   focusKeyword   String?
   productIds     Json     @default("[]")
   createdAt      DateTime @default(now())
@@ -285,25 +285,25 @@ model BlogPost {
   id                    String    @id @default(cuid())
   title                 String
   slug                  String    @unique
-  excerpt               String?
-  content               String?
-  featuredImage         String?
-  featuredImageAlt      String?
-  openGraphImage        String?
+  excerpt               String?   @db.Text
+  content               String?   @db.LongText
+  featuredImage         String?   @db.VarChar(2048)
+  featuredImageAlt      String?   @db.Text
+  openGraphImage        String?   @db.VarChar(2048)
   categoryId            String?
   author                String
   authorId              String?
   authorProfile         Author?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
   authorRole            String?
-  authorBio             String?
-  authorImage           String?
+  authorBio             String?   @db.Text
+  authorImage           String?   @db.VarChar(2048)
   status                String    @default("draft")
   publishedAt           DateTime?
   scheduledAt           DateTime?
   contentRevisedAt      DateTime?
   seoTitle              String?
-  seoDescription        String?
-  canonicalUrl          String?
+  seoDescription        String?   @db.Text
+  canonicalUrl          String?   @db.VarChar(2048)
   focusKeyword          String?
   relatedKeywords       Json      @default("[]")
   relatedArticleIds     Json      @default("[]")
@@ -326,8 +326,8 @@ model Author {
   name      String
   slug      String     @unique
   role      String?
-  bio       String?
-  image     String?
+  bio       String?    @db.Text
+  image     String?    @db.VarChar(2048)
   posts     BlogPost[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -337,9 +337,9 @@ model Review {
   id                 String   @id @default(cuid())
   authorName         String
   authorEmail        String?
-  authorImage        String?
+  authorImage        String?  @db.VarChar(2048)
   rating             Int      @default(5)
-  content            String
+  content            String   @db.Text
   productId          String?
   productHandle      String?
   isFeatured         Boolean  @default(false)
@@ -347,7 +347,7 @@ model Review {
   isVerifiedPurchase Boolean  @default(false)
   helpfulCount       Int      @default(0)
   images             Json     @default("[]")
-  adminNote          String?
+  adminNote          String?  @db.Text
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
@@ -359,18 +359,18 @@ model Review {
 model Certificate {
   id                String    @id @default(cuid())
   title             String    @map("name")
-  certificateImage  String    @map("image")
-  shortDescription  String?   @map("description")
+  certificateImage  String    @map("image") @db.VarChar(2048)
+  shortDescription  String?   @map("description") @db.Text
   displayOrder      Int       @default(0) @map("order")
   active            Boolean   @default(true) @map("isActive")
   featured          Boolean   @default(false) @map("isVerifiedBy")
   organizationName  String    @default("OrganoCity Verified Organization")
-  organizationLogo  String    @default("")
+  organizationLogo  String    @default("") @db.VarChar(2048)
   orientation       String    @default("LANDSCAPE")
   issueDate         DateTime  @default(now())
   expiryDate        DateTime?
   certificateNumber String?
-  verificationUrl   String?
+  verificationUrl   String?   @db.VarChar(2048)
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -380,17 +380,17 @@ model Certificate {
 
 model HeroSlide {
   id                String   @id @default(cuid())
-  imageUrl          String
-  mobileImageUrl    String?
-  imageAlt          String
+  imageUrl          String   @db.VarChar(2048)
+  mobileImageUrl    String?  @db.VarChar(2048)
+  imageAlt          String   @db.Text
   eyebrow           String
   title             String
   titleHighlight    String
-  description       String
+  description       String   @db.Text
   ctaPrimaryLabel   String?
-  ctaPrimaryHref    String?
+  ctaPrimaryHref    String?  @db.VarChar(2048)
   ctaSecondaryLabel String?
-  ctaSecondaryHref  String?
+  ctaSecondaryHref  String?  @db.VarChar(2048)
   isActive          Boolean  @default(true)
   order             Int      @default(0)
   createdAt         DateTime @default(now())
@@ -404,11 +404,11 @@ model HomepageSection {
   id         String   @id @default(cuid())
   sectionKey String   @unique
   title      String?
-  subtitle   String?
+  subtitle   String?  @db.Text
   content    Json?
   order      Int      @default(0)
   isActive   Boolean  @default(true)
-  image      String?
+  image      String?  @db.VarChar(2048)
   updatedAt  DateTime @updatedAt
 }
 
@@ -434,20 +434,20 @@ enum VideoFormat {
 model Video {
   id             String         @id @default(cuid())
   title          String
-  description    String?
-  thumbnail      String?
-  videoUrl       String
-  embedUrl       String?
+  description    String?        @db.Text
+  thumbnail      String?        @db.VarChar(2048)
+  videoUrl       String         @db.VarChar(2048)
+  embedUrl       String?        @db.VarChar(2048)
   platform       VideoPlatform
   placement      VideoPlacement @default(VIDEOS_PAGE)
   format         VideoFormat    @default(LANDSCAPE)
   buttonText     String?
-  buttonUrl      String?
+  buttonUrl      String?        @db.VarChar(2048)
   featured       Boolean        @default(false)
   active         Boolean        @default(true)
   displayOrder   Int            @default(0)
   seoTitle       String?
-  seoDescription String?
+  seoDescription String?        @db.Text
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 
@@ -468,11 +468,11 @@ model NavigationMenu {
 model MediaAsset {
   id          String   @id @default(cuid())
   filename    String
-  url         String
+  url         String   @db.VarChar(2048)
   publicId    String   @unique
   type        String
   size        Int
-  alt         String?
+  alt         String?  @db.Text
   uploadedBy  String?
   usedIn      String?
   referenceId String?
