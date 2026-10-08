@@ -1,0 +1,299 @@
+@import "tailwindcss";
+
+@source "../../node_modules/@esmate/shadcn";
+@import "@esmate/shadcn/styles/new-york.css";
+
+@theme {
+  --font-serif: var(--font-sans);
+  --color-primary: hsl(349, 59%, 56%);
+  --color-primary-foreground: hsl(0, 0%, 100%);
+  --color-secondary: hsl(0, 0%, 96%);
+  --color-secondary-foreground: hsl(0, 0%, 4%);
+  --color-muted: hsl(30, 20%, 97%);
+  --color-muted-foreground: hsl(0, 0%, 29%);
+  --color-accent: hsl(349, 59%, 56%);
+  --color-accent-foreground: hsl(0, 0%, 4%);
+}
+
+:root {
+  --primary: 349 59% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 0 0% 98%;
+  --muted-foreground: 0 0% 15%;
+  --accent: 349 59% 56%;
+  --accent-foreground: 0 0% 0%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 4%;
+  --border: 0 0% 84%;
+  --input: 0 0% 100%;
+  --ring: 349 59% 56%;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #ffffff;
+    color: #111111;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #111111;
+  }
+
+  a {
+    color: #111111;
+  }
+
+  a:hover {
+    color: #d34c65;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    background-color: #ffffff;
+    color: #111111;
+    border-color: rgba(17, 17, 17, 0.2);
+  }
+
+  button:hover,
+  button:focus-visible,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #d34c65;
+  }
+
+  .bg-\[\#fcf5e8\],
+  .bg-\[\#f4f1e8\],
+  .bg-\[\#fff7df\],
+  .bg-\[\#fffaf5\],
+  .bg-\[\#ffedd5\],
+  .bg-\[\#f5f5f5\],
+  .bg-gray-50,
+  .bg-gray-100,
+  .bg-slate-50 {
+    background-color: #ffffff !important;
+  }
+
+  .text-\[\#0a0a0a\],
+  .text-\[\#1a1308\],
+  .text-\[\#5A5E55\],
+  .text-\[\#5a5e55\],
+  .text-gray-600,
+  .text-gray-700,
+  .text-gray-800,
+  .text-gray-900 {
+    color: #111111 !important;
+  }
+
+  .text-\[\#C6A24A\],
+  .text-\[\#f6a45d\],
+  .text-\[\#b57910\],
+  .text-\[\#f97316\],
+  .text-\[\#d8861f\],
+  .text-\[\#EA580C\],
+  .text-\[\#ea580c\],
+  .text-orange-500,
+  .text-orange-600 {
+    color: #d34c65 !important;
+  }
+
+  .bg-\[\#C6A24A\],
+  .bg-\[\#f6a45d\],
+  .bg-\[\#f97316\],
+  .bg-\[\#d8861f\],
+  .bg-\[\#c2410c\],
+  .bg-\[\#EA580C\],
+  .bg-\[\#ea580c\],
+  .bg-orange-500,
+  .bg-orange-600 {
+    background-color: #d34c65 !important;
+    color: #ffffff !important;
+  }
+
+  .hover\:bg-\[\#b8923f\]:hover,
+  .hover\:bg-\[\#d8861f\]:hover,
+  .hover\:bg-\[\#c2410c\]:hover,
+  .hover\:bg-\[\#ea580c\]:hover,
+  .hover\:bg-orange-600:hover {
+    background-color: #bd3f58 !important;
+    color: #ffffff !important;
+  }
+
+  .hover\:text-\[\#f97316\]:hover,
+  .hover\:text-\[\#ea580c\]:hover,
+  .hover\:text-orange-600:hover {
+    color: #bd3f58 !important;
+  }
+
+  .border-\[\#C6A24A\],
+  .border-\[\#C6A24A\]\/20,
+  .border-\[\#C6A24A\]\/25,
+  .border-\[\#C6A24A\]\/30,
+  .border-\[\#C6A24A\]\/35,
+  .border-\[\#C6A24A\]\/45,
+  .border-\[\#C6A24A\]\/50,
+  .border-orange-200,
+  .border-orange-300 {
+    border-color: rgba(17, 17, 17, 0.18) !important;
+  }
+}
+
+/* Keep the image-led category cards lifted above the white page surface. */
+.storefront-categories .category-card {
+  box-shadow: 0 10px 24px rgba(34, 18, 22, 0.1) !important;
+}
+
+/* Keep storefront content comfortably wide on desktop while preserving the
+   narrower reading widths used for text-heavy sections. */
+@media (min-width: 1280px) {
+  .public-site .max-w-7xl {
+    max-width: 96rem;
+    width: calc(100% - 2rem);
+  }
+
+  .public-site .storefront-categories {
+    width: calc(100% - 0.5rem);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.category-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 52s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-marquee-track {
+    animation: none;
+  }
+}
+
+.storefront-categories:hover .category-marquee-track,
+.storefront-categories:focus-within .category-marquee-track,
+.storefront-categories > div.is-dragging .category-marquee-track {
+  animation-play-state: paused;
+}
+
+.storefront-categories > div.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Give storefront filters one consistent closed-select appearance on desktop
+   and mobile instead of relying on each phone's default select styling. */
+.storefront-filter-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='m6 8 4 4 4-4' stroke='%231E6332' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: right 0.45rem center;
+  background-repeat: no-repeat;
+  background-size: 0.75rem;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes certificate-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.certificate-logo-marquee {
+  animation: certificate-logo-marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .certificate-logo-marquee {
+    animation-play-state: paused;
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 7s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Safe area support for mobile devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}

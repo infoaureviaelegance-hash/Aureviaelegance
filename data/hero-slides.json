@@ -1,0 +1,16 @@
+[
+  {
+    "id": "seed-beauty-luxury-lifestyle-hero",
+    "imageUrl": "https://res.cloudinary.com/telsof1g/image/upload/v1790791332/hero/xy4guvbrpaty5rkszdv5.jpg",
+    "mobileImageUrl": "https://res.cloudinary.com/telsof1g/image/upload/v1790791347/hero/g9gesaq3cq5xiqkpzgt4.jpg",
+    "imageAlt": "Beauty, jewelry, fragrances and lifestyle essentials",
+    "eyebrow": "BEAUTY • LUXURY • LIFESTYLE",
+    "title": "Elevate Your",
+    "titleHighlight": "Everyday Elegance",
+    "description": "Discover a world of beauty, cosmetics, jewelry, perfumes and smart watches — curated for the modern woman.",
+    "ctaPrimaryLabel": "Shop Now",
+    "ctaPrimaryHref": "/products",
+    "isActive": true,
+    "order": 1
+  }
+]
