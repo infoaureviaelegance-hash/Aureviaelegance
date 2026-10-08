@@ -7,7 +7,7 @@
     "start": "next start",
     "dev": "esmate task dev",
     "postinstall": "prisma generate",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && next build --webpack",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "fix": "esmate task fix",
@@ -68,7 +68,7 @@
     },
     "build": [
       "prisma generate",
-      "next build"
+      "next build --webpack"
     ],
     "fix": [
       "esmate fmt",
