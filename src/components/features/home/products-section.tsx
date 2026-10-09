@@ -131,10 +131,9 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
   );
 }
 
-function MovingProductRow({ row, products, categoryNames, productCard }: {
+function MovingProductRow({ row, products, productCard }: {
   row: 1 | 2 | 3;
   products: Product[];
-  categoryNames: string[];
   productCard: (product: Product) => React.ReactNode;
 }) {
   const [paused, setPaused] = useState(false);
@@ -153,13 +152,6 @@ function MovingProductRow({ row, products, categoryNames, productCard }: {
 
   return (
     <section aria-label={`Featured products row ${row}`}>
-      <div className="mb-3 flex items-end gap-3 sm:mb-4 sm:gap-5">
-        <div className="min-w-0">
-          <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#d84967]">Featured edit {String(row).padStart(2, "0")}</p>
-          <h3 className="mt-1 truncate font-serif text-lg font-extrabold text-gray-950 sm:text-2xl">{categoryNames.join(" · ") || `Homepage row ${row}`}</h3>
-        </div>
-        <span aria-hidden="true" className="mb-2 h-px min-w-4 flex-1 bg-gradient-to-r from-[#d84967]/55 via-[#d6b89f]/35 to-transparent" />
-      </div>
       <div
         className="scrollbar-hide overflow-x-auto overflow-y-hidden py-1"
         onMouseEnter={() => setPaused(true)}
@@ -252,6 +244,7 @@ function CollectionSlider({ collections }: { collections: Collection[] }) {
 }
 
 export function ProductsSection({ categories, products }: { categories: Category[]; products: Product[] }) {
+  const [selectedCategoryId, setSelectedCategoryId] = useState("all");
   const categoryById = new Map(categories.map((category) => [category.id, category]));
   const resolveRow = (product: Product) => {
     const directCategory = categoryById.get(product.subcategoryId || product.categoryId || "");
@@ -261,13 +254,20 @@ export function ProductsSection({ categories, products }: { categories: Category
   const featuredProducts = products
     .filter((product) => product.isFeatured)
     .sort((a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999) || a.title.localeCompare(b.title));
+  const categoryIncludesProduct = (categoryId: string, product: Product) => {
+    const productCategoryIds = [product.categoryId, product.subcategoryId].filter(Boolean);
+    if (productCategoryIds.includes(categoryId)) return true;
+    return productCategoryIds.some((id) => categoryById.get(id || "")?.parentId === categoryId);
+  };
+  const filterCategories = categories
+    .filter((category) => !category.parentId && featuredProducts.some((product) => resolveRow(product) && categoryIncludesProduct(category.id, product)))
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.name.localeCompare(b.name));
+  const visibleProducts = selectedCategoryId === "all"
+    ? featuredProducts
+    : featuredProducts.filter((product) => categoryIncludesProduct(selectedCategoryId, product));
   const rows = ([1, 2, 3] as const).map((row) => ({
     row,
-    products: featuredProducts.filter((product) => resolveRow(product) === row),
-    categories: categories
-      .filter((category) => category.homepageRow === row)
-      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-      .map((category) => category.name),
+    products: visibleProducts.filter((product) => resolveRow(product) === row),
   })).filter((row) => row.products.length > 0);
   const promotionalCategories = categories
     .filter((category) => category.promoEnabled && (category.promoImage || category.image))
@@ -300,16 +300,44 @@ export function ProductsSection({ categories, products }: { categories: Category
     <>
       {rows.length > 0 && (
         <section className="mx-auto w-full max-w-7xl bg-white px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+          <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-10">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d84967]">Curated for you</p>
+            <h2 className="mt-2 font-serif text-3xl font-extrabold text-gray-950 sm:text-4xl lg:text-5xl">Our Products</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-gray-600 sm:text-base">Explore our collection of carefully selected beauty, fashion, and lifestyle essentials.</p>
+          </div>
+          <div className="scrollbar-hide mb-8 flex items-center gap-2 overflow-x-auto pb-1 sm:mb-10 sm:justify-center" aria-label="Filter featured products by category">
+            <button
+              type="button"
+              onClick={() => setSelectedCategoryId("all")}
+              className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold transition-colors ${selectedCategoryId === "all" ? "bg-[#1a1308] text-white" : "bg-[#f7eee8] text-[#5f4638] hover:bg-[#eeddd2]"}`}
+            >
+              All
+            </button>
+            {filterCategories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                onClick={() => setSelectedCategoryId(category.id)}
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold transition-colors ${selectedCategoryId === category.id ? "bg-[#EA580C] text-white" : "bg-[#f7eee8] text-[#5f4638] hover:bg-[#eeddd2]"}`}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
           <div className="space-y-8 sm:space-y-10">
             {rows.map((row) => (
               <MovingProductRow
                 key={row.row}
                 row={row.row}
                 products={row.products}
-                categoryNames={row.categories}
                 productCard={productCard}
               />
             ))}
+          </div>
+          <div className="mt-10 text-center sm:mt-12">
+            <Link href="/products" className="inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#c2410c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EA580C]">
+              View All Products<ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </section>
       )}
