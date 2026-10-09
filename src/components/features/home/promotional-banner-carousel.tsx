@@ -19,7 +19,7 @@ export function PromotionalBannerCarousel({ banners }: { banners: PromotionalCat
   };
 
   return (
-    <section className="bg-white px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <section className="bg-white px-4 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5 lg:px-8 lg:pb-7 lg:pt-6">
       <div className="mx-auto max-w-7xl">
         {visibleBanners.length > 2 ? (
           <div className="mb-4 hidden justify-end gap-2 md:flex">

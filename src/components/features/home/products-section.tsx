@@ -296,7 +296,7 @@ export function ProductsSection({ categories, products }: { categories: Category
   return (
     <>
       {rows.length > 0 && (
-        <section className="mx-auto w-full max-w-7xl bg-white px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+        <section className="mx-auto w-full max-w-7xl bg-white px-4 pb-5 pt-8 sm:px-6 sm:pb-6 sm:pt-10 lg:px-8 lg:pb-7 lg:pt-12">
           <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-10">
             <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d84967]">Curated for you</p>
             <h2 className="mt-2 font-serif text-3xl font-extrabold text-gray-950 sm:text-4xl lg:text-5xl">Our Products</h2>
@@ -344,7 +344,7 @@ export function ProductsSection({ categories, products }: { categories: Category
 
 export function CollectionsSection({ collections }: { collections: Collection[] }) {
   return (
-    <section className="mx-auto w-full max-w-7xl bg-gray-50 px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+    <section className="mx-auto w-full max-w-7xl bg-gray-50 px-4 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-8 lg:px-8 lg:pb-12 lg:pt-9">
       <div className="mx-auto mb-6 max-w-3xl space-y-3 text-center sm:mb-8">
         <span className="inline-flex rounded-full bg-[#ffedd5] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#ea580c] sm:px-4 sm:py-1.5 sm:text-xs">
           Collections

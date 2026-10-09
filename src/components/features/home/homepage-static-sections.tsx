@@ -131,29 +131,30 @@ export function PinkSaltWellnessSection({ video }: { video?: PublicVideo }) {
 
   return (
     <section className="overflow-hidden bg-white px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 overflow-hidden rounded-[2rem] bg-[#17130f] p-5 shadow-[0_24px_70px_-30px_rgba(55,35,18,0.55)] sm:p-8 md:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:p-12">
-        <div aria-hidden="true" className="pointer-events-none absolute -left-28 -top-28 h-72 w-72 rounded-full bg-[#EA580C]/20 blur-3xl" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 overflow-hidden rounded-[2rem] border border-[#eadbd2] bg-gradient-to-br from-[#fffaf7] via-[#fff5f2] to-[#f8eee8] p-5 shadow-[0_18px_50px_-35px_rgba(92,55,37,0.35)] sm:p-8 md:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:p-12">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-28 -top-28 h-72 w-72 rounded-full bg-[#f5b8c8]/25 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 left-1/3 h-64 w-64 rounded-full bg-[#f6c79d]/20 blur-3xl" />
         <div className="relative z-10 py-2 lg:py-6">
-          <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#f8b27f] backdrop-blur">
+          <span className="inline-flex rounded-full border border-[#e8c8bd] bg-white/75 px-4 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#c65353] shadow-sm backdrop-blur">
             Everyday confidence
           </span>
-          <h2 className="mt-5 max-w-xl font-serif text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-5 max-w-xl font-serif text-3xl font-black leading-[1.08] tracking-[-0.03em] text-[#271913] sm:text-4xl lg:text-5xl">
             {title}
           </h2>
-          <p className="mt-5 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
+          <p className="mt-5 max-w-xl text-sm leading-7 text-[#695b54] sm:text-base">
             {description}
           </p>
-          <ul className="mt-6 grid gap-3 text-sm leading-5 text-white/80 sm:grid-cols-2">
-            <li className="flex gap-2.5"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#f59a5b]" />Fresh, glow-focused skincare</li>
-            <li className="flex gap-2.5"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#f59a5b]" />Elevated everyday essentials</li>
+          <ul className="mt-6 grid gap-3 text-sm font-medium leading-5 text-[#51463f] sm:grid-cols-2">
+            <li className="flex gap-2.5"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#d95f66]" />Fresh, glow-focused skincare</li>
+            <li className="flex gap-2.5"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#d95f66]" />Elevated everyday essentials</li>
           </ul>
           {video?.buttonText && video.buttonUrl ? (
-            <Link href={video.buttonUrl} className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#f26d20] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <Link href={video.buttonUrl} className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#c94b08] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#EA580C]">
               {video.buttonText}<ArrowUpRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           ) : null}
         </div>
-        <div className="relative z-10 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black shadow-2xl">
+        <div className="relative z-10 overflow-hidden rounded-[1.5rem] border border-white bg-black shadow-[0_20px_45px_-28px_rgba(67,38,27,0.55)] ring-1 ring-[#ddcbbf]/70">
           {video?.embedUrl ? (
             <div className={video.format === "VERTICAL" ? "mx-auto aspect-[9/16] max-h-[640px]" : "aspect-video"}>
               <iframe
@@ -166,7 +167,7 @@ export function PinkSaltWellnessSection({ video }: { video?: PublicVideo }) {
               />
             </div>
           ) : (
-            <div className="flex aspect-video items-center justify-center bg-[radial-gradient(circle_at_center,_#3d2a1d,_#0d0b09_70%)] px-8 text-center text-sm font-semibold text-white/55">
+            <div className="flex aspect-video items-center justify-center bg-gradient-to-br from-[#f3e4dc] to-[#ead5ca] px-8 text-center text-sm font-semibold text-[#806b60]">
               A featured video can be added from Admin → Videos using the Homepage placement.
             </div>
           )}
