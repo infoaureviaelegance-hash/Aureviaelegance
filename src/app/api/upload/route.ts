@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     const message = (error as Error).message || "Upload failed";
     const providerRejectedUpload = /status code\s*-?\s*403|forbidden/i.test(message);
     return NextResponse.json(
-      { error: providerRejectedUpload ? "Cloudinary rejected the upload (403). Check the Cloudinary account upload restrictions, or paste an image URL below." : message },
+      { error: providerRejectedUpload ? "The configured Cloudinary API key does not have create/upload permission. Update the Cloudinary credentials, or paste an image URL below." : message },
       { status: providerRejectedUpload ? 502 : 500 },
     );
   }

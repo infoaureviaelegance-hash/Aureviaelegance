@@ -1,5 +1,4 @@
 import { CategoriesSection, CollectionsSection, ProductsSection } from "@/components/features/home/products-section";
-import { WhyChooseUsSection } from "@/components/features/home/why-choose-us";
 import { FeaturedBlogSection } from "@/components/features/home/featured-blog-section";
 import { CustomerVoicesSection } from "@/components/features/home/customer-voices-section";
 import type { PublicVideo } from "@/lib/video-utils";
@@ -64,10 +63,9 @@ export function HomeContentSections({
       <PromoBannerSection banners={promoBanners} />
       <ProductsSection categories={categories} products={products} />
       <PromotionalBannerCarousel banners={categoryPromoBanners} />
-      <WhyChooseUsSection />
       <CollectionsSection collections={collections} />
-      <HomepageReelsSection reels={homepageReels} />
       <PinkSaltWellnessSection video={homeVideos[0]} />
+      <HomepageReelsSection reels={homepageReels} />
       <CertificationsSlider certificates={certificates} />
       <FeaturedBlogSection articles={featuredBlogs} />
       <CustomerVoicesSection />

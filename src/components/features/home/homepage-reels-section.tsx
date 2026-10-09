@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "@esmate/shadcn/pkgs/lucide-react";
 import type { PublicVideo } from "@/lib/video-utils";
-import { SectionHeading } from "@/components/shared/section-heading";
 
 function ReelEmbed({ video }: { video: PublicVideo }) {
   if (!video.embedUrl) {
@@ -46,9 +45,7 @@ export function HomepageReelsSection({ reels }: { reels: PublicVideo[] }) {
   return (
     <section aria-label="TikTok reels" className="bg-white px-6 py-8 lg:px-8 lg:py-10">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading eyebrow="Reels" title="Auerviamaison on TikTok" />
-
-        <div className="relative mt-6">
+        <div className="relative">
           <div
             ref={sliderRef}
             className="scrollbar-hide flex cursor-grab snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-hidden scroll-smooth pb-1 pt-1 active:cursor-grabbing sm:gap-4"
