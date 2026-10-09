@@ -1,6 +1,6 @@
 import { CategoriesSection, CollectionsSection, ProductsSection } from "@/components/features/home/products-section";
 import { FeaturedBlogSection } from "@/components/features/home/featured-blog-section";
-import { CustomerVoicesSection } from "@/components/features/home/customer-voices-section";
+import { CustomerVoicesSection, type HomepageReview } from "@/components/features/home/customer-voices-section";
 import type { PublicVideo } from "@/lib/video-utils";
 import { CertificationsSlider, type CertificateLogo } from "@/components/features/certifications/certifications-slider";
 import { PromoBannerSection } from "@/components/features/home/promo-banner-section";
@@ -14,6 +14,7 @@ type HomeContentSectionsProps = {
   categories: Array<{ id: string; name: string; slug: string; description: string | null; image: string | null; parentId?: string | null; order?: number; homepageRow?: number | null; promoEnabled?: boolean; promoTitle?: string | null; promoDescription?: string | null; promoImage?: string | null; promoButtonText?: string | null; promoOrder?: number }>;
   promoBanners: PromoBanner[];
   categoryPromoBanners: PromotionalCategoryBanner[];
+  homepageReviews: HomepageReview[];
   products: Array<{
     id: string;
     handle: string;
@@ -49,6 +50,7 @@ export function HomeContentSections({
   categories,
   promoBanners,
   categoryPromoBanners,
+  homepageReviews,
   products,
   collections,
   featuredBlogs,
@@ -68,7 +70,7 @@ export function HomeContentSections({
       <HomepageReelsSection reels={homepageReels} />
       <CertificationsSlider certificates={certificates} />
       <FeaturedBlogSection articles={featuredBlogs} />
-      <CustomerVoicesSection />
+      <CustomerVoicesSection reviews={homepageReviews} />
     </>
   );
 }

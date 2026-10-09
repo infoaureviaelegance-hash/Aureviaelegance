@@ -50,7 +50,7 @@ export const metadata = createSeoMetadata({
 });
 
 export default async function Page() {
-   const [categories, featuredCollections, featuredBlogs, homeVideos, homepageReels, certificates, promoBannerSection, categoryPromoSection] = await Promise.all([
+   const [categories, featuredCollections, featuredBlogs, homeVideos, homepageReels, certificates, promoBannerSection, categoryPromoSection, homepageReviews] = await Promise.all([
      safeHomeQuery(
        "categories",
        () => prisma.category.findMany({
@@ -137,6 +137,16 @@ export default async function Page() {
       }),
       null,
     ),
+    safeHomeQuery(
+      "customer reviews",
+      () => prisma.review.findMany({
+        where: { status: "approved" },
+        orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+        take: 16,
+        select: { id: true, authorName: true, rating: true, content: true },
+      }),
+      [],
+    ),
 
   ]);
 
@@ -208,6 +218,7 @@ return (
             categories={categories}
             promoBanners={promoBannerSection ? (promoBannerSection.isActive ? parsePromoBanners(promoBannerSection.content) : []) : DEFAULT_PROMO_BANNERS}
             categoryPromoBanners={categoryPromoSection?.isActive ? parsePromotionalCategoryBanners(categoryPromoSection.content) : []}
+            homepageReviews={homepageReviews}
             products={allProducts}
             collections={homeCollections}
             featuredBlogs={featuredBlogs}
