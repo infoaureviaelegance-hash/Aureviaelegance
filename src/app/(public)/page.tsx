@@ -4,6 +4,7 @@ import { HomeHeroSection } from "./_components/HomeHeroSection";
 import { HomeContentSections } from "./_components/HomeContentSections";
 import { createSeoMetadata } from "@/lib/seo";
 import { DEFAULT_PROMO_BANNERS, parsePromoBanners } from "@/components/features/home/promo-banner-types";
+import { parsePromotionalCategoryBanners } from "@/components/features/home/promotional-category-banner-types";
 
 export const revalidate = 300;
 
@@ -49,7 +50,7 @@ export const metadata = createSeoMetadata({
 });
 
 export default async function Page() {
-   const [categories, featuredCollections, featuredBlogs, homeVideos, homepageReels, certificates, promoBannerSection] = await Promise.all([
+   const [categories, featuredCollections, featuredBlogs, homeVideos, homepageReels, certificates, promoBannerSection, categoryPromoSection] = await Promise.all([
      safeHomeQuery(
        "categories",
        () => prisma.category.findMany({
@@ -128,6 +129,14 @@ export default async function Page() {
       }),
       null,
     ),
+    safeHomeQuery(
+      "category promotional carousel",
+      () => prisma.homepageSection.findUnique({
+        where: { sectionKey: "category-promo-carousel" },
+        select: { content: true, isActive: true },
+      }),
+      null,
+    ),
 
   ]);
 
@@ -198,6 +207,7 @@ return (
           <HomeContentSections
             categories={categories}
             promoBanners={promoBannerSection ? (promoBannerSection.isActive ? parsePromoBanners(promoBannerSection.content) : []) : DEFAULT_PROMO_BANNERS}
+            categoryPromoBanners={categoryPromoSection?.isActive ? parsePromotionalCategoryBanners(categoryPromoSection.content) : []}
             products={allProducts}
             collections={homeCollections}
             featuredBlogs={featuredBlogs}

@@ -269,9 +269,6 @@ export function ProductsSection({ categories, products }: { categories: Category
     row,
     products: visibleProducts.filter((product) => resolveRow(product) === row),
   })).filter((row) => row.products.length > 0);
-  const promotionalCategories = categories
-    .filter((category) => category.promoEnabled && (category.promoImage || category.image))
-    .sort((a, b) => (a.promoOrder ?? 0) - (b.promoOrder ?? 0) || (a.order ?? 0) - (b.order ?? 0));
 
   const productCard = (product: Product) => {
     const productImageUrls = Array.isArray(product.images)
@@ -341,40 +338,7 @@ export function ProductsSection({ categories, products }: { categories: Category
           </div>
         </section>
       )}
-      {promotionalCategories.length > 0 ? <PromotionalCategories categories={promotionalCategories} /> : null}
     </>
-  );
-}
-
-function PromotionalCategories({ categories }: { categories: Category[] }) {
-  return (
-    <section className="bg-[#f8f4ef] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-8 max-w-2xl sm:mb-10">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d84967]">Shop by mood</p>
-          <h2 className="mt-2 font-serif text-3xl font-extrabold text-[#1a1308] sm:text-4xl">Find your next signature look</h2>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
-          {categories.map((category, index) => (
-            <Link
-              key={category.id}
-              href={`/category/${encodeURIComponent(category.slug)}`}
-              className={`group relative min-h-[320px] overflow-hidden rounded-[1.75rem] bg-[#1a1308] shadow-[0_14px_35px_-24px_rgba(26,19,8,0.65)] ${index % 3 === 0 ? "lg:col-span-7" : "lg:col-span-5"}`}
-            >
-              <Image src={category.promoImage || category.image || FALLBACK_IMAGE} alt={category.promoTitle || category.name} fill sizes="(min-width: 1024px) 58vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/5" />
-              <div className="absolute inset-x-0 bottom-0 max-w-lg p-6 text-white sm:p-8">
-                <h3 className="font-serif text-2xl font-extrabold sm:text-3xl">{category.promoTitle || category.name}</h3>
-                {(category.promoDescription || category.description) ? <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/75 sm:text-base">{category.promoDescription || category.description}</p> : null}
-                <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#1a1308] transition group-hover:bg-[#EA580C] group-hover:text-white">
-                  {category.promoButtonText || "Shop Now"}<ArrowUpRight className="h-4 w-4" />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 

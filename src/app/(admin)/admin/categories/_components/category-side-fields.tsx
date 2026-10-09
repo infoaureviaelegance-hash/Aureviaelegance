@@ -45,21 +45,6 @@ function HomepageFields({ values, setValues }: Pick<Props, "values" | "setValues
           <option value="3">Row 3 · right to left</option>
         </select>
       </label>
-      <label className="flex items-center gap-2 text-sm font-semibold text-[#0a0a0a]">
-        <input type="checkbox" checked={values.promoEnabled} onChange={(e) => setValues((v) => ({ ...v, promoEnabled: e.target.checked }))} />
-        Show as promotional category banner
-      </label>
-      {values.promoEnabled ? (
-        <div className="space-y-3 border-t border-orange-200 pt-4">
-          <AdminImageUpload label="Promotional Image" folder="auerviamaison/categories/promotional" usedIn="homepage-category-promo" value={values.promoImage} onChange={(url) => setValues((v) => ({ ...v, promoImage: url }))} />
-          <label className="block text-sm font-medium text-[#0a0a0a]">Promotional title<input value={values.promoTitle ?? ""} onChange={(e) => setValues((v) => ({ ...v, promoTitle: e.target.value }))} placeholder={values.name || "Category name"} className={inputClass} /></label>
-          <label className="block text-sm font-medium text-[#0a0a0a]">Short description<textarea value={values.promoDescription ?? ""} onChange={(e) => setValues((v) => ({ ...v, promoDescription: e.target.value }))} rows={3} className={inputClass} /></label>
-          <div className="grid grid-cols-2 gap-3">
-            <label className="block text-sm font-medium text-[#0a0a0a]">Button text<input value={values.promoButtonText ?? ""} onChange={(e) => setValues((v) => ({ ...v, promoButtonText: e.target.value }))} className={inputClass} /></label>
-            <label className="block text-sm font-medium text-[#0a0a0a]">Display order<input type="number" value={values.promoOrder} onChange={(e) => setValues((v) => ({ ...v, promoOrder: Number(e.target.value) }))} className={inputClass} /></label>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }

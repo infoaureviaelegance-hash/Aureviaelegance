@@ -29,6 +29,12 @@ const sections = [
     icon: FiVideo,
   },
   {
+    name: "Category Promotional Carousel",
+    description: "Manage the draggable promotional banners shown below homepage products",
+    href: "/admin/homepage/category-banners",
+    icon: FiImage,
+  },
+  {
     name: "Reviews",
     description: "Manage customer reviews for homepage",
     href: "/admin/reviews",
