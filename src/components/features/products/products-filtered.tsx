@@ -23,13 +23,13 @@ export function ProductsFiltered({
   };
   return (
     <section className="min-w-0 space-y-6">
-      <nav aria-label="Product categories" className="overflow-hidden border-y border-[#eadfd6] bg-white py-3">
+      <nav aria-label="Product categories" className="overflow-hidden bg-transparent py-2">
         <div className="products-category-name-track flex w-max items-center gap-8 whitespace-nowrap px-4">
           {[0, 1].map((copy) => (
             <div key={copy} aria-hidden={copy === 1} className="flex items-center gap-8">
-              <Link href="/products" className="text-[15px] font-semibold text-[#EA580C] transition-colors hover:text-[#a93f08]">All</Link>
+              <Link href="/products" className="rounded-full bg-[#f6eee8] px-4 py-2 text-[15px] font-semibold text-[#b94a18] transition-colors hover:bg-[#eee0d6]">All</Link>
               {categories.map((category) => (
-                <Link key={`${copy}-${category.id}`} href={`/category/${encodeURIComponent(category.slug)}`} className="text-[15px] font-semibold text-gray-700 transition-colors hover:text-[#EA580C]">{category.name}</Link>
+                <Link key={`${copy}-${category.id}`} href={`/category/${encodeURIComponent(category.slug)}`} className="rounded-full bg-[#f5f3f1] px-4 py-2 text-[15px] font-semibold text-gray-700 transition-colors hover:bg-[#eee9e5] hover:text-[#b94a18]">{category.name}</Link>
               ))}
             </div>
           ))}
