@@ -54,7 +54,7 @@ export default async function Page() {
        "categories",
        () => prisma.category.findMany({
          orderBy: [{ order: "asc" }, { name: "asc" }],
-         select: { id: true, name: true, slug: true, description: true, image: true, parentId: true, order: true },
+         select: { id: true, name: true, slug: true, description: true, image: true, parentId: true, order: true, homepageRow: true, promoEnabled: true, promoTitle: true, promoDescription: true, promoImage: true, promoButtonText: true, promoOrder: true },
        }),
        [],
      ),

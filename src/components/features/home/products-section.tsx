@@ -16,6 +16,13 @@ interface Category {
   image: string | null;
   parentId?: string | null;
   order?: number;
+  homepageRow?: number | null;
+  promoEnabled?: boolean;
+  promoTitle?: string | null;
+  promoDescription?: string | null;
+  promoImage?: string | null;
+  promoButtonText?: string | null;
+  promoOrder?: number;
 }
 
 interface Product {
@@ -42,46 +49,6 @@ interface Collection {
   image: string | null;
   isFeatured?: boolean;
   productHandles?: string[];
-}
-
-function ProductGrid({ products, title, bgColor = "white" }: { products: Product[]; title: string; bgColor?: string }) {
-  if (!products.length) return null;
-
-  const bgClass = bgColor === "gray-50" ? "bg-gray-50" : "bg-white";
-
-  return (
-    <section className={`mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16 ${bgClass}`}>
-      <div className="text-center max-w-3xl mx-auto mb-10 space-y-4 sm:mb-12 sm:mb-16">
-        <h2 className="font-serif text-2xl font-extrabold text-gray-900 sm:text-3xl sm:text-4xl lg:text-5xl">
-          {title}
-        </h2>
-      </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 sm:gap-6">
-        {products.map((product) => {
-          const productImageUrls = Array.isArray(product.images)
-            ? product.images.filter((x): x is string => typeof x === "string")
-            : [];
-          const firstImage = productImageUrls[0] || null;
-          const firstTag = Array.isArray(product.tags)
-            ? product.tags.find((x): x is string => typeof x === "string")
-            : undefined;
-          return (
-            <StoreProductCard
-              key={product.handle}
-              handle={product.handle}
-              title={product.title}
-              featuredImageUrl={product.featuredImage || firstImage || FALLBACK_IMAGE}
-              imageUrls={productImageUrls}
-              price={{ amount: Number(product.price || 0).toFixed(2), currencyCode: "PKR" }}
-              compareAtPrice={product.compareAtPrice ? { amount: Number(product.compareAtPrice).toFixed(2), currencyCode: "PKR" } : null}
-              tag={firstTag}
-              productId={product.id}
-            />
-          );
-        })}
-      </div>
-    </section>
-  );
 }
 
 export function CategoriesSection({ categories }: { categories: Category[] }) {
@@ -164,84 +131,53 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
   );
 }
 
-function FeaturedProductRow({
-  category,
-  products,
-  productCard,
-}: {
-  category: Category;
+function MovingProductRow({ row, products, categoryNames, productCard }: {
+  row: 1 | 2 | 3;
   products: Product[];
+  categoryNames: string[];
   productCard: (product: Product) => React.ReactNode;
 }) {
-  const rowRef = useRef<HTMLDivElement | null>(null);
-  const isAutoScrollPaused = useRef(false);
-
-  useEffect(() => {
-    if (products.length <= 1) return;
-
-    const interval = window.setInterval(() => {
-      const row = rowRef.current;
-      if (!row || isAutoScrollPaused.current || document.hidden) return;
-
-      const firstCard = row.querySelector<HTMLElement>("[data-product-card]");
-      const cardWidth = firstCard?.offsetWidth || 280;
-      const gap = 24;
-      const nextLeft = row.scrollLeft + cardWidth + gap;
-      const atEnd = nextLeft >= row.scrollWidth - row.clientWidth - 4;
-
-      row.scrollTo({
-        left: atEnd ? 0 : nextLeft,
-        behavior: "smooth",
-      });
-    }, 5000);
-
-    return () => window.clearInterval(interval);
-  }, [products.length]);
-
+  const [paused, setPaused] = useState(false);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   if (!products.length) return null;
 
+  const minimumItems = 8;
+  const repeatCount = Math.max(1, Math.ceil(minimumItems / products.length));
+  const loopItems = Array.from({ length: repeatCount }, () => products).flat();
+  const movingItems = [...loopItems, ...loopItems];
+  const pauseTemporarily = () => {
+    setPaused(true);
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => setPaused(false), 1800);
+  };
+
   return (
-    <section>
-      <div className="mb-3 flex items-center gap-3 sm:mb-4 sm:gap-5">
-        <h3 className="shrink-0 font-serif text-lg font-extrabold leading-none text-gray-950 sm:text-xl sm:text-2xl">
-          {category.name}
-        </h3>
-        <span aria-hidden="true" className="h-px min-w-4 flex-1 bg-gradient-to-r from-[#d84967]/55 via-[#d6b89f]/45 to-transparent" />
-        <Link
-          href={`/category/${encodeURIComponent(category.slug)}`}
-          className="group inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#f8e6df] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-wide text-[#b84650] transition hover:bg-[#d84967] hover:text-white sm:px-3.5 sm:py-2 sm:text-[0.65rem] sm:text-xs"
-        >
-          View all
-          <ArrowUpRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-3.5 sm:w-3.5" />
-        </Link>
+    <section aria-label={`Featured products row ${row}`}>
+      <div className="mb-3 flex items-end gap-3 sm:mb-4 sm:gap-5">
+        <div className="min-w-0">
+          <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#d84967]">Featured edit {String(row).padStart(2, "0")}</p>
+          <h3 className="mt-1 truncate font-serif text-lg font-extrabold text-gray-950 sm:text-2xl">{categoryNames.join(" · ") || `Homepage row ${row}`}</h3>
+        </div>
+        <span aria-hidden="true" className="mb-2 h-px min-w-4 flex-1 bg-gradient-to-r from-[#d84967]/55 via-[#d6b89f]/35 to-transparent" />
       </div>
       <div
-        ref={rowRef}
-        onMouseEnter={() => {
-          isAutoScrollPaused.current = true;
-        }}
-        onMouseLeave={() => {
-          isAutoScrollPaused.current = false;
-        }}
-        onFocusCapture={() => {
-          isAutoScrollPaused.current = true;
-        }}
-        onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) {
-            isAutoScrollPaused.current = false;
-          }
-        }}
-        className="scrollbar-hide flex gap-3 overflow-x-auto py-1 sm:gap-4 sm:gap-6"
+        className="scrollbar-hide overflow-x-auto overflow-y-hidden py-1"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onPointerDown={pauseTemporarily}
+        onTouchStart={pauseTemporarily}
+        onScroll={pauseTemporarily}
       >
-        {products.map((product) => (
-          <div
-            key={product.handle}
-            data-product-card
-            className="w-[calc((100vw-2.75rem)/2)] shrink-0 sm:w-[14rem] lg:w-[16rem]"
-          >
-            {productCard(product)}
-          </div>
-        ))}
+        <div
+          className={`homepage-product-track flex w-max gap-3 sm:gap-6 ${row === 2 ? "homepage-product-track-reverse" : ""}`}
+          style={{ animationDuration: `${Math.max(42, loopItems.length * 7)}s`, animationPlayState: paused ? "paused" : "running" }}
+        >
+          {movingItems.map((product, index) => (
+            <div key={`${product.handle}-${index}`} className="w-[calc((100vw-2.75rem)/2)] shrink-0 sm:w-[14rem] lg:w-[16rem]">
+              {productCard(product)}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -315,52 +251,27 @@ function CollectionSlider({ collections }: { collections: Collection[] }) {
   );
 }
 
-export function ProductsSection({ categories, products, collections }: { categories: Category[]; products: Product[]; collections: Collection[] }) {
-  const featuredProducts = products.filter(p => p.isFeatured);
-  const productsByHandle = new Map(products.map((product) => [product.handle, product]));
-  const mainCategories = categories
-    .filter((category) => !category.parentId)
-    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.name.localeCompare(b.name));
-
-  const subcategoryIdsByParentId = categories.reduce((map, category) => {
-    if (!category.parentId) return map;
-    const ids = map.get(category.parentId) || [];
-    ids.push(category.id);
-    map.set(category.parentId, ids);
-    return map;
-  }, new Map<string, string[]>());
-
-  const featuredRows = mainCategories
-    .map((category) => {
-      const categoryIds = new Set([category.id, ...(subcategoryIdsByParentId.get(category.id) || [])]);
-      const rowProducts = featuredProducts
-        .filter(
-          (product) =>
-            (product.categoryId && categoryIds.has(product.categoryId)) ||
-            (product.subcategoryId && categoryIds.has(product.subcategoryId)),
-        )
-        .sort(
-          (a, b) =>
-            (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999) ||
-            a.title.localeCompare(b.title),
-        );
-
-      return { category, products: rowProducts };
-    })
-    .filter((row) => row.products.length > 0);
-
-  const getCollectionProducts = (handle: string) => {
-    const collection = collections.find((item) => item.handle === handle);
-    const productHandles = collection?.productHandles || [];
-
-    return productHandles
-      .map((productHandle) => productsByHandle.get(productHandle))
-      .filter((product): product is Product => Boolean(product))
-      .slice(0, 8);
+export function ProductsSection({ categories, products }: { categories: Category[]; products: Product[] }) {
+  const categoryById = new Map(categories.map((category) => [category.id, category]));
+  const resolveRow = (product: Product) => {
+    const directCategory = categoryById.get(product.subcategoryId || product.categoryId || "");
+    if (directCategory?.homepageRow) return directCategory.homepageRow;
+    return directCategory?.parentId ? categoryById.get(directCategory.parentId)?.homepageRow ?? null : null;
   };
-
-  const newArrivals = getCollectionProducts("new-arrivals");
-  const bestSellers = getCollectionProducts("best-sellers");
+  const featuredProducts = products
+    .filter((product) => product.isFeatured)
+    .sort((a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999) || a.title.localeCompare(b.title));
+  const rows = ([1, 2, 3] as const).map((row) => ({
+    row,
+    products: featuredProducts.filter((product) => resolveRow(product) === row),
+    categories: categories
+      .filter((category) => category.homepageRow === row)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      .map((category) => category.name),
+  })).filter((row) => row.products.length > 0);
+  const promotionalCategories = categories
+    .filter((category) => category.promoEnabled && (category.promoImage || category.image))
+    .sort((a, b) => (a.promoOrder ?? 0) - (b.promoOrder ?? 0) || (a.order ?? 0) - (b.order ?? 0));
 
   const productCard = (product: Product) => {
     const productImageUrls = Array.isArray(product.images)
@@ -387,26 +298,55 @@ export function ProductsSection({ categories, products, collections }: { categor
 
   return (
     <>
-      {featuredRows.length > 0 && (
+      {rows.length > 0 && (
         <section className="mx-auto w-full max-w-7xl bg-white px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-          <div className="space-y-6 sm:space-y-7 sm:space-y-9">
-            {featuredRows.map((row) => (
-              <FeaturedProductRow
-                key={row.category.id}
-                category={row.category}
+          <div className="space-y-8 sm:space-y-10">
+            {rows.map((row) => (
+              <MovingProductRow
+                key={row.row}
+                row={row.row}
                 products={row.products}
+                categoryNames={row.categories}
                 productCard={productCard}
               />
             ))}
           </div>
         </section>
       )}
-
-      <ProductGrid products={newArrivals} title="New Arrivals" bgColor="white" />
-
-      <ProductGrid products={bestSellers} title="Best Sellers" bgColor="gray-50" />
-
+      {promotionalCategories.length > 0 ? <PromotionalCategories categories={promotionalCategories} /> : null}
     </>
+  );
+}
+
+function PromotionalCategories({ categories }: { categories: Category[] }) {
+  return (
+    <section className="bg-[#f8f4ef] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8 max-w-2xl sm:mb-10">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d84967]">Shop by mood</p>
+          <h2 className="mt-2 font-serif text-3xl font-extrabold text-[#1a1308] sm:text-4xl">Find your next signature look</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
+          {categories.map((category, index) => (
+            <Link
+              key={category.id}
+              href={`/category/${encodeURIComponent(category.slug)}`}
+              className={`group relative min-h-[320px] overflow-hidden rounded-[1.75rem] bg-[#1a1308] shadow-[0_14px_35px_-24px_rgba(26,19,8,0.65)] ${index % 3 === 0 ? "lg:col-span-7" : "lg:col-span-5"}`}
+            >
+              <Image src={category.promoImage || category.image || FALLBACK_IMAGE} alt={category.promoTitle || category.name} fill sizes="(min-width: 1024px) 58vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/5" />
+              <div className="absolute inset-x-0 bottom-0 max-w-lg p-6 text-white sm:p-8">
+                <h3 className="font-serif text-2xl font-extrabold sm:text-3xl">{category.promoTitle || category.name}</h3>
+                {(category.promoDescription || category.description) ? <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/75 sm:text-base">{category.promoDescription || category.description}</p> : null}
+                <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#1a1308] transition group-hover:bg-[#EA580C] group-hover:text-white">
+                  {category.promoButtonText || "Shop Now"}<ArrowUpRight className="h-4 w-4" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

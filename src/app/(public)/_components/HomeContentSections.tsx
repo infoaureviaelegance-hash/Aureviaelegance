@@ -10,7 +10,7 @@ import { PinkSaltWellnessSection, TrustStrip } from "@/components/features/home/
 import { HomepageReelsSection } from "@/components/features/home/homepage-reels-section";
 
 type HomeContentSectionsProps = {
-  categories: Array<{ id: string; name: string; slug: string; description: string | null; image: string | null; parentId?: string | null; order?: number }>;
+  categories: Array<{ id: string; name: string; slug: string; description: string | null; image: string | null; parentId?: string | null; order?: number; homepageRow?: number | null; promoEnabled?: boolean; promoTitle?: string | null; promoDescription?: string | null; promoImage?: string | null; promoButtonText?: string | null; promoOrder?: number }>;
   promoBanners: PromoBanner[];
   products: Array<{
     id: string;
@@ -58,7 +58,7 @@ export function HomeContentSections({
       <TrustStrip />
       <CategoriesSection categories={categories} />
       <PromoBannerSection banners={promoBanners} />
-      <ProductsSection categories={categories} products={products} collections={collections} />
+      <ProductsSection categories={categories} products={products} />
       <WhyChooseUsSection />
       <CollectionsSection collections={collections} />
       <HomepageReelsSection reels={homepageReels} />

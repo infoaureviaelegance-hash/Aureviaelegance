@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/admin-auth";
+import { revalidatePath } from "next/cache";
 
 const categorySchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -11,6 +12,13 @@ const categorySchema = z.object({
   parentId: z.string().optional(),
   order: z.number().int().default(0),
   featured: z.boolean().default(false),
+  homepageRow: z.union([z.literal(1), z.literal(2), z.literal(3)]).nullable().optional(),
+  promoEnabled: z.boolean().default(false),
+  promoTitle: z.string().optional(),
+  promoDescription: z.string().optional(),
+  promoImage: z.string().optional(),
+  promoButtonText: z.string().optional(),
+  promoOrder: z.number().int().default(0),
   seoTitle: z.string().optional(),
   seoDescription: z.string().optional(),
   canonicalUrl: z.string().optional(),
@@ -63,6 +71,8 @@ export async function PUT(
       data: validated,
     });
 
+    revalidatePath("/");
+
     return NextResponse.json(category);
   } catch (error: unknown) {
     console.error("Error updating category:", error);
@@ -97,6 +107,8 @@ export async function DELETE(
     await prisma.category.delete({
       where: { id },
     });
+
+    revalidatePath("/");
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {

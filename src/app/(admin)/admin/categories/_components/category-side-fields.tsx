@@ -17,8 +17,49 @@ export function CategorySideFields({ values, setValues, parentOptions, saving }:
         <label className="block text-sm font-medium text-[#0a0a0a]">Order Number<input type="number" value={values.order} onChange={(e) => setValues((v) => ({ ...v, order: Number(e.target.value) }))} className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-[#C6A24A]" /></label>
         <label className="flex items-center gap-2 pt-6 text-sm text-[#0a0a0a]"><input type="checkbox" checked={values.featured} onChange={(e) => setValues((v) => ({ ...v, featured: e.target.checked }))} />Featured</label>
       </div>
+      <HomepageFields values={values} setValues={setValues} />
       <SeoFields values={values} setValues={setValues} />
       <div className="flex items-center justify-end gap-3 pt-2"><button type="submit" disabled={saving} className="rounded-lg bg-[#f6a45d] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#d8861f] disabled:opacity-50">{saving ? "Saving..." : "Save"}</button></div>
+    </div>
+  );
+}
+
+function HomepageFields({ values, setValues }: Pick<Props, "values" | "setValues">) {
+  const inputClass = "mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-[#C6A24A]";
+  return (
+    <div className="space-y-4 rounded-xl border border-[#EA580C]/20 bg-orange-50/40 p-4">
+      <div>
+        <p className="text-sm font-bold text-[#0a0a0a]">Homepage merchandising</p>
+        <p className="mt-1 text-xs leading-5 text-gray-600">Assign this category’s featured products to one of the three moving rows.</p>
+      </div>
+      <label className="block text-sm font-medium text-[#0a0a0a]">
+        Product row
+        <select
+          value={values.homepageRow ?? ""}
+          onChange={(e) => setValues((v) => ({ ...v, homepageRow: e.target.value ? Number(e.target.value) as 1 | 2 | 3 : null }))}
+          className={inputClass}
+        >
+          <option value="">Not displayed</option>
+          <option value="1">Row 1 · right to left</option>
+          <option value="2">Row 2 · left to right</option>
+          <option value="3">Row 3 · right to left</option>
+        </select>
+      </label>
+      <label className="flex items-center gap-2 text-sm font-semibold text-[#0a0a0a]">
+        <input type="checkbox" checked={values.promoEnabled} onChange={(e) => setValues((v) => ({ ...v, promoEnabled: e.target.checked }))} />
+        Show as promotional category banner
+      </label>
+      {values.promoEnabled ? (
+        <div className="space-y-3 border-t border-orange-200 pt-4">
+          <AdminImageUpload label="Promotional Image" folder="auerviamaison/categories/promotional" usedIn="homepage-category-promo" value={values.promoImage} onChange={(url) => setValues((v) => ({ ...v, promoImage: url }))} />
+          <label className="block text-sm font-medium text-[#0a0a0a]">Promotional title<input value={values.promoTitle ?? ""} onChange={(e) => setValues((v) => ({ ...v, promoTitle: e.target.value }))} placeholder={values.name || "Category name"} className={inputClass} /></label>
+          <label className="block text-sm font-medium text-[#0a0a0a]">Short description<textarea value={values.promoDescription ?? ""} onChange={(e) => setValues((v) => ({ ...v, promoDescription: e.target.value }))} rows={3} className={inputClass} /></label>
+          <div className="grid grid-cols-2 gap-3">
+            <label className="block text-sm font-medium text-[#0a0a0a]">Button text<input value={values.promoButtonText ?? ""} onChange={(e) => setValues((v) => ({ ...v, promoButtonText: e.target.value }))} className={inputClass} /></label>
+            <label className="block text-sm font-medium text-[#0a0a0a]">Display order<input type="number" value={values.promoOrder} onChange={(e) => setValues((v) => ({ ...v, promoOrder: Number(e.target.value) }))} className={inputClass} /></label>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

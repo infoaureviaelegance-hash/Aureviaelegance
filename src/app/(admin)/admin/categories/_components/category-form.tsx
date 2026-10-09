@@ -13,6 +13,13 @@ export type CategoryFormValues = {
   parentId?: string;
   order: number;
   featured: boolean;
+  homepageRow: 1 | 2 | 3 | null;
+  promoEnabled: boolean;
+  promoTitle?: string;
+  promoDescription?: string;
+  promoImage?: string;
+  promoButtonText?: string;
+  promoOrder: number;
   seoTitle?: string;
   seoDescription?: string;
   canonicalUrl?: string;

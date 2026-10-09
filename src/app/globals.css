@@ -199,6 +199,34 @@
   }
 }
 
+@keyframes homepage-product-loop {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - var(--homepage-loop-gap)), 0, 0); }
+}
+
+@keyframes homepage-product-loop-reverse {
+  from { transform: translate3d(calc(-50% - var(--homepage-loop-gap)), 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.homepage-product-track {
+  --homepage-loop-gap: 0.375rem;
+  animation: homepage-product-loop 60s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .homepage-product-track { --homepage-loop-gap: 0.75rem; }
+}
+
+.homepage-product-track-reverse {
+  animation-name: homepage-product-loop-reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homepage-product-track { animation: none; }
+}
+
 .storefront-categories:hover .category-marquee-track,
 .storefront-categories:focus-within .category-marquee-track,
 .storefront-categories > div.is-dragging .category-marquee-track {
