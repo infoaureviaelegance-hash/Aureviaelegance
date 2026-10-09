@@ -99,28 +99,10 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
   if (!articles.length) return null
 
   return (
-    <section className="bg-[#fffaf8] py-8 sm:py-10">
+    <section className="bg-white py-3 sm:py-4">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div className="min-w-0">
-            <span className="inline-flex rounded-full border border-[#ead5cc] bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#a85460]">
-              Beauty Journal
-            </span>
-            <h2 className="mt-3 font-serif text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">
-              From the journal
-            </h2>
-            <p className="mt-2 hidden max-w-2xl text-base text-gray-600 sm:block sm:text-lg">
-              Beauty guidance, thoughtful routines, and inspiration for a more confident everyday style.
-            </p>
-          </div>
-          <Link href="/blogs" className="group mb-2 inline-flex shrink-0 items-center gap-2 self-center rounded-full border border-[#d8a9b1] bg-white px-4 py-2.5 text-xs font-bold text-[#9f4050] transition hover:border-[#9f4050] hover:bg-[#9f4050] hover:text-white sm:mb-4 sm:px-5 sm:text-sm">
-            View all posts
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-
         {/* Blog grid or horizontal scrollable carousel */}
-        <div className="relative mt-8">
+        <div className="relative">
           <div
             ref={scrollRef}
             className={`flex gap-4 overflow-x-auto pb-2 scrollbar-hide sm:gap-6 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"}`}
@@ -163,8 +145,7 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
                   key={article.id}
                   className="flex w-[88%] shrink-0 snap-start items-stretch sm:w-[calc((100%_-_1.5rem)/2)]"
                 >
-                  <article className="group relative flex w-full flex-col overflow-hidden rounded-3xl border border-[#e8ddd7] bg-white shadow-[0_8px_30px_rgba(69,44,35,0.07)] transition duration-500 hover:-translate-y-1 hover:border-[#d9b5b8] hover:shadow-[0_18px_42px_rgba(69,44,35,0.12)]">
-                    <div className="absolute inset-x-0 top-0 z-20 h-1 bg-gradient-to-r from-[#bd6875] via-[#d7a887] to-[#d9bd76]" />
+                  <article className="group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#faf9f7] transition duration-500 hover:-translate-y-0.5">
                     <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#f5efeb]">
                       {article.image?.url ? (
                         <Image
@@ -215,7 +196,7 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
                   type="button"
                   onClick={scrollLeft}
                   aria-label="Scroll left"
-                  className="group absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-[#e5d7d0] bg-white p-2.5 text-[#513a32] shadow-lg transition-all duration-300 hover:scale-105 hover:text-[#a85460] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#a85460]/20 sm:-left-3"
+                  className="group absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 text-[#513a32] shadow-sm transition-all duration-300 hover:scale-105 hover:text-[#a85460] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#a85460]/20 sm:-left-3"
                 >
                   <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-slate-800 transition-transform duration-300 group-hover:-translate-x-0.5" />
                 </button>
@@ -226,7 +207,7 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
                   type="button"
                   onClick={scrollRight}
                   aria-label="Scroll right"
-                  className="group absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-[#e5d7d0] bg-white p-2.5 text-[#513a32] shadow-lg transition-all duration-300 hover:scale-105 hover:text-[#a85460] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#a85460]/20 sm:-right-3"
+                  className="group absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2.5 text-[#513a32] shadow-sm transition-all duration-300 hover:scale-105 hover:text-[#a85460] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#a85460]/20 sm:-right-3"
                 >
                   <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-slate-800 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </button>
