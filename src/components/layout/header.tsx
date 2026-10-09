@@ -389,7 +389,7 @@ export function Header() {
               priority
             />
           </div>
-          <div className="relative h-7 w-[86px] min-[400px]:w-[96px] sm:h-11 sm:w-[148px] lg:h-13 lg:w-[164px]">
+          <div className="relative h-9 w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] lg:h-16 lg:w-[210px]">
             <Image
               src="/logo/logotext.png"
               alt="Auerviamaison"
