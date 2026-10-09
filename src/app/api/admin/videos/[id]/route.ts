@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin-auth";
 import { deleteImage } from "@/lib/cloudinary";
@@ -34,6 +35,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const body = await request.json();
     const data = await prepareVideoData(body);
     const video = await prisma.video.update({ where: { id }, data });
+    revalidatePath("/");
+    revalidatePath("/videos");
     return NextResponse.json(video);
   } catch (error: unknown) {
     if (error instanceof z.ZodError) {
@@ -55,6 +58,8 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
 
     await deleteThumbnailAsset(video.thumbnail);
     await prisma.video.delete({ where: { id } });
+    revalidatePath("/");
+    revalidatePath("/videos");
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin-auth";
@@ -52,6 +53,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = await prepareVideoData(body);
     const video = await prisma.video.create({ data });
+    revalidatePath("/");
+    revalidatePath("/videos");
     return NextResponse.json({ video }, { status: 201 });
   } catch (error: unknown) {
     if (error instanceof z.ZodError) {
