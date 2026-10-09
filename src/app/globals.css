@@ -193,8 +193,25 @@
   animation: scroll-left 52s linear infinite;
 }
 
+@keyframes products-category-name-loop {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - 1rem), 0, 0); }
+}
+
+.products-category-name-track {
+  animation: products-category-name-loop 58s linear infinite;
+  will-change: transform;
+}
+
+.products-category-name-track:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .category-marquee-track {
+    animation: none;
+  }
+  .products-category-name-track {
     animation: none;
   }
 }

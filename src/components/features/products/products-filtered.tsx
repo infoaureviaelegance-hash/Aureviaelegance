@@ -23,25 +23,18 @@ export function ProductsFiltered({
   };
   return (
     <section className="min-w-0 space-y-6">
-      <form action="/products" className="flex flex-col gap-3 rounded-[26px] border border-black/10 bg-white p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-4">
-        <div className="flex-1">
-          <input
-            name="q"
-            defaultValue={query.q}
-            placeholder="Search products"
-            aria-label="Search products"
-            className="h-12 w-full rounded-full border border-black/10 bg-[#f9f9f9] px-4 text-sm text-black outline-none transition focus:border-[#f97316] focus:bg-white"
-          />
+      <nav aria-label="Product categories" className="overflow-hidden border-y border-[#eadfd6] bg-white py-3">
+        <div className="products-category-name-track flex w-max items-center gap-8 whitespace-nowrap px-4">
+          {[0, 1].map((copy) => (
+            <div key={copy} aria-hidden={copy === 1} className="flex items-center gap-8">
+              <Link href="/products" className="text-[15px] font-semibold text-[#EA580C] transition-colors hover:text-[#a93f08]">All</Link>
+              {categories.map((category) => (
+                <Link key={`${copy}-${category.id}`} href={`/category/${encodeURIComponent(category.slug)}`} className="text-[15px] font-semibold text-gray-700 transition-colors hover:text-[#EA580C]">{category.name}</Link>
+              ))}
+            </div>
+          ))}
         </div>
-
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
-          <select name="category" defaultValue={query.category || ""} aria-label="Category" className="h-12 min-w-[150px] rounded-full border border-black/10 bg-[#f9f9f9] px-4 text-sm text-black outline-none transition focus:border-[#f97316] focus:bg-white"><option value="">All categories</option>{categories.map((category) => <option key={category.id} value={category.slug}>{category.name}</option>)}</select>
-          <input name="min" type="number" min="0" defaultValue={query.min} placeholder="Min" aria-label="Minimum price" className="h-12 w-full min-w-[110px] rounded-full border border-black/10 bg-[#f9f9f9] px-4 text-sm text-black outline-none transition focus:border-[#f97316] focus:bg-white sm:w-[110px]" />
-          <input name="max" type="number" min="0" defaultValue={query.max} placeholder="Max" aria-label="Maximum price" className="h-12 w-full min-w-[110px] rounded-full border border-black/10 bg-[#f9f9f9] px-4 text-sm text-black outline-none transition focus:border-[#f97316] focus:bg-white sm:w-[110px]" />
-          <select name="sort" defaultValue={query.sort || "featured"} aria-label="Sort products" className="h-12 min-w-[150px] rounded-full border border-black/10 bg-[#f9f9f9] px-4 text-sm text-black outline-none transition focus:border-[#f97316] focus:bg-white"><option value="featured">Featured</option><option value="newest">Newest</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name</option></select>
-          <button type="submit" className="h-12 rounded-full bg-[#1a1308] px-5 text-sm font-semibold text-white transition hover:bg-[#2a1d10]">Apply</button>
-        </div>
-      </form>
+      </nav>
       <p className="text-sm text-[#5A5E55]">{total} product{total === 1 ? "" : "s"} found</p>
       {products.length ? <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 xl:grid-cols-4 sm:gap-6">{products.map((product) => {
         const images = Array.isArray(product.images) ? product.images.filter((item): item is string => typeof item === "string") : [];

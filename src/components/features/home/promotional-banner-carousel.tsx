@@ -21,18 +21,12 @@ export function PromotionalBannerCarousel({ banners }: { banners: PromotionalCat
   return (
     <section className="bg-[#f8f4ef] px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex items-end justify-between gap-5 sm:mb-10">
-          <div className="max-w-2xl">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d84967]">Shop by mood</p>
-            <h2 className="mt-2 font-serif text-3xl font-extrabold text-[#1a1308] sm:text-4xl">Find your next signature look</h2>
+        {visibleBanners.length > 2 ? (
+          <div className="mb-4 hidden justify-end gap-2 md:flex">
+            <button type="button" onClick={() => move(-1)} aria-label="Previous promotional banners" className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9c9ba] bg-white text-[#1a1308] transition hover:border-[#EA580C] hover:text-[#EA580C]"><ArrowLeft className="h-4 w-4" /></button>
+            <button type="button" onClick={() => move(1)} aria-label="Next promotional banners" className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9c9ba] bg-white text-[#1a1308] transition hover:border-[#EA580C] hover:text-[#EA580C]"><ArrowRight className="h-4 w-4" /></button>
           </div>
-          {visibleBanners.length > 2 ? (
-            <div className="hidden items-center gap-2 md:flex">
-              <button type="button" onClick={() => move(-1)} aria-label="Previous promotional banners" className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9c9ba] bg-white text-[#1a1308] transition hover:border-[#EA580C] hover:text-[#EA580C]"><ArrowLeft className="h-4 w-4" /></button>
-              <button type="button" onClick={() => move(1)} aria-label="Next promotional banners" className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9c9ba] bg-white text-[#1a1308] transition hover:border-[#EA580C] hover:text-[#EA580C]"><ArrowRight className="h-4 w-4" /></button>
-            </div>
-          ) : null}
-        </div>
+        ) : null}
         <div
           ref={viewportRef}
           className="scrollbar-hide cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth active:cursor-grabbing"
