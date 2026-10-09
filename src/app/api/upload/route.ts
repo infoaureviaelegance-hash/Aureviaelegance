@@ -42,9 +42,11 @@ export async function POST(request: Request) {
       media,
     });
   } catch (error: unknown) {
+    const message = (error as Error).message || "Upload failed";
+    const providerRejectedUpload = /status code\s*-?\s*403|forbidden/i.test(message);
     return NextResponse.json(
-      { error: (error as Error).message || "Upload failed" },
-      { status: 500 },
+      { error: providerRejectedUpload ? "Cloudinary rejected the upload (403). Check the Cloudinary account upload restrictions, or paste an image URL below." : message },
+      { status: providerRejectedUpload ? 502 : 500 },
     );
   }
 }

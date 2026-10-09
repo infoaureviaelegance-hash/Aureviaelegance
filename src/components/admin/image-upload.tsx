@@ -184,6 +184,23 @@ export function AdminImageUpload({
         </button>
       </div>
 
+      {mode === "single" ? (
+        <label className="block text-xs font-medium text-gray-600">
+          Or paste an image URL
+          <input
+            type="url"
+            value={value || ""}
+            onChange={(event) => {
+              setError(null);
+              setLocalPreview(null);
+              onChange?.(event.target.value);
+            }}
+            placeholder="https://..."
+            className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none focus:border-[#EA580C] focus:ring-2 focus:ring-[#EA580C]/20"
+          />
+        </label>
+      ) : null}
+
       {error ? <p role="alert" className="text-xs font-medium text-red-600">{error}</p> : null}
 
       {mode === "single" && (localPreview || value) ? (
