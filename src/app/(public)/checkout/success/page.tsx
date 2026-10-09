@@ -4,7 +4,7 @@ import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata = createSeoMetadata({
   title: "Order Confirmed",
-  description: "Your Auerviamaison order confirmation.",
+  description: "Your Aurevia Elegance order confirmation.",
   path: "/checkout/success",
   noIndex: true,
 });

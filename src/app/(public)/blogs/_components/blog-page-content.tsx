@@ -24,7 +24,7 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
       <div className="relative h-80 w-full overflow-hidden sm:h-105">
         <Image
           src="/logo/auerviamaison.png"
-          alt="Auerviamaison Blog"
+          alt="Aurevia Elegance Blog"
           fill
           priority
           className="object-cover"
@@ -32,7 +32,7 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
         <div className="absolute inset-0 bg-[#1a1308]/35" />
         <div className="relative z-10 flex h-full items-center justify-center">
           <h1 className="text-3xl font-bold tracking-tight text-[#fcf5e8] sm:text-4xl">
-            Auerviamaison Blogs
+            Aurevia Elegance Blogs
           </h1>
         </div>
       </div>
@@ -41,11 +41,11 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-[#0a0a0a] sm:text-4xl">
-              Latest from Auerviamaison
+              Latest from Aurevia Elegance
             </h2>
 
             <p className="mt-4 text-lg text-[#5A5E55]">
-              Welcome to the Auerviamaison blog, where we share practical buying
+              Welcome to the Aurevia Elegance blog, where we share practical buying
               guides and sourcing insights that help customers choose authentic
               Himalayan and natural wellness products.
             </p>
@@ -110,7 +110,7 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
                     </Link>
                   </h3>
                   <p className="mt-5 line-clamp-3 text-sm leading-6 text-[#5A5E55]">
-                    {post.excerpt || "Read this article on Auerviamaison blog."}
+                    {post.excerpt || "Read this article on Aurevia Elegance blog."}
                   </p>
                 </div>
 
@@ -139,7 +139,7 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
             Disclaimer
           </p>
           <p className="text-sm font-medium text-[#0a0a0a]">
-            At Auerviamaison, we believe in being open and honest with our customers.
+            At Aurevia Elegance, we believe in being open and honest with our customers.
             The following disclaimer outlines important information about the content
             and products featured on our website. Please take a moment to read
             through it carefully.
@@ -169,7 +169,7 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
               <p>
                 By using our website and purchasing our products, you
                 acknowledge and agree that you do so at your own discretion and
-                risk. Auerviamaison is not responsible for any direct, indirect, or
+                risk. Aurevia Elegance is not responsible for any direct, indirect, or
                 incidental damages that may result from reliance on information
                 presented here.
               </p>

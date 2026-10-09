@@ -42,7 +42,7 @@ function ProductsSeoSection() {
       </h2>
 
       <p className="mt-4 max-w-4xl text-[#5A5E55]">
-        Auerviamaison specializes in authentic beauty and lifestyle products,
+        Aurevia Elegance specializes in authentic beauty and lifestyle products,
         responsibly sourced and minimally processed to retain their natural
         mineral composition. Our range includes edible products for cooking,
         bath and wellness salt, decorative and functional products lamps, and

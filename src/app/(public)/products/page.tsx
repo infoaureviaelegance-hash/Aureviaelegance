@@ -13,7 +13,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const page = Math.max(1, Number(query.page) || 1);
   return createSeoMetadata({
     title: page > 1 ? `Himalayan & Natural Wellness Products – Page ${page}` : "Shop Himalayan & Natural Wellness Products",
-    description: "Shop beauty, personal care, fragrance, and lifestyle essentials from Auerviamaison.",
+    description: "Shop beauty, personal care, fragrance, and lifestyle essentials from Aurevia Elegance.",
     path: page > 1 && !filtered ? `/products?page=${page}` : "/products",
     keywords: ["Himalayan pink salt products", "Shilajit Pakistan", "salt lamps", "herbal wellness products", "natural honey"],
     noIndex: filtered,

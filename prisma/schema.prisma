@@ -33,7 +33,7 @@ model Product {
   productType            String?
   categoryId             String?
   subcategoryId          String?
-  vendor                 String             @default("Auerviamaison")
+  vendor                 String             @default("Aurevia Elegance")
   tags                   Json               @default("[]")
   collectionIds          Json               @default("[]")
   isFeatured             Boolean            @default(false)

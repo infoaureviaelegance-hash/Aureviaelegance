@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const collection = await getCollection(collectionHandle);
     return createSeoMetadata({
       title: collection.seo?.title ?? `${collection.title} Pakistan`,
-      description: collection.seo?.description || collection.description || `Shop ${collection.title} in Pakistan from Auerviamaison with nationwide delivery.`,
+      description: collection.seo?.description || collection.description || `Shop ${collection.title} in Pakistan from Aurevia Elegance with nationwide delivery.`,
       path: collection.canonicalUrl || `/collections/${collectionHandle}`,
       image: collection.openGraphImage || collection.image?.url,
       keywords: [collection.focusKeyword, collection.title, `${collection.title} Pakistan`, "Buy Himalayan Pink Salt Online Pakistan"].filter((item): item is string => Boolean(item)),
@@ -89,14 +89,14 @@ export default async function Page({ params }: Props) {
         <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#f6a45d]">
-              Auerviamaison
+              Aurevia Elegance
             </p>
             <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
               {collection.title}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:text-lg">
               {collection.description ||
-                "Explore carefully selected beauty, personal care, and lifestyle essentials from Auerviamaison."}
+                "Explore carefully selected beauty, personal care, and lifestyle essentials from Aurevia Elegance."}
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold">
               <span className="rounded-full bg-white px-4 py-2 text-[#1a1308]">

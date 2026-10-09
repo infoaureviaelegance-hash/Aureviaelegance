@@ -44,10 +44,10 @@ export async function sendOrderConfirmationEmail(order: EmailOrder) {
     .join("");
 
   await transporter.sendMail({
-    from: `Auerviamaison <${user}>`,
+    from: `Aurevia Elegance <${user}>`,
     to: order.customerEmail,
     replyTo: user,
     subject: `Order ${order.orderNumber} confirmed`,
-    html: `<div style="font-family:Arial,sans-serif;max-width:640px;margin:auto;color:#1a1308"><div style="background:#f6a45d;padding:20px;color:white"><h1 style="margin:0;font-size:24px">Order confirmed</h1></div><div style="padding:24px;border:1px solid #eee"><p>Assalam-o-Alaikum ${escapeHtml(order.customerName)},</p><p>Your order <strong>${escapeHtml(order.orderNumber)}</strong> has been confirmed.</p><h3>Products</h3><ul>${itemHtml}</ul><p><strong>Total:</strong> PKR ${order.total.toLocaleString()}</p><p><strong>Payment method:</strong> ${escapeHtml(order.paymentMethod.replaceAll("_", " "))}</p><p><strong>Payment status:</strong> ${escapeHtml(order.paymentStatus)}</p><p><strong>Order status:</strong> ${escapeHtml(order.orderStatus)}</p><p><strong>Delivery address:</strong><br>${escapeHtml(addressText || "Not provided")}</p><p>Thank you for choosing Auerviamaison.</p></div></div>`,
+    html: `<div style="font-family:Arial,sans-serif;max-width:640px;margin:auto;color:#1a1308"><div style="background:#f6a45d;padding:20px;color:white"><h1 style="margin:0;font-size:24px">Order confirmed</h1></div><div style="padding:24px;border:1px solid #eee"><p>Assalam-o-Alaikum ${escapeHtml(order.customerName)},</p><p>Your order <strong>${escapeHtml(order.orderNumber)}</strong> has been confirmed.</p><h3>Products</h3><ul>${itemHtml}</ul><p><strong>Total:</strong> PKR ${order.total.toLocaleString()}</p><p><strong>Payment method:</strong> ${escapeHtml(order.paymentMethod.replaceAll("_", " "))}</p><p><strong>Payment status:</strong> ${escapeHtml(order.paymentStatus)}</p><p><strong>Order status:</strong> ${escapeHtml(order.orderStatus)}</p><p><strong>Delivery address:</strong><br>${escapeHtml(addressText || "Not provided")}</p><p>Thank you for choosing Aurevia Elegance.</p></div></div>`,
   });
 }

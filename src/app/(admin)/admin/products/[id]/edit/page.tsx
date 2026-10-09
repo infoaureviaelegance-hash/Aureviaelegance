@@ -45,7 +45,7 @@ export default function EditProductPage() {
           productType: data.productType ?? "",
           categoryId: data.categoryId ?? "",
           subcategoryId: data.subcategoryId ?? "",
-          vendor: data.vendor ?? "Auerviamaison",
+          vendor: data.vendor ?? "Aurevia Elegance",
           tags: Array.isArray(data.tags) ? data.tags : [],
           collectionIds: Array.isArray(data.collectionIds) ? data.collectionIds : [],
           isFeatured: data.isFeatured ?? false,

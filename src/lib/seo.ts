@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const SITE_NAME = "Auerviamaison";
+export const SITE_NAME = "Aurevia Elegance";
 export const SITE_URL = "https://www.auerviamaison.com";
 export const DEFAULT_OG_IMAGE = "/logo/auerviamaison.png";
 
@@ -13,7 +13,7 @@ export const pakistanWellnessKeywords = [
   "Beauty accessories Pakistan",
   "Smartwatch Pakistan",
   "Jewelry and accessories Pakistan",
-  "Auerviamaison Pakistan",
+  "Aurevia Elegance Pakistan",
   "Cosmetics online Pakistan",
   "Beauty gifts Pakistan",
   "Luxury lifestyle products Pakistan",

@@ -8,7 +8,7 @@ import { createSeoMetadata } from "@/lib/seo";
 import { defaultWholesalePage, getYouTubeEmbedUrl, parseWholesalePage, WHOLESALE_PAGE_KEY } from "@/lib/wholesale-page";
 
 export const revalidate = 900;
-export const metadata = createSeoMetadata({ title: "Wholesale & Bulk Supply | Auerviamaison", description: "Explore Auerviamaison wholesale beauty essentials, business supply options, and partner pricing.", path: "/wholesale", keywords: ["Auerviamaison wholesale", "beauty wholesale Pakistan", "cosmetics bulk supply"] });
+export const metadata = createSeoMetadata({ title: "Wholesale & Bulk Supply | Aurevia Elegance", description: "Explore Aurevia Elegance wholesale beauty essentials, business supply options, and partner pricing.", path: "/wholesale", keywords: ["Aurevia Elegance wholesale", "beauty wholesale Pakistan", "cosmetics bulk supply"] });
 
 export default async function WholesalePage() {
   const [setting, products] = await Promise.all([
@@ -22,7 +22,7 @@ export default async function WholesalePage() {
   const content = setting ? parseWholesalePage(setting.value) : defaultWholesalePage;
   const wholesaleProducts = products.filter((product) => product.wholesaleQuoteEnabled || normalizeWholesaleDiscounts(product.wholesaleDiscounts).length > 0);
   const whatsappNumber = "923179517939";
-  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Assalamualaikum, I would like information about Auerviamaison wholesale beauty products and pricing.")}`;
+  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Assalamualaikum, I would like information about Aurevia Elegance wholesale beauty products and pricing.")}`;
 
   return <main className="overflow-x-hidden bg-gray-50 text-gray-900">
     <section className="relative isolate min-h-[520px] overflow-hidden border-b border-[#C6A24A]/35 bg-[#fcf5e8]"><div className="absolute inset-0">{content.heroImage ? <Image src={content.heroImage} alt="OrganoCity wholesale" fill priority className="object-cover opacity-15" sizes="100vw" /> : <div className="h-full bg-[radial-gradient(circle_at_80%_20%,rgba(198,162,74,0.28),transparent_34%),radial-gradient(circle_at_10%_90%,rgba(246,164,93,0.18),transparent_30%)]" />}<div className="absolute inset-0 bg-gradient-to-r from-[#fcf5e8] via-[#fcf5e8]/90 to-[#fcf5e8]/45" /></div><div className="relative mx-auto flex min-h-[520px] max-w-7xl items-center px-5 py-20 sm:px-8"><div className="max-w-3xl"><span className="inline-flex items-center gap-2 rounded-full border border-[#C6A24A]/50 bg-[#C6A24A]/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#b57910]"><PackageCheck className="h-4 w-4" /> Bulk &amp; business supply</span><h1 className="mt-6 font-serif text-4xl font-extrabold leading-tight text-gray-900 sm:text-5xl lg:text-6xl">{content.heroTitle}</h1><p className="mt-5 max-w-2xl text-base leading-7 text-gray-700 sm:text-lg">{content.heroDescription}</p><div className="mt-8 flex flex-wrap gap-3"><a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-[#f6a45d] px-6 py-3 text-sm font-bold text-white hover:bg-[#d8861f]"><MessageCircle className="h-4 w-4" /> Request wholesale quote</a><a href="#wholesale-products" className="inline-flex items-center gap-2 rounded-lg border border-[#C6A24A]/45 bg-white px-6 py-3 text-sm font-bold text-gray-900">View products <ArrowRight className="h-4 w-4" /></a></div></div></div></section>

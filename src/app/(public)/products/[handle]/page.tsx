@@ -62,7 +62,7 @@ export default async function Page({ params }: Props) {
       image: data.images?.nodes?.map((img) => ({ "@type": "ImageObject", url: img.url, caption: img.altText || data.title })) || [],
       description: data.description || data.seo.description,
       sku: data.variants?.nodes?.[0]?.sku || undefined,
-      brand: { "@type": "Brand", name: data.vendor || "Auerviamaison" },
+      brand: { "@type": "Brand", name: data.vendor || "Aurevia Elegance" },
       category: category?.name || data.productType || "Products",
       offers: data.variants.nodes.map((variant) => ({
         "@type": "Offer",

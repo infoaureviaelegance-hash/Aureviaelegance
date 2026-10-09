@@ -66,8 +66,8 @@ export function AdminAccountsPanel() {
 
   return <div className="rounded-lg bg-white p-6 shadow">
     <h2 className="flex items-center gap-2 text-lg font-semibold"><FiUsers className="h-5 w-5" />Admin Accounts</h2>
-    <p className="mt-1 text-sm text-gray-500">Create additional admin logins or change a secondary admin email. Security codes always go to the protected Auerviamaison email.</p>
-    <p className="mt-1 text-sm text-gray-500">Create additional admin logins or change a secondary admin email. Security codes always go to the protected Auerviamaison email.</p>
+    <p className="mt-1 text-sm text-gray-500">Create additional admin logins or change a secondary admin email. Security codes always go to the protected Aurevia Elegance email.</p>
+    <p className="mt-1 text-sm text-gray-500">Create additional admin logins or change a secondary admin email. Security codes always go to the protected Aurevia Elegance email.</p>
     <div className="mt-4 space-y-2">{admins.map((admin) => <div key={admin.id} className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm"><span>{admin.email}</span>{admin.isPrimary && <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">Primary & protected</span>}</div>)}</div>
     <div className="mt-5 flex gap-2"><button type="button" onClick={() => { reset(); setMode("create"); }} className={`rounded-lg px-3 py-2 text-sm ${mode === "create" ? "bg-[#C6A24A] text-white" : "bg-gray-100"}`}><FiPlus className="mr-1 inline" />Add admin</button><button type="button" onClick={() => { reset(); setMode("change"); }} className={`rounded-lg px-3 py-2 text-sm ${mode === "change" ? "bg-[#C6A24A] text-white" : "bg-gray-100"}`}><FiMail className="mr-1 inline" />Change email</button></div>
     {message && <div className={`mt-4 rounded-lg p-3 text-sm ${message.includes("created") || message.includes("changed") || message.includes("sent") ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>{message}</div>}

@@ -45,7 +45,7 @@ export function VideosPageClient({ videos }: { videos: PublicVideo[] }) {
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl space-y-5">
             <span className="inline-flex rounded-full bg-[#ffedd5] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#ea580c]">
-              Auerviamaison Videos
+              Aurevia Elegance Videos
             </span>
             <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
               Product demos, tech guides, and shop updates.

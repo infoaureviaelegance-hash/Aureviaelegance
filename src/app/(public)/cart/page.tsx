@@ -3,7 +3,7 @@ import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata = createSeoMetadata({
   title: "Shopping Cart",
-  description: "Review products selected from Auerviamaison before checkout.",
+  description: "Review products selected from Aurevia Elegance before checkout.",
   path: "/cart",
   noIndex: true,
 });

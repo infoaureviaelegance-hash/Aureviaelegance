@@ -18,8 +18,8 @@ export default function NotFound() {
   return (
     <>
       <Head>
-        <title>404 Not Found – Auerviamaison</title>
-          <title>404 Not Found – Auerviamaison</title>
+        <title>404 Not Found – Aurevia Elegance</title>
+          <title>404 Not Found – Aurevia Elegance</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://www.auerviamaison.com/404" />
           <link rel="canonical" href="https://www.auerviamaison.com/404" />
@@ -29,8 +29,8 @@ export default function NotFound() {
           href="//mobarakfoods.com/cdn/shop/files/mubarak_foods_logo-removebg-preview.png?crop=center&height=32&v=1764223344&width=32"
         />
 
-        <meta property="og:site_name" content="Auerviamaison" />
-          <meta property="og:site_name" content="Auerviamaison" />
+        <meta property="og:site_name" content="Aurevia Elegance" />
+          <meta property="og:site_name" content="Aurevia Elegance" />
         <meta property="og:url" content="https://www.auerviamaison.com/404" />
           <meta property="og:url" content="https://www.auerviamaison.com/404" />
         <meta property="og:title" content="404 Not Found" />
@@ -88,7 +88,7 @@ export default function NotFound() {
               >
                 <Link href="/">
                   <Home className="mr-2 h-5 w-5" />
-                  Back to Auerviamaison
+                  Back to Aurevia Elegance
                 </Link>
               </Button>
             </CardFooter>

@@ -33,9 +33,9 @@ const processSteps = [
 
 export const homepageFaqItems = [
   {
-    question: "What is Auerviamaison?",
-    answer: <>Auerviamaison is a premium beauty and lifestyle store focused on skincare, makeup, fragrance, accessories, and modern personal styling essentials.</>,
-    schemaAnswer: "Auerviamaison is a premium beauty and lifestyle store focused on skincare, makeup, fragrance, accessories, and modern personal styling essentials.",
+    question: "What is Aurevia Elegance?",
+    answer: <>Aurevia Elegance is a premium beauty and lifestyle store focused on skincare, makeup, fragrance, accessories, and modern personal styling essentials.</>,
+    schemaAnswer: "Aurevia Elegance is a premium beauty and lifestyle store focused on skincare, makeup, fragrance, accessories, and modern personal styling essentials.",
   },
   {
     question: "Do you sell skincare and makeup?",
@@ -66,7 +66,7 @@ export const homepageFaqItems = [
 
 export function TrustStrip() {
   return (
-    <section aria-label="Why shoppers choose Auerviamaison" className="border-y border-[#EA580C]/20 bg-[#fffaf5] px-3 py-4 sm:px-6 sm:py-5">
+    <section aria-label="Why shoppers choose Aurevia Elegance" className="border-y border-[#EA580C]/20 bg-[#fffaf5] px-3 py-4 sm:px-6 sm:py-5">
       <div className="mx-auto grid max-w-7xl grid-cols-6 gap-x-2 gap-y-4 sm:gap-x-5 lg:grid-cols-5 lg:gap-6">
         {trustItems.map(({ icon: Icon, text }) => (
           <div key={text} className="col-span-2 flex min-w-0 items-center justify-center gap-1.5 text-[10px] font-semibold leading-tight text-gray-800 [&:nth-child(n+4)]:col-span-3 sm:gap-2.5 sm:text-xs lg:col-span-1 lg:justify-start lg:gap-3 lg:text-sm lg:[&:nth-child(n+4)]:col-span-1">
@@ -83,7 +83,7 @@ export function OurProcessSection() {
   return (
     <section className="bg-gray-50 px-6 py-14 lg:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading eyebrow="The beauty edit" title="How we curate every pick" description="At Auerviamaison, we blend clean beauty, elevated style, and everyday practicality. Every product in our curated collection is chosen to help customers feel polished, confident, and ready for modern life." />
+        <SectionHeading eyebrow="The beauty edit" title="How we curate every pick" description="At Aurevia Elegance, we blend clean beauty, elevated style, and everyday practicality. Every product in our curated collection is chosen to help customers feel polished, confident, and ready for modern life." />
         <ol className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {processSteps.map(({ icon: Icon, title, text }, index) => (
             <li key={title} className="rounded-3xl border border-[#EA580C]/20 bg-white p-7 shadow-sm">
@@ -117,7 +117,7 @@ export function IsThisYouSection() {
           {items.map((item) => <li key={item} className="flex items-start gap-3 rounded-2xl bg-white p-4 text-gray-700 shadow-sm"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#EA580C]" /><span>{item}</span></li>)}
         </ul>
         <div className="mt-8 text-center">
-          <p className="text-lg font-semibold text-gray-900">Then Auerviamaison is your new beauty destination.</p>
+          <p className="text-lg font-semibold text-gray-900">Then Aurevia Elegance is your new beauty destination.</p>
           <Link href="/products" className="mt-5 inline-flex rounded-full bg-[#EA580C] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#c2410c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EA580C]">Shop the collection</Link>
         </div>
       </div>

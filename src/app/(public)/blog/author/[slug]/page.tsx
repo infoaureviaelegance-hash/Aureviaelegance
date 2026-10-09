@@ -15,10 +15,10 @@ async function findAuthor(slug: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const { profile } = await findAuthor(slug);
-  return createSeoMetadata({ title: profile ? `${profile.author} – Author` : "Author Not Found", description: profile?.authorBio || "Meet the people who write Auerviamaison product and beauty guides.", path: `/blog/author/${slug}`, noIndex: !profile });
+  return createSeoMetadata({ title: profile ? `${profile.author} – Author` : "Author Not Found", description: profile?.authorBio || "Meet the people who write Aurevia Elegance product and beauty guides.", path: `/blog/author/${slug}`, noIndex: !profile });
 }
 
 export default async function AuthorPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const { profile, posts } = await findAuthor(slug); if (!profile) notFound();
-  return <main className="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><Link href="/blog">Blog</Link> / Authors</nav><h1 className="mt-8 text-4xl font-bold">{profile.author}</h1>{profile.authorRole && <p className="mt-2 text-lg">{profile.authorRole}</p>}<p className="mt-4 text-muted-foreground">{profile.authorBio || `${profile.author} contributes practical product and beauty guides to Auerviamaison.`}</p><h2 className="mt-12 text-2xl font-semibold">Published articles</h2><ul className="mt-5 space-y-3">{posts.map((post) => <li key={post.slug}><Link href={`/blog/${post.slug}`}>{post.title}</Link></li>)}</ul></main>;
+  return <main className="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><Link href="/blog">Blog</Link> / Authors</nav><h1 className="mt-8 text-4xl font-bold">{profile.author}</h1>{profile.authorRole && <p className="mt-2 text-lg">{profile.authorRole}</p>}<p className="mt-4 text-muted-foreground">{profile.authorBio || `${profile.author} contributes practical product and beauty guides to Aurevia Elegance.`}</p><h2 className="mt-12 text-2xl font-semibold">Published articles</h2><ul className="mt-5 space-y-3">{posts.map((post) => <li key={post.slug}><Link href={`/blog/${post.slug}`}>{post.title}</Link></li>)}</ul></main>;
 }

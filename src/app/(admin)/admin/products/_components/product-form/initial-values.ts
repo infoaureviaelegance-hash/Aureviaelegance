@@ -25,7 +25,7 @@ export const defaultProductValues: ProductFormValues = {
   productType: "",
   categoryId: "",
   subcategoryId: "",
-  vendor: "Auerviamaison",
+  vendor: "Aurevia Elegance",
   tags: [],
   collectionIds: [],
   isFeatured: false,

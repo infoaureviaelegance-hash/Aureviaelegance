@@ -116,7 +116,7 @@ ${addressStr}
 
 We're preparing your order for dispatch. You'll receive tracking updates soon.
 
-Thank you for choosing Auerviamaison! ✨
+Thank you for choosing Aurevia Elegance! ✨
 
 For queries, reply to this message.`;
 }
@@ -174,7 +174,7 @@ export function buildCustomerOrderMessage(cartItems: any[], customerName: string
     .reduce((sum, line) => sum + Number(line.cost?.totalAmount?.amount || 0), 0)
     .toLocaleString();
 
-  return `Hi Auerviamaison,
+  return `Hi Aurevia Elegance,
 
 I would like to order:
 ${items}

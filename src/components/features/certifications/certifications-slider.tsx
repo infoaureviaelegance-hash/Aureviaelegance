@@ -21,7 +21,7 @@ export function CertificationsSlider({ certificates }: { certificates: Certifica
         <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#5A5E55]">Explore the independent organizations and credentials that support our commitment to quality and authenticity.</p>
       </div>
 
-      <Link href="/certificates" className="group block" aria-label="View all Auerviamaison certificates">
+      <Link href="/certificates" className="group block" aria-label="View all Aurevia Elegance certificates">
         <div className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#fcf5e8] to-transparent sm:w-28" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#fcf5e8] to-transparent sm:w-28" />

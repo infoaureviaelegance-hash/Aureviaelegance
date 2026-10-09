@@ -26,7 +26,7 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": "https://www.auerviamaison.com/#website",
-  name: "Auerviamaison",
+  name: "Aurevia Elegance",
   url: "https://www.auerviamaison.com",
   publisher: { "@id": "https://www.auerviamaison.com/#organization" },
   potentialAction: {
@@ -43,8 +43,8 @@ function parseStringArray(value: unknown): string[] {
 }
 
 export const metadata = createSeoMetadata({
-  title: "Auerviamaison | Beauty, Makeup & Lifestyle Essentials",
-  description: "Discover premium skincare, makeup, fragrance, watches, accessories and beauty essentials for everyday confidence at Auerviamaison.",
+  title: "Aurevia Elegance | Beauty, Makeup & Lifestyle Essentials",
+  description: "Discover premium skincare, makeup, fragrance, watches, accessories and beauty essentials for everyday confidence at Aurevia Elegance.",
   path: "/",
   keywords: ["beauty store Pakistan", "premium skincare Pakistan", "makeup products Pakistan", "fragrance Pakistan", "beauty accessories Pakistan", "smartwatch Pakistan"],
 });
@@ -194,7 +194,7 @@ const homepageJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Featured Auerviamaison products",
+    name: "Featured Aurevia Elegance products",
     numberOfItems: allProducts.length,
     itemListElement: allProducts.slice(0, 20).map((product, index) => ({
       "@type": "ListItem",

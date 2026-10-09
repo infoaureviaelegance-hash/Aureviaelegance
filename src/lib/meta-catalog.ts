@@ -1,7 +1,7 @@
 import type { Prisma } from "@prisma/client";
 
 const CURRENCY = "PKR";
-const DEFAULT_BRAND = "Auerviamaison";
+const DEFAULT_BRAND = "Aurevia Elegance";
 const MAX_ADDITIONAL_IMAGES = 10;
 
 type CatalogVariant = {
@@ -190,9 +190,9 @@ export function buildMetaCatalogXml(
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
   <channel>
-    <title>Auerviamaison Product Catalog</title>
+    <title>Aurevia Elegance Product Catalog</title>
     <link>${escapeXml(baseUrl)}</link>
-    <description>Live product catalog for Auerviamaison</description>
+    <description>Live product catalog for Aurevia Elegance</description>
 ${items.join("\n")}
   </channel>
 </rss>`;

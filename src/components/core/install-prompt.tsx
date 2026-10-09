@@ -34,7 +34,7 @@ export default function InstallPrompt() {
               <FiSmartphone className="w-5 h-5 text-[#0a0a0a]" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm">Install Auerviamaison</h3>
+              <h3 className="font-semibold text-sm">Install Aurevia Elegance</h3>
               <p className="text-xs text-gray-300 mt-1">
                 {isIOS
                   ? "Add to Home Screen for quick access"

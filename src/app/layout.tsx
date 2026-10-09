@@ -12,16 +12,16 @@ import { SITE_NAME, SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Auerviamaison | Beauty, Makeup & Everyday Lifestyle Essentials",
+    default: "Aurevia Elegance | Beauty, Makeup & Everyday Lifestyle Essentials",
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Shop premium beauty, skincare, makeup, fragrances, accessories, watches and modern lifestyle essentials from Auerviamaison Pakistan.",
+    "Shop premium beauty, skincare, makeup, fragrances, accessories, watches and modern lifestyle essentials from Aurevia Elegance Pakistan.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Auerviamaison",
+    title: "Aurevia Elegance",
   },
   icons: {
     icon: [
@@ -57,7 +57,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/logo/icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Auerviamaison" />
+        <meta name="apple-mobile-web-app-title" content="Aurevia Elegance" />
         <meta name="mobile-web-app-capable" content="yes" />
         <script src="/performance-measure-guard.js" />
       </head>

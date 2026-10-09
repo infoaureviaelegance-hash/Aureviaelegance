@@ -65,7 +65,7 @@ export function usePWAInstall() {
     if (isIOS) {
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
       if (isSafari) {
-        alert("To install Auerviamaison:\n\n1. Tap the Share button\n2. Tap 'Add to Home Screen'\n3. Tap 'Add'");
+        alert("To install Aurevia Elegance:\n\n1. Tap the Share button\n2. Tap 'Add to Home Screen'\n3. Tap 'Add'");
       }
       return;
     }

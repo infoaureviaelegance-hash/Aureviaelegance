@@ -221,7 +221,7 @@ export function Header() {
                     <div className="relative h-14 w-[130px]">
                       <Image
                         src={logoSrc}
-                        alt="Aurevia Maison"
+                        alt="Aurevia Elegance"
                         fill
                         className="object-contain"
                       />
@@ -392,7 +392,7 @@ export function Header() {
           <div className="relative h-9 w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] lg:h-16 lg:w-[210px]">
             <Image
               src="/logo/logotext.png"
-              alt="Auerviamaison"
+              alt="Aurevia Elegance"
               fill
               className="object-contain object-left"
               priority

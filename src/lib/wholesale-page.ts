@@ -26,7 +26,7 @@ export const wholesalePageSchema = z.object({
 export type WholesalePageContent = z.infer<typeof wholesalePageSchema>;
 
 export const defaultWholesalePage: WholesalePageContent = {
-  heroTitle: "Wholesale With Auerviamaison",
+  heroTitle: "Wholesale With Aurevia Elegance",
   heroDescription: "Reliable bulk supply of beauty, personal care, and lifestyle essentials for retailers, distributors, and institutions.",
   heroImage: "",
   policyTitle: "Our Wholesale Policy",

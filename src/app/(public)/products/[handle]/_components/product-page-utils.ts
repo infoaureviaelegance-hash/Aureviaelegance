@@ -63,7 +63,7 @@ export function buildWhatsAppOrderMessage({
   url?: string;
 }) {
   return [
-    "Hi Auerviamaison,",
+    "Hi Aurevia Elegance,",
     "",
     "I want to order this product:",
     `Product: ${title}`,

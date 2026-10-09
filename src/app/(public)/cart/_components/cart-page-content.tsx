@@ -48,7 +48,7 @@ function buildWhatsAppMessage(cart: any) {
     .reduce((sum: number, line: any) => sum + Number(line.cost?.totalAmount?.amount || 0), 0)
     .toLocaleString();
 
-  return `Hi Auerviamaison,%0A%0AI would like to order:%0A${items}%0A%0ATotal: Rs. ${subtotal}%0A%0APlease confirm my order. Thank you!`;
+  return `Hi Aurevia Elegance,%0A%0AI would like to order:%0A${items}%0A%0ATotal: Rs. ${subtotal}%0A%0APlease confirm my order. Thank you!`;
 }
 
 async function fetchReviewStats(productHandle: string): Promise<ReviewStats | null> {

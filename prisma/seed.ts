@@ -287,7 +287,7 @@ const collections = [
 ];
 
 async function main() {
-  const adminEmail = process.env.ADMIN_USER ?? "info.aureviamaison@gmail.com";
+  const adminEmail = process.env.ADMIN_USER ?? "info.aureviaelegance@gmail.com";
   const adminPassword = process.env.ADMIN_PASS ?? "admin123";
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
@@ -297,11 +297,11 @@ async function main() {
     if (existingAdmin) {
       await prisma.adminUser.update({
         where: { id: existingAdmin.id },
-        data: { email: adminEmail, name: existingAdmin.name ?? "Auerviamaison Admin" },
+        data: { email: adminEmail, name: existingAdmin.name ?? "Aurevia Elegance Admin" },
       });
     } else {
       await prisma.adminUser.create({
-        data: { email: adminEmail, password: hashedPassword, name: "Auerviamaison Admin" },
+        data: { email: adminEmail, password: hashedPassword, name: "Aurevia Elegance Admin" },
       });
     }
   }
@@ -352,8 +352,8 @@ async function main() {
         image: CATEGORY_IMAGE,
         order: cat.order,
         featured: cat.featured,
-        seoTitle: `${cat.name} – Auerviamaison`,
-        seoDescription: `Shop premium ${cat.name.toLowerCase()} essentials at Auerviamaison.`,
+        seoTitle: `${cat.name} – Aurevia Elegance`,
+        seoDescription: `Shop premium ${cat.name.toLowerCase()} essentials at Aurevia Elegance.`,
       },
     });
     categoryMap.set(cat.slug, created.id);
@@ -378,10 +378,10 @@ async function main() {
         images: JSON.stringify([{ url: product.image, altText: product.title }]),
         productType: product.category,
         categoryId,
-        vendor: "Auerviamaison",
+        vendor: "Aurevia Elegance",
         tags: JSON.stringify(["beauty", "lifestyle", product.category]),
         isFeatured: product.isFeatured,
-        seoTitle: `${product.title} – Auerviamaison`,
+        seoTitle: `${product.title} – Aurevia Elegance`,
         seoDescription: product.description,
       },
     });
@@ -400,7 +400,7 @@ async function main() {
         image: CATEGORY_IMAGE,
         isFeatured: col.isFeatured,
         productHandles: JSON.stringify(featuredHandles.slice(0, 6)),
-        seoTitle: `${col.title} – Auerviamaison`,
+        seoTitle: `${col.title} – Aurevia Elegance`,
         seoDescription: col.description,
       },
     });
@@ -410,7 +410,7 @@ async function main() {
     {
       authorName: "Ayesha K.",
       rating: 5,
-      content: "The serum and foundation feel premium and the glow is so natural. Auerviamaison nails the beauty edit.",
+      content: "The serum and foundation feel premium and the glow is so natural. Aurevia Elegance nails the beauty edit.",
       isFeatured: true,
     },
     {
@@ -515,7 +515,7 @@ async function main() {
       excerpt: "A simple beauty routine for hydrated skin, soft color, and an elevated everyday look.",
       content: "<p>Your ideal glow routine can be simple, quick, and high-impact. Start with hydration, add a soft tint, and finish with a signature fragrance.</p>",
       featuredImage: PRODUCT_IMAGE,
-      author: "Auerviamaison Studio",
+      author: "Aurevia Elegance Studio",
       status: "published",
       isFeatured: true,
       publishedAt: new Date(),
@@ -526,7 +526,7 @@ async function main() {
       excerpt: "Discover the ingredients that make a fragrance feel premium, memorable, and easy to wear.",
       content: "<p>Soft florals, warm woods, and clean musk create a balanced scent profile that feels polished from day to night.</p>",
       featuredImage: PRODUCT_IMAGE,
-      author: "Auerviamaison Studio",
+      author: "Aurevia Elegance Studio",
       status: "published",
       isFeatured: true,
       publishedAt: new Date(),
@@ -537,7 +537,7 @@ async function main() {
       excerpt: "From mirrors to watches to beauty brushes, small details can completely reshape your routine.",
       content: "<p>Beauty is in the details. Thoughtful accessories bring polish, convenience, and personality to even the simplest daily styling choices.</p>",
       featuredImage: PRODUCT_IMAGE,
-      author: "Auerviamaison Studio",
+      author: "Aurevia Elegance Studio",
       status: "published",
       isFeatured: false,
       publishedAt: new Date(),
@@ -576,19 +576,19 @@ async function main() {
   });
 
   const siteSettings = [
-    { key: "siteName", value: "Auerviamaison" },
+    { key: "siteName", value: "Aurevia Elegance" },
     {
       key: "termsOfService",
       value: {
         title: "Terms and Conditions",
-        body: "<p>Welcome to Auerviamaison. These terms and conditions outline how our online store operates and how customers can shop with confidence.</p>",
+        body: "<p>Welcome to Aurevia Elegance. These terms and conditions outline how our online store operates and how customers can shop with confidence.</p>",
       },
     },
     {
       key: "privacyPolicy",
       value: {
         title: "Privacy Policy",
-        body: "<p>At Auerviamaison, we protect the information you share with us and use it only to support secure shopping and customer service.</p>",
+        body: "<p>At Aurevia Elegance, we protect the information you share with us and use it only to support secure shopping and customer service.</p>",
       },
     },
     {

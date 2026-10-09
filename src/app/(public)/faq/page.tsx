@@ -4,7 +4,7 @@ import { breadcrumbSchema, createSeoMetadata } from "@/lib/seo";
 
 export const metadata = createSeoMetadata({
   title: "Product Buying FAQ Pakistan",
-  description: "Answers about buying beauty, personal care, fragrance, and lifestyle products in Pakistan from Auerviamaison.",
+  description: "Answers about buying beauty, personal care, fragrance, and lifestyle products in Pakistan from Aurevia Elegance.",
   path: "/faq",
   keywords: ["Product FAQ Pakistan", "Buy Himalayan Pink Salt Online Pakistan", "Product warranty Pakistan"],
 });

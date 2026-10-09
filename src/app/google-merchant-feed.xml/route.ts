@@ -53,6 +53,6 @@ export async function GET() {
     });
   }).filter(Boolean).join("");
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss xmlns:g="http://base.google.com/ns/1.0" version="2.0"><channel><title>Auerviamaison Product Feed</title><link>${absoluteUrl("/")}</link><description>Auerviamaison products available in Pakistan</description>${items}</channel></rss>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss xmlns:g="http://base.google.com/ns/1.0" version="2.0"><channel><title>Aurevia Elegance Product Feed</title><link>${absoluteUrl("/")}</link><description>Aurevia Elegance products available in Pakistan</description>${items}</channel></rss>`;
   return new Response(xml, { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" } });
 }

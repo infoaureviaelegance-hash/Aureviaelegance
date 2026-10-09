@@ -22,7 +22,7 @@ export function SiteLoader() {
      <div className="relative h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40">
           <Image
             src="/logo/icon.png"
-            alt="Auerviamaison"
+            alt="Aurevia Elegance"
             fill
             priority
             className="object-contain"
@@ -30,7 +30,7 @@ export function SiteLoader() {
         </div>
 
         <h1 className="mt-5 text-2xl font-semibold tracking-wide text-[#0a0a0a] sm:text-3xl">
-          Auerviamaison
+          Aurevia Elegance
         </h1>
 
         <p className="mt-2 text-sm text-[#5A5E55] sm:text-base">

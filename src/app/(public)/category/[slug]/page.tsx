@@ -25,7 +25,7 @@ export async function generateMetadata({
   if (!category) return createSeoMetadata({ title: "Category Not Found", description: "This category is not available.", path: `/category/${slug}`, noIndex: true });
   return createSeoMetadata({
     title: category.seoTitle || `${category.name} Pakistan`,
-    description: category.seoDescription || category.description || `Buy ${category.name} in Pakistan from Auerviamaison with expert local support and nationwide delivery.`,
+    description: category.seoDescription || category.description || `Buy ${category.name} in Pakistan from Aurevia Elegance with expert local support and nationwide delivery.`,
     path: page > 1 || sort ? `/category/${slug}?${new URLSearchParams({ ...(page > 1 ? { page: String(page) } : {}), ...(sort ? { sort } : {}) }).toString()}` : category.canonicalUrl || `/category/${slug}`,
     image: category.openGraphImage || category.image,
     keywords: [category.focusKeyword, category.name, `${category.name} Pakistan`, `Buy ${category.name} Pakistan`, "Natural Products Pakistan"].filter((item): item is string => Boolean(item)),
@@ -103,7 +103,7 @@ export default async function CategoryPage({
       </nav>
       <header className="max-w-4xl">
         <h1 className="font-serif text-3xl font-bold text-[#0a0a0a] sm:text-4xl">{category.name}</h1>
-        <p className="mt-3 leading-7 text-[#5A5E55]">{category.description || `Explore authentic ${category.name} products selected by Auerviamaison for quality, traceability, and reliable delivery across Pakistan.`}</p>
+        <p className="mt-3 leading-7 text-[#5A5E55]">{category.description || `Explore authentic ${category.name} products selected by Aurevia Elegance for quality, traceability, and reliable delivery across Pakistan.`}</p>
       </header>
       {subcategories.length > 0 && (
         <section>

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const related = Array.isArray(article.relatedKeywords) ? article.relatedKeywords.filter((tag): tag is string => typeof tag === "string") : [];
   return createSeoMetadata({
     title: article.seoTitle || article.title,
-    description: article.seoDescription || article.excerpt || `Read ${article.title} from Auerviamaison.`,
+    description: article.seoDescription || article.excerpt || `Read ${article.title} from Aurevia Elegance.`,
     path: article.canonicalUrl || `/blog/${slug}`,
     type: "article",
     image: article.openGraphImage || article.featuredImage,
@@ -78,7 +78,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           datePublished: effectivePublishedAt?.toISOString(), dateModified: modified.toISOString(),
           articleSection: category?.name, keywords: [article.focusKeyword, ...(Array.isArray(article.tags) ? article.tags : [])].filter(Boolean).join(", "),
           author: { "@type": "Person", name: article.author, url: absoluteUrl(`/blog/author/${authorSlug(article.author)}`), description: article.authorBio || undefined },
-          publisher: { "@type": "Organization", "@id": `${absoluteUrl("/")}#organization`, name: "Auerviamaison", logo: { "@type": "ImageObject", url: absoluteUrl("/logo/auerviamaison.png") } },
+          publisher: { "@type": "Organization", "@id": `${absoluteUrl("/")}#organization`, name: "Aurevia Elegance", logo: { "@type": "ImageObject", url: absoluteUrl("/logo/auerviamaison.png") } },
         },
       ]} />
 
@@ -101,7 +101,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="prose prose-lg mt-10 max-w-none scroll-mt-24 dark:prose-invert" dangerouslySetInnerHTML={{ __html: articleContent.content }} />
 
         {(category || products.length > 0) && <aside className="mt-12 rounded-2xl border p-6" aria-labelledby="explore-related">
-          <h2 id="explore-related" className="text-xl font-semibold">Explore related Auerviamaison products</h2>
+          <h2 id="explore-related" className="text-xl font-semibold">Explore related Aurevia Elegance products</h2>
           <div className="mt-4 flex flex-col gap-2">
             {category && <Link href={`/category/${category.slug}`}>Explore our {category.name} collection</Link>}
             {products.map((product) => <Link key={product.handle} href={`/products/${product.handle}`}>{product.title}</Link>)}
@@ -119,7 +119,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {previous ? <Link href={`/blog/${previous.slug}`}>← {previous.title}</Link> : <span />}
           {next && <Link className="sm:text-right" href={`/blog/${next.slug}`}>{next.title} →</Link>}
         </nav>
-        <div className="mt-12 rounded-2xl bg-[#fcf5e8] p-6 text-center text-[#0a0a0a]"><h2 className="text-2xl font-semibold">Need beauty or gifting guidance?</h2><p className="mt-2">Our team can help with product recommendations, styling ideas, and gifting suggestions.</p><Link className="mt-4 inline-block font-semibold text-[#9b6722] underline" href="/contact">Contact Auerviamaison</Link></div>
+        <div className="mt-12 rounded-2xl bg-[#fcf5e8] p-6 text-center text-[#0a0a0a]"><h2 className="text-2xl font-semibold">Need beauty or gifting guidance?</h2><p className="mt-2">Our team can help with product recommendations, styling ideas, and gifting suggestions.</p><Link className="mt-4 inline-block font-semibold text-[#9b6722] underline" href="/contact">Contact Aurevia Elegance</Link></div>
       </div>
     </article>
   );

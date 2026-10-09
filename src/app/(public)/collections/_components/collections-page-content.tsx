@@ -32,7 +32,7 @@ export async function CollectionsPageContent({ data }: CollectionsPageContentPro
             Authentic Premium Products Collections
           </h2>
           <p>
-            Auerviamaison sources premium beauty and lifestyle products directly from the
+            Aurevia Elegance sources premium beauty and lifestyle products directly from the
             ancient salt mines of Pakistan. Our collections include edible salt
             for cooking, wellness and spa products, decorative salt lamps, and
             lifestyle accessories designed to support a natural and balanced

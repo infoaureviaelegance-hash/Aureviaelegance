@@ -5,10 +5,10 @@ import { AboutPageContent } from "./_components/about-page-content"
 import { createSeoMetadata } from "@/lib/seo"
 
 export const metadata = createSeoMetadata({
-  title: "About Auerviamaison",
-  description: "Learn about Auerviamaison and the beauty, skincare, fragrance, and personal-style essentials we curate for modern routines.",
+  title: "About Aurevia Elegance",
+  description: "Learn about Aurevia Elegance and the beauty, skincare, fragrance, and personal-style essentials we curate for modern routines.",
   path: "/about-us",
-  keywords: ["Auerviamaison", "beauty store Pakistan", "skincare Pakistan", "makeup products Pakistan", "premium fragrance Pakistan"],
+  keywords: ["Aurevia Elegance", "beauty store Pakistan", "skincare Pakistan", "makeup products Pakistan", "premium fragrance Pakistan"],
 })
 
 export const revalidate = 3600;

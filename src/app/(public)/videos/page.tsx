@@ -7,7 +7,7 @@ export const revalidate = 900;
 
 export const metadata = createSeoMetadata({
   title: "Product Videos and Tech Guides Pakistan",
-  description: "Watch Auerviamaison product demos, buying guides, beauty guidance, and product updates for Pakistan.",
+  description: "Watch Aurevia Elegance product demos, buying guides, beauty guidance, and product updates for Pakistan.",
   path: "/videos",
   keywords: ["Product guides Pakistan", "Natural wellness product videos", "Shilajit Pakistan"],
 });

@@ -34,7 +34,7 @@ export function WhyChooseUsSection() {
           <div className="relative">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#e8c9b8] bg-white/80 px-3.5 py-1.5 text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#b85b43] shadow-sm">
               <Sparkles aria-hidden="true" className="h-4 w-4" />
-              The Auerviamaison difference
+              The Aurevia Elegance difference
             </span>
             <h2 className="mt-3 max-w-xl font-serif text-2xl font-black leading-[1.08] tracking-[-0.04em] text-[#241710] sm:text-3xl">
               Thoughtful beauty for your most <span className="text-[#c55461]">confident self.</span>
@@ -77,7 +77,7 @@ export function WhyChooseUsSection() {
         <div className="group relative min-h-[260px] overflow-hidden sm:min-h-[340px] lg:min-h-0">
           <Image
             src="/images/homepage/AM Beauty Vanity Showcase.png"
-            alt="Woman at a vanity with Auerviamaison perfume, lipstick and skincare products"
+            alt="Woman at a vanity with Aurevia Elegance perfume, lipstick and skincare products"
             fill
             sizes="(max-width: 1024px) 100vw, 48vw"
             className="object-cover object-center transition-transform duration-[1400ms] ease-out group-hover:scale-[1.035]"

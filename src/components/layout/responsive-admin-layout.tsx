@@ -118,7 +118,7 @@ function AdminSidebar({ admin, onClose, isMobile = false }: { admin: AdminIdenti
         <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
           <div className="flex-1">
             <Link href="/admin/dashboard" className="text-lg font-bold text-[#C6A24A]">
-              Auerviamaison Admin
+              Aurevia Elegance Admin
             </Link>
           </div>
           {isMobile && onClose && (

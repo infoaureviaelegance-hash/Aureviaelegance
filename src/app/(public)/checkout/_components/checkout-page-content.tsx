@@ -57,7 +57,7 @@ export function CheckoutPageContent() {
     }).catch(() => undefined);
   }, []);
 
-  const whatsappMessage = encodeURIComponent(`Hi Auerviamaison, I need help with my checkout. Total: Rs. ${pricing.total.toLocaleString()}. Name: ${details.customerName || "Not entered"}. Phone: ${details.customerPhone || "Not entered"}.`);
+  const whatsappMessage = encodeURIComponent(`Hi Aurevia Elegance, I need help with my checkout. Total: Rs. ${pricing.total.toLocaleString()}. Name: ${details.customerName || "Not entered"}. Phone: ${details.customerPhone || "Not entered"}.`);
 
   async function placeOrder(event: React.FormEvent) {
     event.preventDefault();

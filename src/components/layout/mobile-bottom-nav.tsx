@@ -53,7 +53,7 @@ export function MobileBottomNav() {
       {selectedAction === "whatsapp" && (
         <div className="absolute bottom-[4.25rem] left-1/2 w-[min(22rem,calc(100vw-1.5rem))] -translate-x-1/2 rounded-2xl border border-[#EA580C]/20 bg-white p-4 shadow-2xl">
           <label htmlFor="mobile-whatsapp-message" className="text-sm font-semibold text-gray-950">
-            Message Auerviamaison on WhatsApp
+            Message Aurevia Elegance on WhatsApp
           </label>
           <textarea
             id="mobile-whatsapp-message"

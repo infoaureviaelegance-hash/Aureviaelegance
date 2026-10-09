@@ -17,27 +17,27 @@ const virtualCollections = {
     handle: "best-sellers",
     title: "Best Sellers",
     description:
-      "Shop the most popular beauty and lifestyle products at Auerviamaison, selected from customer favorites and high-value picks.",
+      "Shop the most popular beauty and lifestyle products at Aurevia Elegance, selected from customer favorites and high-value picks.",
     descriptionHtml: null,
     seo: {
-      title: "Best Sellers | Auerviamaison",
+      title: "Best Sellers | Aurevia Elegance",
       description:
-        "Discover Auerviamaison best-selling beauty and lifestyle products.",
+        "Discover Aurevia Elegance best-selling beauty and lifestyle products.",
     },
     image: null,
-    canonicalUrl: null, robots: "index,follow", openGraphImage: null, focusKeyword: "Auerviamaison best sellers",
+    canonicalUrl: null, robots: "index,follow", openGraphImage: null, focusKeyword: "Aurevia Elegance best sellers",
   },
   "new-arrivals": {
     id: "virtual-new-arrivals",
     handle: "new-arrivals",
     title: "New Arrivals",
     description:
-      "Explore the latest beauty and lifestyle products added to Auerviamaison.",
+      "Explore the latest beauty and lifestyle products added to Aurevia Elegance.",
     descriptionHtml: null,
     seo: {
-      title: "New Arrivals | Auerviamaison",
+      title: "New Arrivals | Aurevia Elegance",
       description:
-        "Browse the newest beauty and lifestyle products available at Auerviamaison.",
+        "Browse the newest beauty and lifestyle products available at Aurevia Elegance.",
     },
     image: null,
     canonicalUrl: null, robots: "index,follow", openGraphImage: null, focusKeyword: "new natural wellness products",
@@ -47,12 +47,12 @@ const virtualCollections = {
     handle: "hot-deals",
     title: "Hot Deals",
     description:
-      "Find current deals on beauty, personal care, and lifestyle essentials at Auerviamaison.",
+      "Find current deals on beauty, personal care, and lifestyle essentials at Aurevia Elegance.",
     descriptionHtml: null,
     seo: {
-      title: "Hot Deals | Auerviamaison",
+      title: "Hot Deals | Aurevia Elegance",
       description:
-        "Save on selected beauty and lifestyle products at Auerviamaison.",
+        "Save on selected beauty and lifestyle products at Aurevia Elegance.",
     },
     image: null,
     canonicalUrl: null, robots: "index,follow", openGraphImage: null, focusKeyword: "natural wellness deals",

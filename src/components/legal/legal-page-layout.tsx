@@ -109,9 +109,9 @@ export function LegalPageLayout({
             <section className="mt-14 rounded-3xl border border-[#C6A24A]/25 bg-[#f4f1e8] p-7 sm:p-9">
               <Mail aria-hidden="true" className="h-7 w-7 text-[#C6A24A]" />
               <h2 className="mt-4 font-serif text-2xl font-bold text-gray-950">Questions about this policy?</h2>
-              <p className="mt-3 text-gray-700">Contact Auerviamaison before ordering if you need clarification for a retail, gifting, or beauty purchase.</p>
+              <p className="mt-3 text-gray-700">Contact Aurevia Elegance before ordering if you need clarification for a retail, gifting, or beauty purchase.</p>
               <Link href="/contact" className="mt-5 inline-flex rounded-full bg-[#ea580c] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#c2410c]">
-                Contact Auerviamaison
+                Contact Aurevia Elegance
               </Link>
             </section>
 

@@ -32,7 +32,7 @@ const productSchema = z.object({
   productType: z.string().optional(),
   categoryId: z.string().optional(),
   subcategoryId: z.string().optional(),
-  vendor: z.string().default("Auerviamaison"),
+  vendor: z.string().default("Aurevia Elegance"),
   tags: z.array(z.string()).default([]),
   collectionIds: z.array(z.string()).default([]),
   isFeatured: z.boolean().default(false),

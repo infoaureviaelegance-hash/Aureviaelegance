@@ -101,7 +101,7 @@ export default function ContactClient() {
             </span>
             
             <h1 className="font-serif text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl leading-[1.1]">
-              Contact Auerviamaison
+              Contact Aurevia Elegance
               <span className="block text-[#ea580c] mt-2">We&apos;re Here to Help</span>
             </h1>
             
@@ -273,7 +273,7 @@ export default function ContactClient() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
-              title="Auerviamaison Location"
+              title="Aurevia Elegance Location"
             />
           </div>
         </div>

@@ -22,7 +22,7 @@ const values = [
     icon: Award,
     title: "Beauty with Intent",
     description:
-      "Auerviamaison blends elevated essentials with a polished, everyday routine that feels effortless and personal.",
+      "Aurevia Elegance blends elevated essentials with a polished, everyday routine that feels effortless and personal.",
   },
   {
     icon: ShieldCheck,
@@ -60,11 +60,11 @@ export function AboutPageContent() {
 
               <h1 className="font-serif text-4xl font-extrabold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
                 Beauty made to feel personal.
-                <span className="mt-2 block text-[#ea580c]">The story of Auerviamaison.</span>
+                <span className="mt-2 block text-[#ea580c]">The story of Aurevia Elegance.</span>
               </h1>
 
               <p className="max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-                Auerviamaison is built for modern routines, elevated essentials, and the confidence that comes from beauty that feels intentional and effortless.
+                Aurevia Elegance is built for modern routines, elevated essentials, and the confidence that comes from beauty that feels intentional and effortless.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
@@ -115,13 +115,13 @@ export function AboutPageContent() {
 
               <div className="space-y-6 text-base leading-relaxed text-gray-600 sm:text-lg">
                 <p>
-                  Auerviamaison began with a simple idea: beauty should feel elevated without being complicated. We wanted to make it easier to discover genuinely loved essentials that work beautifully in real routines.
+                  Aurevia Elegance began with a simple idea: beauty should feel elevated without being complicated. We wanted to make it easier to discover genuinely loved essentials that work beautifully in real routines.
                 </p>
                 <p>
                   From skincare and makeup to fragrance and personal-care staples, we focus on pieces that feel premium, practical, and easy to reach for every day. <strong className="font-semibold text-gray-900">Thoughtful selection</strong> and reliable service sit at the heart of everything we do.
                 </p>
                 <p>
-                  Today, Auerviamaison serves customers across Pakistan with beauty favorites designed for glowing routines, gifting moments, and everyday confidence.
+                  Today, Aurevia Elegance serves customers across Pakistan with beauty favorites designed for glowing routines, gifting moments, and everyday confidence.
                 </p>
               </div>
 
@@ -147,7 +147,7 @@ export function AboutPageContent() {
                     <Users className="h-6 w-6" />
                   </div>
                   <div>
-                    <p className="text-base font-bold text-gray-950">Auerviamaison Studio</p>
+                    <p className="text-base font-bold text-gray-950">Aurevia Elegance Studio</p>
                     <p className="text-xs font-semibold uppercase tracking-wider text-[#b57910]">Beauty & lifestyle</p>
                   </div>
                 </div>
@@ -167,7 +167,7 @@ export function AboutPageContent() {
               Curated for glow, style, and real life
             </h2>
             <p className="text-base text-gray-600 sm:text-lg">
-              Explore the beauty essentials at the heart of Auerviamaison, chosen for feel, finish, and everyday confidence.
+              Explore the beauty essentials at the heart of Aurevia Elegance, chosen for feel, finish, and everyday confidence.
             </p>
           </div>
 
@@ -238,7 +238,7 @@ export function AboutPageContent() {
                   <Link href="/products">Shop the Catalog</Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full border-gray-300 bg-white px-7 py-6 text-gray-800 hover:bg-gray-50">
-                  <Link href="/contact">Contact Auerviamaison</Link>
+                  <Link href="/contact">Contact Aurevia Elegance</Link>
                 </Button>
               </div>
             </div>

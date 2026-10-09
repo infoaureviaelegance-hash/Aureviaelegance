@@ -19,7 +19,7 @@ export function ChatPopup({ open, onClose }: { open: boolean; onClose: () => voi
     {
       role: "assistant",
       content:
-        "Hi! I am your Auerviamaison AI assistant. Ask me about products, beauty essentials, support, or say 'I want to order'.",
+        "Hi! I am your Aurevia Elegance AI assistant. Ask me about products, beauty essentials, support, or say 'I want to order'.",
     },
   ]);
   const [typing, setTyping] = useState(false);
@@ -120,7 +120,7 @@ export function ChatPopup({ open, onClose }: { open: boolean; onClose: () => voi
     >
       <div className="flex items-center justify-between bg-[#f6a45d] px-4 py-3 text-white">
         <div>
-          <p className="text-sm font-semibold">Auerviamaison AI Assistant</p>
+          <p className="text-sm font-semibold">Aurevia Elegance AI Assistant</p>
           <p className="text-xs opacity-90">Sales + Support</p>
         </div>
         <button type="button" onClick={onClose} className="rounded p-1 hover:bg-white/10">

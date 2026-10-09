@@ -17,7 +17,7 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   const page = Math.max(1, Number(query.page) || 1);
   return createSeoMetadata({
     title: page > 1 ? `${category.seoTitle || category.name} Articles – Page ${page}` : category.seoTitle || `${category.name} Guides`,
-    description: category.seoDescription || category.description || `Helpful ${category.name} guides from Auerviamaison.`,
+    description: category.seoDescription || category.description || `Helpful ${category.name} guides from Aurevia Elegance.`,
     path: page > 1 ? `/blog/category/${slug}?page=${page}` : `/blog/category/${slug}`,
     noIndex: count === 0,
   });
