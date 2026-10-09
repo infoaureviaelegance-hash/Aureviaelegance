@@ -2,7 +2,6 @@ import { CategoriesSection, CollectionsSection, ProductsSection } from "@/compon
 import { WhyChooseUsSection } from "@/components/features/home/why-choose-us";
 import { FeaturedBlogSection } from "@/components/features/home/featured-blog-section";
 import { CustomerVoicesSection } from "@/components/features/home/customer-voices-section";
-import { FeaturedVideoSection } from "@/components/features/videos/featured-video-section";
 import type { PublicVideo } from "@/lib/video-utils";
 import { CertificationsSlider, type CertificateLogo } from "@/components/features/certifications/certifications-slider";
 import { PromoBannerSection } from "@/components/features/home/promo-banner-section";
@@ -61,15 +60,9 @@ export function HomeContentSections({
       <PromoBannerSection banners={promoBanners} />
       <ProductsSection categories={categories} products={products} collections={collections} />
       <WhyChooseUsSection />
-      <FeaturedVideoSection
-        videos={homeVideos}
-        heading="See the latest from Auerviamaison"
-        description="Watch featured beauty launches, expert styling inspiration, and shop updates selected by the Auerviamaison team."
-        singleAtATime
-      />
       <CollectionsSection collections={collections} />
       <HomepageReelsSection reels={homepageReels} />
-      <PinkSaltWellnessSection />
+      <PinkSaltWellnessSection video={homeVideos[0]} />
       <CertificationsSlider certificates={certificates} />
       <FeaturedBlogSection articles={featuredBlogs} />
       <CustomerVoicesSection />

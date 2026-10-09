@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
+  ArrowUpRight,
   Box,
   CheckCircle2,
   Gem,
@@ -12,6 +12,7 @@ import {
   Truck,
 } from "@esmate/shadcn/pkgs/lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
+import type { PublicVideo } from "@/lib/video-utils";
 
 const trustItems = [
   { icon: Gem, text: "Authentic beauty essentials" },
@@ -124,37 +125,51 @@ export function IsThisYouSection() {
   );
 }
 
-export function PinkSaltWellnessSection() {
+export function PinkSaltWellnessSection({ video }: { video?: PublicVideo }) {
+  const title = video?.title || "Beauty essentials designed for real life";
+  const description = video?.description || "Beauty made easy, polished, and personal. Discover skincare, fragrance, and accessories chosen for everyday confidence.";
+
   return (
-    <section className="bg-white px-6 py-6 lg:px-8 lg:py-8">
-      <div className="mx-auto grid max-w-7xl items-center gap-5 overflow-hidden rounded-3xl border border-[#e4d0a1] bg-gradient-to-br from-[#fffbef] via-[#fbf0d4] to-[#f3e2b8] p-5 shadow-sm md:grid-cols-2 md:p-6">
-        <div>
-          <span className="inline-flex rounded-full bg-[#fff1ea] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#EA580C]">
+    <section className="overflow-hidden bg-white px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 overflow-hidden rounded-[2rem] bg-[#17130f] p-5 shadow-[0_24px_70px_-30px_rgba(55,35,18,0.55)] sm:p-8 md:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:p-12">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-28 -top-28 h-72 w-72 rounded-full bg-[#EA580C]/20 blur-3xl" />
+        <div className="relative z-10 py-2 lg:py-6">
+          <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#f8b27f] backdrop-blur">
             Everyday confidence
           </span>
-          <h2 className="mt-3 font-serif text-2xl font-extrabold text-gray-900 sm:text-3xl">
-            Beauty essentials designed for real life
+          <h2 className="mt-5 max-w-xl font-serif text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+            {title}
           </h2>
-          <p className="mt-3 text-sm leading-6 text-gray-700">
-            Beauty made easy, polished, and personal. Discover skincare, fragrance, and accessories chosen for everyday confidence.
+          <p className="mt-5 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
+            {description}
           </p>
-          <ul className="mt-4 space-y-2 text-sm leading-5 text-gray-700">
-            <li className="flex gap-3"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#EA580C]" />Skincare that supports a fresh, healthy-looking glow.</li>
-            <li className="flex gap-3"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#EA580C]" />Makeup and fragrance choices that feel elevated and wearable.</li>
-            <li className="flex gap-3"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#EA580C]" />Accessories and watches that complete a polished personal style.</li>
+          <ul className="mt-6 grid gap-3 text-sm leading-5 text-white/80 sm:grid-cols-2">
+            <li className="flex gap-2.5"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#f59a5b]" />Fresh, glow-focused skincare</li>
+            <li className="flex gap-2.5"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#f59a5b]" />Elevated everyday essentials</li>
           </ul>
-          <p className="mt-4 rounded-xl bg-white/80 px-3 py-2 text-sm leading-5 text-gray-600">
-            Your routine. Your style. Essentials that feel like you.
-          </p>
+          {video?.buttonText && video.buttonUrl ? (
+            <Link href={video.buttonUrl} className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#EA580C] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#f26d20] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              {video.buttonText}<ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          ) : null}
         </div>
-        <div className="relative aspect-[2/1] max-h-[300px] overflow-hidden rounded-2xl">
-          <Image
-            src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80"
-            alt="Beauty products and skincare essentials arranged for a premium routine"
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-          />
+        <div className="relative z-10 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black shadow-2xl">
+          {video?.embedUrl ? (
+            <div className={video.format === "VERTICAL" ? "mx-auto aspect-[9/16] max-h-[640px]" : "aspect-video"}>
+              <iframe
+                src={video.embedUrl}
+                title={video.title}
+                className="h-full w-full"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          ) : (
+            <div className="flex aspect-video items-center justify-center bg-[radial-gradient(circle_at_center,_#3d2a1d,_#0d0b09_70%)] px-8 text-center text-sm font-semibold text-white/55">
+              A featured video can be added from Admin → Videos using the Homepage placement.
+            </div>
+          )}
         </div>
       </div>
     </section>

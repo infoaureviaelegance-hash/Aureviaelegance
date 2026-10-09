@@ -111,6 +111,10 @@ export function VideoForm({ mode, videoId, initialValues }: VideoFormProps) {
                 </Link>
                 .
               </p>
+            ) : values.placement === "HOMEPAGE" ? (
+              <p className="text-xs leading-5 text-gray-500">
+                The first active video in display order powers the homepage “Everyday confidence” section. Its title, description, and button fields become the section content.
+              </p>
             ) : null}
           </label>
 

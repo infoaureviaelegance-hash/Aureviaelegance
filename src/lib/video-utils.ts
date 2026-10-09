@@ -24,7 +24,7 @@ export const VIDEO_PLATFORM_LABELS: Record<VideoPlatformValue, string> = {
 };
 
 export const VIDEO_PLACEMENT_LABELS: Record<VideoPlacementValue, string> = {
-  HOMEPAGE: "Homepage (featured video)",
+  HOMEPAGE: "Homepage confidence section",
   HOMEPAGE_REELS: "Homepage reels row",
   ABOUT: "About Page",
   VIDEOS_PAGE: "Videos Page",
