@@ -289,6 +289,28 @@ const collections = [
 async function main() {
   const adminEmail = process.env.ADMIN_USER ?? "info.aureviaelegance@gmail.com";
   const adminPassword = process.env.ADMIN_PASS ?? "admin123";
+
+  if (process.env.SEED_ADMIN_EMAIL_ONLY === "true") {
+    const targetAdmin = await prisma.adminUser.findUnique({ where: { email: adminEmail } });
+
+    if (targetAdmin) {
+      console.log(`Admin email is already ${adminEmail}; no database changes were made.`);
+      return;
+    }
+
+    const existingAdmin = await prisma.adminUser.findFirst({ orderBy: { createdAt: "asc" } });
+    if (!existingAdmin) {
+      throw new Error("No existing admin account was found; refusing to create or modify other data.");
+    }
+
+    await prisma.adminUser.update({
+      where: { id: existingAdmin.id },
+      data: { email: adminEmail },
+    });
+    console.log(`Updated only the existing admin email to ${adminEmail}.`);
+    return;
+  }
+
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
   const targetAdmin = await prisma.adminUser.findUnique({ where: { email: adminEmail } });
