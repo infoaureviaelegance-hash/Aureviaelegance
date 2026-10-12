@@ -46,7 +46,7 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <h3 className="text-sm font-extrabold uppercase tracking-[0.12em] text-[#3e3029]">Contact</h3>
             <div className="mt-4 space-y-3.5 text-sm text-[#6a5b53]">
-              <p className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#EA580C]" /><span>Lahore, Pakistan<br />Nationwide delivery available</span></p>
+              <p className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#EA580C]" /><span>Sardheri Bazar, Charsadda Mardan Road<br />Charsadda, Khyber Pakhtunkhwa 24420, Pakistan<br />Nationwide delivery available</span></p>
               <a href="tel:+923179517939" className="flex items-center gap-3 transition hover:text-[#EA580C]"><Phone className="h-4 w-4 shrink-0 text-[#EA580C]" />+92 317 9517939</a>
               <a href="mailto:info.aureviaelegance@gmail.com" className="flex items-center gap-3 break-all transition hover:text-[#EA580C]"><Mail className="h-4 w-4 shrink-0 text-[#EA580C]" />info.aureviaelegance@gmail.com</a>
               <a href="https://wa.me/923179517939" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#1f9d55] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#168447]"><FaWhatsapp className="h-4 w-4" />Chat on WhatsApp</a>

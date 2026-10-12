@@ -38,9 +38,10 @@ const businessSchemas = [
     priceRange: "PKR",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Model Town",
-      addressLocality: "Lahore",
-      addressRegion: "Punjab",
+      streetAddress: "Sardheri Bazar, Charsadda Mardan Road",
+      addressLocality: "Charsadda",
+      addressRegion: "Khyber Pakhtunkhwa",
+      postalCode: "24420",
       addressCountry: "PK",
     },
     areaServed: { "@type": "Country", name: "Pakistan" },

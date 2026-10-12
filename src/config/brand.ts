@@ -6,7 +6,7 @@ export const brandConfig = {
   whatsapp: "923179517939",
   email: "info.aureviaelegance@gmail.com",
   inquiryEmail: "info.aureviaelegance@gmail.com",
-  address: "Lahore, Pakistan",
+  address: "Sardheri Bazar, Charsadda Mardan Road, Charsadda, Khyber Pakhtunkhwa 24420, Pakistan",
   primaryColor: "#EA580C",
   saltPink: "#F7C7A7",
   parentCompany: "Aurevia Elegance Studio",

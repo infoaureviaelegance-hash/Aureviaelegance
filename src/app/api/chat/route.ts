@@ -246,7 +246,7 @@ KEY PRODUCTS:
 - Personal care → grooming, body care, and daily self-care essentials
 
 CONTACT INFORMATION (share when asked):
-- Address: Lahore, Pakistan | All Pakistan delivery available
+- Address: Sardheri Bazar, Charsadda Mardan Road, Charsadda, Khyber Pakhtunkhwa 24420, Pakistan | All Pakistan delivery available
 - Phone: +92 317 9517939
 - Email: info.aureviaelegance@gmail.com
 - Founder: Aurevia Elegance Studio

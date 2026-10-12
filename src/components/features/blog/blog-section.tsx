@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, ChevronLeft, ChevronRight } from "@esmate/shadcn/pkgs/lucide-react"
+import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight } from "@esmate/shadcn/pkgs/lucide-react"
 
 interface BlogImage {
   url: string
@@ -100,26 +100,21 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
 
   return (
     <section aria-labelledby="featured-journal-heading" className="bg-white py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-9 flex flex-col gap-5 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#a85460]">The Aurevia journal</p>
-            <h2 id="featured-journal-heading" className="mt-3 font-serif text-3xl font-semibold tracking-tight text-[#241b18] sm:text-4xl lg:text-5xl">
-              Ideas for elevated living
-            </h2>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-[#6f625d] sm:text-base">
-              Curated stories, practical guidance, and considered inspiration for beauty and everyday rituals.
-            </p>
-          </div>
-          <Link href="/blog" className="inline-flex w-fit items-center gap-2 border-b border-[#a85460]/40 pb-1 text-sm font-semibold text-[#8f4350] transition hover:border-[#a85460] hover:text-[#a85460]">
-            Explore the journal <ArrowRight className="h-4 w-4" />
-          </Link>
+      <div className="mx-auto max-w-[96rem] px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <p className="inline-flex rounded-full bg-[#fff0df] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#f27435]">Latest Articles</p>
+          <h2 id="featured-journal-heading" className="mt-4 font-serif text-4xl font-semibold tracking-tight text-[#101827] sm:text-5xl lg:text-6xl">
+            Latest Articles
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-[#4f5663] sm:text-base">
+            Helpful beauty reads, product guidance, and inspiration for more confident everyday routines.
+          </p>
         </div>
 
         <div className="relative">
           <div
             ref={scrollRef}
-            className={`flex gap-5 overflow-x-auto pb-5 scrollbar-hide sm:gap-7 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"}`}
+            className={`flex gap-4 overflow-x-auto pb-3 scrollbar-hide sm:gap-5 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"}`}
             onDragStart={(event) => event.preventDefault()}
             onPointerDown={(event) => {
               drag.current.moved = false
@@ -153,46 +148,53 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
           >
             {articles.map((article) => {
               const text = article.content?.replace(/<[^>]+>/g, "").trim() ?? ""
+              const publishedDate = article.publishedAt
+                ? new Date(article.publishedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+                : "Recently"
 
               return (
                 <div
                   key={article.id}
-                  className="flex w-[88%] shrink-0 snap-start items-stretch sm:w-[calc((100%_-_1.75rem)/2)]"
+                  className="flex w-[86%] shrink-0 snap-start items-stretch sm:w-[calc((100%_-_1.25rem)/2)] lg:w-[calc((100%_-_3.75rem)/4)]"
                 >
-                  <article className="group relative flex w-full flex-col overflow-hidden rounded-[1.75rem] border border-[#eee6e1] bg-[#fcfaf8] shadow-[0_16px_45px_rgba(73,47,38,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(73,47,38,0.10)]">
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#f5efeb]">
+                  <article className="group relative flex w-full flex-col overflow-hidden rounded-2xl border border-[#eee9df] bg-[#fffaf0] shadow-[0_2px_8px_rgba(28,25,23,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(28,25,23,0.12)]">
+                    <Link href={`/blog/${article.handle}`} className="relative block aspect-[4/3] w-full overflow-hidden bg-[#f7f8fa]">
                       {article.image?.url ? (
                         <Image
                           src={article.image.url}
                           alt={article.image.altText || article.title}
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 640px) 88vw, 48vw"
+                          sizes="(max-width: 640px) 86vw, (max-width: 1024px) 48vw, 24vw"
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
                           No image
                         </div>
                       )}
-                    </div>
+                    </Link>
 
-                    <div className="flex min-w-0 flex-1 flex-col p-5 sm:px-7 sm:py-6">
-                      <h3 className="line-clamp-2 font-serif text-lg font-semibold leading-snug text-[#241b18] sm:text-2xl">
+                    <div className="flex min-h-[205px] min-w-0 flex-1 flex-col p-4 sm:p-5">
+                      <div className="mb-3 flex items-center gap-2 text-xs text-[#4f5663]">
+                        <CalendarDays aria-hidden="true" className="h-4 w-4" />
+                        <time dateTime={article.publishedAt || undefined}>{publishedDate}</time>
+                      </div>
+                      <h3 className="line-clamp-2 text-base font-semibold leading-snug text-[#111827]">
                         <Link
                           href={`/blog/${article.handle}`}
-                          className="transition-colors hover:text-[#a85460]"
+                          className="transition-colors hover:text-[#f27435]"
                         >
                           {article.title}
                         </Link>
                       </h3>
 
-                      <div className="mt-4 flex min-w-0 flex-1 flex-col items-start gap-5">
-                        <p className="line-clamp-2 text-sm leading-6 text-[#71635e] sm:text-[15px]">{text}</p>
+                      <div className="mt-2 flex min-w-0 flex-1 flex-col items-start gap-4">
+                        <p className="line-clamp-2 text-sm leading-6 text-[#625a55]">{text}</p>
                         <Link
                           href={`/blog/${article.handle}`}
-                          className="mt-auto inline-flex shrink-0 items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#9f4050] transition hover:gap-2.5 sm:text-sm"
+                          className="mt-auto inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[#ff7b3d] transition hover:gap-2.5 hover:text-[#e96528]"
                         >
-                          Learn more <ArrowRight className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
+                          Read Article <ArrowRight className="h-4 w-4 shrink-0" />
                         </Link>
                       </div>
                     </div>
