@@ -105,7 +105,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div className="mt-4 flex flex-col gap-2">
             {category && <Link href={`/category/${category.slug}`}>Explore our {category.name} collection</Link>}
             {products.map((product) => <Link key={product.handle} href={`/products/${product.handle}`}>{product.title}</Link>)}
-            <Link href="/wholesale">Ask about wholesale Himalayan products</Link>
+            <Link href="/wholesale">Ask about wholesale beauty products</Link>
           </div>
         </aside>}
         <p className="mt-10 rounded-xl bg-muted p-4 text-sm text-muted-foreground">This article is for general informational purposes and is not medical advice. Consult a qualified healthcare professional before using wellness supplements.</p>

@@ -46,18 +46,18 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
 
             <p className="mt-4 text-lg text-[#5A5E55]">
               Welcome to the Aurevia Elegance blog, where we share practical buying
-              guides and sourcing insights that help customers choose authentic
-              Himalayan and natural wellness products.
+              beauty guides and product insights that help customers choose
+              skincare, makeup, fragrance, and accessories with confidence.
             </p>
 
             <p className="mt-4 text-[#5A5E55]">
-              From Himalayan salt guides to herbal product information, our goal
-              is to make it easier to choose confidently and understand product quality.
+              From skincare routines and makeup ideas to fragrance and gifting
+              advice, our goal is to make every purchase easier to understand.
             </p>
 
             <p className="mt-4 text-[#5A5E55]">
-              Whether you are researching Shilajit, natural honey, salt products or
-              wholesale sourcing, you will find practical guidance here.
+              Whether you are comparing ingredients, exploring a new look, or
+              choosing a thoughtful gift, you will find practical guidance here.
             </p>
           </div>
         </div>
@@ -160,9 +160,9 @@ export function BlogPageContent({ articles, page = 1, pages = 1 }: BlogPageConte
               </p>
 
               <p>
-                Our products are consumer natural products and
-                are intended for everyday culinary, home, bath, and wellness use
-                use. Product availability, pricing, and specifications may change
+                Our products are consumer beauty, personal-care, fashion, and
+                lifestyle goods intended for their described everyday use.
+                Product availability, pricing, and specifications may change
                 without notice.
               </p>
 

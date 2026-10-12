@@ -28,8 +28,8 @@ export async function generateMetadata({
     description: category.seoDescription || category.description || `Buy ${category.name} in Pakistan from Aurevia Elegance with expert local support and nationwide delivery.`,
     path: page > 1 || sort ? `/category/${slug}?${new URLSearchParams({ ...(page > 1 ? { page: String(page) } : {}), ...(sort ? { sort } : {}) }).toString()}` : category.canonicalUrl || `/category/${slug}`,
     image: category.openGraphImage || category.image,
-    keywords: [category.focusKeyword, category.name, `${category.name} Pakistan`, `Buy ${category.name} Pakistan`, "Natural Products Pakistan"].filter((item): item is string => Boolean(item)),
-    noIndex: category.robots?.startsWith("noindex"),
+    keywords: [category.focusKeyword, category.name, `${category.name} Pakistan`, `buy ${category.name} online Pakistan`].filter((item): item is string => Boolean(item)),
+    noIndex: Boolean(category.robots?.startsWith("noindex") || sort),
   });
 }
 

@@ -24,11 +24,9 @@ import {
 } from "@esmate/shadcn/pkgs/lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { CartDrawer } from "@/components/features/cart/cart-drawer";
-import { WishlistDrawer } from "@/components/features/wishlist/wishlist-drawer";
-import { ProfileDrawer } from "@/components/features/profile/profile-drawer";
 import { searchProducts } from "@/components/search/actions";
 import { search as trackSearch } from "@/lib/pixel";
 import { usePWAInstall } from "@/hooks/use-pwa-install";
@@ -60,20 +58,20 @@ const topBarLeft = [
 
 const topBarRight = [
   { text: "New In", href: "/collections/new-arrivals" },
-  { text: "Reviews", href: "/reviews" },
+  { text: "Reviews", href: "/#customer-reviews" },
   { text: "Gift Sets", href: "/collections/hot-deals" },
-  { text: "FAQs", href: "/faqs" },
+  { text: "FAQs", href: "/faq" },
 ];
 
 const logoSrc = "/logo/icon.png";
 
-async function getShopCategories() {
-  const res = await fetch("/api/categories", { next: { revalidate: 60 } });
-  const data = await res.json();
-  return data.categories || [];
-}
+const CartDrawer = dynamic(() => import("@/components/features/cart/cart-drawer").then((module) => module.CartDrawer), { ssr: false });
+const WishlistDrawer = dynamic(() => import("@/components/features/wishlist/wishlist-drawer").then((module) => module.WishlistDrawer), { ssr: false });
+const ProfileDrawer = dynamic(() => import("@/components/features/profile/profile-drawer").then((module) => module.ProfileDrawer), { ssr: false });
 
-export function Header() {
+type HeaderCategory = { id: string; name: string; slug: string; image: string | null };
+
+export function Header({ initialCategories = [] }: { initialCategories?: HeaderCategory[] }) {
   const pathname = usePathname();
   const { totalQuantity } = useCart();
   const { count: wishlistCount } = useWishlist();
@@ -90,13 +88,7 @@ export function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [shopCategories, setShopCategories] = useState<
-    { id: string; name: string; slug: string; image: string | null }[]
-  >([]);
-
-  useEffect(() => {
-    getShopCategories().then(setShopCategories);
-  }, []);
+  const shopCategories = initialCategories;
 
   useEffect(() => {
     const handleOpenWishlist = () => setWishlistOpen(true);
@@ -111,7 +103,7 @@ export function Header() {
     };
   }, []);
 
-  const isActive = (href: string) => pathname.startsWith(href);
+  const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
   const legalPageActive = legalMenuItems.some((item) => pathname === item.href);
   const mainCategories = shopCategories.slice(0, 4);
   useEffect(() => {

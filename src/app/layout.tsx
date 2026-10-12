@@ -8,15 +8,16 @@ import { Analytics } from "@vercel/analytics/next";
 import { MetaPixel } from "@/components/integrations/meta-pixel";
 import { GoogleMarketing } from "@/components/integrations/google-marketing";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Aurevia Elegance | Beauty, Makeup & Everyday Lifestyle Essentials",
+    default: "Aurevia Elegance | Online Beauty Store Pakistan",
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Shop premium beauty, skincare, makeup, fragrances, accessories, watches and modern lifestyle essentials from Aurevia Elegance Pakistan.",
+    "Shop skincare, makeup, fragrances, hair care, jewelry, watches and beauty accessories online from Aurevia Elegance with delivery across Pakistan.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -59,7 +60,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Aurevia Elegance" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <script src="/performance-measure-guard.js" />
+        <Script src="/performance-measure-guard.js" strategy="beforeInteractive" />
       </head>
       <body suppressHydrationWarning>
         <Suspense fallback={null}>

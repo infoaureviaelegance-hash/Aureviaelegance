@@ -3,39 +3,31 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { getAuthSecret } from "@/core/config/auth-secret";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let token;
   try {
     token = await getToken({ req: request, secret: getAuthSecret() });
   } catch {
-    // If token decryption fails, treat as no token
     token = null;
   }
 
   const pathname = request.nextUrl.pathname;
   const isAdminPageRoute = pathname.startsWith("/admin");
   const isAdminApiRoute = pathname.startsWith("/api/admin");
-  const isLoginRoute = request.nextUrl.pathname === "/admin/login";
+  const isLoginRoute = pathname === "/admin/login";
 
-  if (!isAdminPageRoute && !isAdminApiRoute) {
-    return NextResponse.next();
-  }
+  if (!isAdminPageRoute && !isAdminApiRoute) return NextResponse.next();
 
   if (!token) {
-    if (isAdminApiRoute) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
+    if (isAdminApiRoute) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     if (!isLoginRoute) {
       const loginUrl = new URL("/admin/login", request.url);
-      loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+      loginUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(loginUrl);
     }
   }
 
-  if (token && isLoginRoute) {
-    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
-  }
+  if (token && isLoginRoute) return NextResponse.redirect(new URL("/admin/dashboard", request.url));
 
   return NextResponse.next();
 }

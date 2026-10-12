@@ -43,10 +43,10 @@ function parseStringArray(value: unknown): string[] {
 }
 
 export const metadata = createSeoMetadata({
-  title: "Aurevia Elegance | Beauty, Makeup & Lifestyle Essentials",
-  description: "Discover premium skincare, makeup, fragrance, watches, accessories and beauty essentials for everyday confidence at Aurevia Elegance.",
+  title: "Online Beauty Store Pakistan",
+  description: "Shop skincare, makeup, fragrances, hair care, jewelry, watches and beauty accessories online at Aurevia Elegance, with delivery across Pakistan.",
   path: "/",
-  keywords: ["beauty store Pakistan", "premium skincare Pakistan", "makeup products Pakistan", "fragrance Pakistan", "beauty accessories Pakistan", "smartwatch Pakistan"],
+  keywords: ["online beauty store Pakistan", "skincare products online Pakistan", "makeup online Pakistan", "perfumes online Pakistan", "beauty accessories Pakistan", "jewelry online Pakistan"],
 });
 
 export default async function Page() {
@@ -90,7 +90,7 @@ export default async function Page() {
         },
         orderBy: { publishedAt: "desc" },
         take: 20,
-        select: { id: true, title: true, slug: true, excerpt: true, featuredImage: true, publishedAt: true, content: true },
+        select: { id: true, title: true, slug: true, excerpt: true, featuredImage: true, publishedAt: true },
       }),
       [],
     ),

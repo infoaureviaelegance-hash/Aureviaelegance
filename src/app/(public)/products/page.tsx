@@ -12,10 +12,10 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   const filtered = Boolean(query.q || query.category || query.min || query.max || query.sort);
   const page = Math.max(1, Number(query.page) || 1);
   return createSeoMetadata({
-    title: page > 1 ? `Himalayan & Natural Wellness Products – Page ${page}` : "Shop Himalayan & Natural Wellness Products",
-    description: "Shop beauty, personal care, fragrance, and lifestyle essentials from Aurevia Elegance.",
+    title: page > 1 ? `Beauty & Lifestyle Products – Page ${page}` : "Shop Beauty & Lifestyle Products Online",
+    description: "Shop skincare, makeup, fragrance, hair care, jewelry, watches and beauty accessories online from Aurevia Elegance in Pakistan.",
     path: page > 1 && !filtered ? `/products?page=${page}` : "/products",
-    keywords: ["Himalayan pink salt products", "Shilajit Pakistan", "salt lamps", "herbal wellness products", "natural honey"],
+    keywords: ["beauty products online Pakistan", "skincare products Pakistan", "makeup online Pakistan", "fragrances Pakistan", "beauty accessories online"],
     noIndex: filtered,
   });
 }

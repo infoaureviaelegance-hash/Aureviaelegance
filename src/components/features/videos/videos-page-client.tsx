@@ -48,7 +48,7 @@ export function VideosPageClient({ videos }: { videos: PublicVideo[] }) {
               Aurevia Elegance Videos
             </span>
             <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
-              Product demos, tech guides, and shop updates.
+              Beauty product demos, buying guides, and shop updates.
             </h1>
             <p className="text-base leading-relaxed text-gray-700 sm:text-lg">
               Watch our latest product showcases, buying guides, repairs, reels, and customer-focused videos across every platform.

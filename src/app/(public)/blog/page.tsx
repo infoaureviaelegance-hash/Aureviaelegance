@@ -9,10 +9,10 @@ export const revalidate = 900;
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
   const page = Math.max(1, Number((await searchParams).page) || 1);
   return createSeoMetadata({
-    title: page > 1 ? `Natural Wellness Guides – Page ${page}` : "Natural Wellness & Himalayan Product Guides",
-    description: "Practical guides about Himalayan Shilajit, pink salt, natural honey, herbal wellness products, and wholesale sourcing from Pakistan.",
+    title: page > 1 ? `Beauty & Lifestyle Guides – Page ${page}` : "Beauty, Skincare & Lifestyle Guides",
+    description: "Read practical skincare, makeup, fragrance, hair care, jewelry and beauty buying guides from Aurevia Elegance Pakistan.",
     path: page > 1 ? `/blog?page=${page}` : "/blog",
-    keywords: ["Himalayan wellness blog", "Shilajit guides", "pink salt guides"],
+    keywords: ["beauty blog Pakistan", "skincare guides Pakistan", "makeup tips Pakistan", "fragrance guide", "beauty buying guides"],
   });
 }
 

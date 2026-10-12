@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata = createSeoMetadata({
-  title: "Certificates & Verifications | Aurevia Elegance",
+  title: "Certificates & Verifications",
   description: "Review Aurevia Elegance certificates, issuing organizations and available verification details.",
   path: "/certificates",
   keywords: ["Aurevia Elegance certificates", "verified beauty products", "Aurevia Elegance authenticity"],

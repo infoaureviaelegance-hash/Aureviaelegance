@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "@esmate/shadcn/pkgs/lucide-react";
 import { HeroSlide } from "@/types/hero";
@@ -60,7 +60,12 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     >
       {slides.map((slide, index) => {
         const isActive = index === currentActive;
-        const hasMobileImage = Boolean(slide.mobileImageUrl);
+        const responsiveImage = slide.mobileImageUrl
+          ? {
+              desktop: getImageProps({ src: slide.imageUrl, alt: slide.imageAlt, fill: true, priority: index === 0, sizes: "100vw" }).props,
+              mobile: getImageProps({ src: slide.mobileImageUrl, alt: slide.imageAlt, fill: true, priority: index === 0, sizes: "100vw" }).props,
+            }
+          : null;
 
         return (
           <div
@@ -70,24 +75,19 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               isActive ? "z-0 opacity-100" : "pointer-events-none opacity-0"
             }`}
           >
-            <Image
-              src={slide.imageUrl}
-              alt={slide.imageAlt}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className={`hero-desktop-image object-cover ${
-                hasMobileImage ? "has-mobile-hero-image" : ""
-              }`}
-            />
-            {slide.mobileImageUrl && (
+            {responsiveImage ? (
+              <picture>
+                <source media="(max-width: 767px)" srcSet={responsiveImage.mobile.srcSet} />
+                <img {...responsiveImage.desktop} alt={slide.imageAlt} className="object-cover" />
+              </picture>
+            ) : (
               <Image
-                src={slide.mobileImageUrl}
+                src={slide.imageUrl}
                 alt={slide.imageAlt}
                 fill
                 priority={index === 0}
                 sizes="100vw"
-                className="hero-mobile-image object-cover object-center"
+                className="object-cover"
               />
             )}
           </div>
@@ -224,19 +224,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           background: linear-gradient(90deg, rgba(255, 250, 248, 0.97) 0%, rgba(255, 250, 248, 0.88) 34%, rgba(255, 250, 248, 0.48) 52%, rgba(255, 250, 248, 0) 72%);
         }
 
-        .hero-mobile-image {
-          display: none;
-        }
-
         @media (max-width: 767px) {
-          .hero-desktop-image.has-mobile-hero-image {
-            display: none;
-          }
-
-          .hero-mobile-image {
-            display: block;
-          }
-
           .hero-copy-scrim {
             background: linear-gradient(0deg, rgba(255, 250, 248, 0.98) 0%, rgba(255, 250, 248, 0.94) 35%, rgba(255, 250, 248, 0.52) 62%, rgba(255, 250, 248, 0.04) 100%);
           }

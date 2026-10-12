@@ -3,7 +3,6 @@ import { publishedBlogWhere } from "@/lib/blog";
 import { absoluteUrl } from "@/lib/seo";
 
 export const revalidate = 900;
-export const dynamic = "force-dynamic";
 
 export async function GET() {
   const posts = await prisma.blogPost.findMany({ where: publishedBlogWhere(), orderBy: { updatedAt: "desc" }, select: { slug: true, updatedAt: true, featuredImage: true } });

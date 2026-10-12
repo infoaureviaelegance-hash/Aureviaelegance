@@ -28,7 +28,9 @@ export function ChatIntegrations() {
       window.removeEventListener("scroll", onScroll);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    if (TAWK_ID && TAWK_WIDGET_ID) {
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
 
     const handleOpenMobileChat = () => setOpenChat(true);
     const handleCloseMobileChat = () => setOpenChat(false);
@@ -65,7 +67,7 @@ export function ChatIntegrations() {
       </Link>
 
       {/* Load Tawk.to only after scroll */}
-      {loadTawk && (
+      {loadTawk && TAWK_ID && TAWK_WIDGET_ID && (
         <Script id="tawk-to-script" strategy="afterInteractive">
           {`
             var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();

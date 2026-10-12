@@ -4,25 +4,6 @@ export const SITE_NAME = "Aurevia Elegance";
 export const SITE_URL = "https://www.auerviamaison.com";
 export const DEFAULT_OG_IMAGE = "/logo/auerviamaison.png";
 
-export const pakistanWellnessKeywords = [
-  "Beauty store Pakistan",
-  "Luxury skincare Pakistan",
-  "Makeup products Pakistan",
-  "Premium fragrance Pakistan",
-  "Skincare routine Pakistan",
-  "Beauty accessories Pakistan",
-  "Smartwatch Pakistan",
-  "Jewelry and accessories Pakistan",
-  "Aurevia Elegance Pakistan",
-  "Cosmetics online Pakistan",
-  "Beauty gifts Pakistan",
-  "Luxury lifestyle products Pakistan",
-  "Fashion accessories Pakistan",
-  "Personal care products Pakistan",
-  "Premium beauty essentials Pakistan",
-  "Modern lifestyle shopping Pakistan",
-];
-
 type SeoMetadataInput = {
   title: string;
   description: string;
@@ -54,13 +35,13 @@ export function createSeoMetadata({
 }: SeoMetadataInput): Metadata {
   const canonical = absoluteUrl(path);
   const images = image
-    ? [{ url: absoluteUrl(image), width: 1200, height: 630, alt: title }]
+    ? [{ url: absoluteUrl(image), alt: title }]
     : undefined;
 
   return {
     title,
     description,
-    keywords: [...new Set([...keywords, ...pakistanWellnessKeywords])],
+    keywords: keywords.length ? [...new Set(keywords)] : undefined,
     alternates: { canonical },
     robots: {
       index: !noIndex,

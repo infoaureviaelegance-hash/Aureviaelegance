@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ]);
 
     return createSeoMetadata({
-      title: `${product.seo.title} Pakistan`,
+      title: product.seo.title,
       description: product.seo.description,
       path: seoFields?.canonicalUrl || `/products/${handle}`,
       image: seoFields?.openGraphImage || product.featuredImage?.url,

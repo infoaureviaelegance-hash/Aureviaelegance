@@ -14,10 +14,9 @@ export async function CollectionsPageContent({ data }: CollectionsPageContentPro
             Our Collections
           </h1>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            Explore our carefully curated collections of authentic Premium
-            products products. From natural wellness essentials to beautifully
-            crafted salt lamps and edible salts, each collection reflects our
-            commitment to purity, quality, and sustainable sourcing.
+            Explore curated collections of skincare, makeup, fragrance, hair
+            care, jewelry, watches, beauty accessories, and thoughtful gifts
+            selected for confident everyday routines.
           </p>
         </div>
       </section>
@@ -29,20 +28,18 @@ export async function CollectionsPageContent({ data }: CollectionsPageContentPro
       <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-8">
         <div className="max-w-4xl space-y-4 text-muted-foreground leading-relaxed">
           <h2 className="text-xl font-semibold text-foreground">
-            Authentic Premium Products Collections
+            Curated Beauty and Lifestyle Collections
           </h2>
           <p>
-            Aurevia Elegance sources premium beauty and lifestyle products directly from the
-            ancient salt mines of Pakistan. Our collections include edible salt
-            for cooking, wellness and spa products, decorative salt lamps, and
-            lifestyle accessories designed to support a natural and balanced
-            way of living.
+            Aurevia Elegance brings beauty and personal-style essentials into
+            easy-to-browse edits. Discover skincare for everyday routines,
+            makeup and fragrance for every mood, plus accessories, jewelry, and
+            watches selected to complete your look.
           </p>
           <p>
-            Whether you are looking for bulk supply, retail products, or
-            wellness solutions, our collections are crafted to meet
-            international quality standards while preserving the natural
-            mineral richness of Premium salt.
+            Whether you are shopping for a daily essential, a new arrival, or
+            a considered gift, each collection helps you compare relevant
+            products and find the right fit with delivery across Pakistan.
           </p>
         </div>
       </section>

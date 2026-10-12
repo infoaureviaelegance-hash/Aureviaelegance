@@ -2,23 +2,23 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Mountain, ShieldCheck, Truck } from "@esmate/shadcn/pkgs/lucide-react";
+import { ChevronDown, Sparkles, ShieldCheck, Truck } from "@esmate/shadcn/pkgs/lucide-react";
 
 const infoCards = [
   {
-    icon: <Mountain className="h-5 w-5" />,
+    icon: <Sparkles className="h-5 w-5" />,
     title: "Premium products",
-    text: "Curated Himalayan Shilajit, herbal products, and natural wellness products selected for quality and authenticity.",
+    text: "Curated skincare, makeup, fragrance, accessories, and lifestyle essentials for everyday routines.",
   },
   {
     icon: <ShieldCheck className="h-5 w-5" />,
     title: "Verified quality",
-    text: "Every device is checked for battery health, hardware condition, and overall usability before it reaches you.",
+    text: "Products are reviewed for packaging, labeling, presentation, and available sourcing information before listing.",
   },
   {
     icon: <Truck className="h-5 w-5" />,
     title: "Delivery & support",
-    text: "Fast delivery across Pakistan, with responsive support for setup, troubleshooting, and warranty questions.",
+    text: "Delivery across Pakistan, with responsive support for product, order, return, and shipping questions.",
   },
 ];
 
@@ -26,22 +26,17 @@ const faqItems = [
   {
     question: "What types of products do you sell?",
     answer:
-      "We stock Himalayan Shilajit, herbal products, salt lamps, and premium accessories from trusted natural product sources in Pakistan.",
+      "We offer skincare, makeup, fragrances, hair care, personal care, jewelry, watches, and beauty accessories for everyday routines and gifting.",
   },
   {
-    question: "Are your devices tested before sale?",
+    question: "Are your products checked before sale?",
     answer:
       "Yes. Products are checked for packaging integrity, labeling, presentation and the quality information supplied by our sourcing team before listing.",
   },
   {
-    question: "Do you offer warranty support?",
+    question: "Can I return an eligible product?",
     answer:
-      "We provide warranty-backed support for eligible products and help with after-sales questions related to setup, repairs, and replacement concerns.",
-  },
-  {
-    question: "Can I buy a used or refurbished product?",
-    answer:
-      "Yes. We offer carefully inspected pre-owned and refurbished devices that are cleaned, tested, and priced transparently.",
+      "Return eligibility depends on the product condition, reason for return, and confirmed order terms. Contact us before sending any item back so our team can provide the correct instructions.",
   },
   {
     question: "Do you deliver across Pakistan?",
@@ -56,12 +51,12 @@ const faqItems = [
   {
     question: "Do you sell accessories too?",
     answer:
-      "Yes. Our range includes Himalayan salt products, salt lamps, Shilajit, herbal products and other natural wellness items.",
+      "Yes. You can shop jewelry, watches, beauty tools, grooming accessories, and other finishing touches alongside our beauty collections.",
   },
   {
     question: "How can I contact support after purchase?",
     answer:
-      "You can reach our support team through the contact page or by calling the store directly for purchase assistance and device support.",
+      "You can reach our support team through the contact page, phone, or WhatsApp for product and order assistance.",
   },
 ];
 

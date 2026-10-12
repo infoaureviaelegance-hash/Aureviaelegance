@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: collection.seo?.description || collection.description || `Shop ${collection.title} in Pakistan from Aurevia Elegance with nationwide delivery.`,
       path: collection.canonicalUrl || `/collections/${collectionHandle}`,
       image: collection.openGraphImage || collection.image?.url,
-      keywords: [collection.focusKeyword, collection.title, `${collection.title} Pakistan`, "Buy Himalayan Pink Salt Online Pakistan"].filter((item): item is string => Boolean(item)),
+      keywords: [collection.focusKeyword, collection.title, `${collection.title} Pakistan`, `shop ${collection.title} online`].filter((item): item is string => Boolean(item)),
       noIndex: collection.robots.startsWith("noindex"),
     });
   } catch {

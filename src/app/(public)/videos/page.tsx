@@ -6,10 +6,10 @@ import { createSeoMetadata } from "@/lib/seo";
 export const revalidate = 900;
 
 export const metadata = createSeoMetadata({
-  title: "Product Videos and Tech Guides Pakistan",
-  description: "Watch Aurevia Elegance product demos, buying guides, beauty guidance, and product updates for Pakistan.",
+  title: "Beauty Product Videos & Buying Guides",
+  description: "Watch Aurevia Elegance beauty product demos, skincare and makeup guidance, buying guides, and new product updates in Pakistan.",
   path: "/videos",
-  keywords: ["Product guides Pakistan", "Natural wellness product videos", "Shilajit Pakistan"],
+  keywords: ["beauty product videos", "skincare guides Pakistan", "makeup tutorials Pakistan", "fragrance buying guide"],
 });
 
 export default async function VideosPage() {

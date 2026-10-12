@@ -11,7 +11,7 @@ export function CustomerVoicesSection({ reviews }: { reviews: HomepageReview[] }
   if (!reviews.length) return null;
 
   return (
-    <section aria-labelledby="customer-voices-heading" className="bg-[#f8f4f1] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <section id="customer-reviews" aria-labelledby="customer-voices-heading" className="scroll-mt-24 bg-[#f8f4f1] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-9 max-w-2xl sm:mb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#a85460]">Customer stories</p>

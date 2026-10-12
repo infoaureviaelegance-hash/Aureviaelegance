@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "Are your products authentic?",
-    a: "Yes. We carefully source and inspect our natural products for quality before dispatch.",
+    a: "We carefully source and inspect our beauty and lifestyle products, including their packaging, labeling, and presentation, before dispatch.",
   },
   {
     q: "Do you offer warranty support?",
@@ -266,14 +266,14 @@ export default function ContactClient() {
           </div>
           <div className="rounded-3xl overflow-hidden border border-[#C6A24A]/20 shadow-lg">
             <iframe
-              src="https://www.google.com/maps?q=Swabi%20Topi%20Road%2C%20Pakistan&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6602.171265901142!2d71.83562331097426!3d34.16972821809048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1791799671404!5m2!1sen!2s"
               width="100%"
               height="450"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
-              title="Aurevia Elegance Location"
+              title="Aurevia Elegance showroom location"
             />
           </div>
         </div>

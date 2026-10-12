@@ -3,18 +3,18 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, createSeoMetadata } from "@/lib/seo";
 
 export const metadata = createSeoMetadata({
-  title: "Product Buying FAQ Pakistan",
+  title: "Beauty Shopping & Delivery FAQ Pakistan",
   description: "Answers about buying beauty, personal care, fragrance, and lifestyle products in Pakistan from Aurevia Elegance.",
   path: "/faq",
-  keywords: ["Product FAQ Pakistan", "Buy Himalayan Pink Salt Online Pakistan", "Product warranty Pakistan"],
+  keywords: ["beauty shopping FAQ Pakistan", "skincare delivery Pakistan", "Aurevia Elegance returns", "beauty product support"],
 });
 
 const faqItems = [
-  ["What types of products do you sell?", "We stock Himalayan Shilajit, herbal products, salt lamps, and premium accessories from trusted natural product sources in Pakistan."],
+  ["What types of products do you sell?", "We offer skincare, makeup, fragrances, hair care, personal care, jewelry, watches, and beauty accessories for everyday routines and gifting."],
   ["Are your products checked before sale?", "Yes. Products are checked for packaging integrity, labeling, presentation and the quality information supplied by our sourcing team before listing."],
-  ["Do you offer warranty support?", "We provide warranty-backed support for eligible products and help with after-sales questions related to setup, repairs, and replacement concerns."],
+  ["Can I return an eligible product?", "Return eligibility depends on the product condition, reason for return, and confirmed order terms. Contact us before sending any item back so our team can provide the correct instructions."],
   ["Do you deliver across Pakistan?", "Yes. We ship to customers across Pakistan and also assist with pickup and delivery coordination where available."],
-  ["What kinds of products do you sell?", "Our range includes Himalayan salt products, salt lamps, Shilajit, herbal products and other natural wellness items."],
+  ["How can I choose the right product?", "Our team can help you compare product types, features, shades, sizes, and budgets through the contact page or WhatsApp before you order."],
 ];
 
 export default function FAQPage() {

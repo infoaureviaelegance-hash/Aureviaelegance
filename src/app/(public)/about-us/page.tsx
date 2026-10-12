@@ -3,9 +3,11 @@ import { serializeVideo } from "@/lib/video-utils"
 import { FeaturedVideoSection } from "@/components/features/videos/featured-video-section"
 import { AboutPageContent } from "./_components/about-page-content"
 import { createSeoMetadata } from "@/lib/seo"
+import { JsonLd } from "@/components/seo/json-ld"
+import { absoluteUrl, breadcrumbSchema } from "@/lib/seo"
 
 export const metadata = createSeoMetadata({
-  title: "About Aurevia Elegance",
+  title: "About Us",
   description: "Learn about Aurevia Elegance and the beauty, skincare, fragrance, and personal-style essentials we curate for modern routines.",
   path: "/about-us",
   keywords: ["Aurevia Elegance", "beauty store Pakistan", "skincare Pakistan", "makeup products Pakistan", "premium fragrance Pakistan"],
@@ -22,6 +24,17 @@ export default async function AboutPage() {
 
   return (
     <>
+      <JsonLd data={[
+        breadcrumbSchema([{ name: "Home", path: "/" }, { name: "About Us", path: "/about-us" }]),
+        {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: "About Aurevia Elegance",
+          description: "The story, values, and curated beauty philosophy behind Aurevia Elegance.",
+          url: absoluteUrl("/about-us"),
+          mainEntity: { "@id": `${absoluteUrl("/")}#organization` },
+        },
+      ]} />
       <AboutPageContent />
       <FeaturedVideoSection
         videos={aboutVideos.map(serializeVideo)}

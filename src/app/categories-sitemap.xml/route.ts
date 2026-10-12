@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { absoluteUrl } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 900;
 
 export async function GET() {
   const categories = await prisma.category.findMany({ where: { robots: { not: { startsWith: "noindex" } } }, orderBy: { updatedAt: "desc" }, select: { slug: true, updatedAt: true, image: true } });
