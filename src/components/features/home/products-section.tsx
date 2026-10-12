@@ -91,7 +91,7 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
 
       <div
         ref={categoriesViewportRef}
-        className="relative flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab sm:gap-6"
+        className="relative flex gap-6 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab sm:gap-8"
         onPointerDown={handleCategoryPointerDown}
         onPointerMove={handleCategoryPointerMove}
         onPointerUp={handleCategoryPointerUp}
@@ -104,12 +104,12 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
           }
         }}
       >
-        <div className="category-marquee-track scrollbar-hide gap-4 px-2 sm:gap-6 sm:px-3 lg:gap-7 lg:px-4">
+        <div className="category-marquee-track scrollbar-hide gap-6 px-2 sm:gap-8 sm:px-3 lg:gap-10 lg:px-4">
            {[...mainCategories, ...mainCategories].map((category, idx) => (
              <Link
                key={`${category.id}-${idx}`}
                href={`/category/${encodeURIComponent(category.slug)}`}
-              className="category-card group relative h-[10rem] w-[7.5rem] flex-shrink-0 overflow-hidden rounded-2xl bg-[#fffdf8] text-white sm:h-[11.5rem] sm:w-[8.75rem] md:h-[13rem] md:w-[9.75rem]"
+              className="category-card group relative h-[10rem] w-[7.5rem] flex-shrink-0 overflow-hidden rounded-2xl bg-transparent text-white sm:h-[11.5rem] sm:w-[8.75rem] md:h-[13rem] md:w-[9.75rem]"
              >
               <div className="absolute inset-0">
                 <Image
@@ -121,7 +121,7 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/65" />
               </div>
-              <span className="absolute bottom-3 left-3 right-10 line-clamp-2 text-left text-xs font-extrabold uppercase leading-tight text-white sm:bottom-4 sm:left-4 sm:right-12 sm:text-sm">{category.name}</span>
+              <span className="absolute bottom-3 left-3 right-10 line-clamp-2 text-left text-xs font-medium uppercase leading-tight text-white sm:bottom-4 sm:left-4 sm:right-12 sm:text-sm">{category.name}</span>
               <span className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#d84967] text-base text-white sm:bottom-4 sm:right-4 sm:h-9 sm:w-9 sm:text-lg" aria-hidden="true">→</span>
               </Link>
             ))}

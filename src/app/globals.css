@@ -151,9 +151,10 @@
   }
 }
 
-/* Keep the image-led category cards lifted above the white page surface. */
+/* Keep category cards clean and transparent against the page surface. */
 .storefront-categories .category-card {
-  box-shadow: 0 4px 12px rgba(34, 18, 22, 0.055) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Keep storefront content comfortably wide on desktop while preserving the

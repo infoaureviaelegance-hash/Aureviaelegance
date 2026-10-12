@@ -5,7 +5,7 @@ import type { PublicVideo } from "@/lib/video-utils";
 import { CertificationsSlider, type CertificateLogo } from "@/components/features/certifications/certifications-slider";
 import { PromoBannerSection } from "@/components/features/home/promo-banner-section";
 import type { PromoBanner } from "@/components/features/home/promo-banner-types";
-import { PinkSaltWellnessSection, TrustStrip } from "@/components/features/home/homepage-static-sections";
+import { PinkSaltWellnessSection } from "@/components/features/home/homepage-static-sections";
 import { HomepageReelsSection } from "@/components/features/home/homepage-reels-section";
 import { PromotionalBannerCarousel } from "@/components/features/home/promotional-banner-carousel";
 import type { PromotionalCategoryBanner } from "@/components/features/home/promotional-category-banner-types";
@@ -60,7 +60,6 @@ export function HomeContentSections({
 }: HomeContentSectionsProps) {
   return (
     <>
-      <TrustStrip />
       <CategoriesSection categories={categories} />
       <PromoBannerSection banners={promoBanners} />
       <ProductsSection categories={categories} products={products} />

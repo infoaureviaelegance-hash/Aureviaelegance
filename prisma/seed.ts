@@ -289,6 +289,14 @@ const collections = [
 async function main() {
   const adminEmail = process.env.ADMIN_USER ?? "info.aureviaelegance@gmail.com";
   const adminPassword = process.env.ADMIN_PASS ?? "admin123";
+  const seedAdminCredentialsOnly = process.env.SEED_ADMIN_CREDENTIALS_ONLY === "true";
+
+  if (
+    seedAdminCredentialsOnly &&
+    (process.env.SEED_ADMIN_EMAIL_ONLY === "true" || process.env.SEED_ADMIN_AND_HERO_ONLY === "true")
+  ) {
+    throw new Error("SEED_ADMIN_CREDENTIALS_ONLY cannot be combined with another seed-only mode.");
+  }
 
   if (process.env.SEED_ADMIN_EMAIL_ONLY === "true") {
     const targetAdmin = await prisma.adminUser.findUnique({ where: { email: adminEmail } });
@@ -308,6 +316,31 @@ async function main() {
       data: { email: adminEmail },
     });
     console.log(`Updated only the existing admin email to ${adminEmail}.`);
+    return;
+  }
+
+  if (seedAdminCredentialsOnly) {
+    if (!adminEmail || !adminPassword) {
+      throw new Error("ADMIN_USER and ADMIN_PASS must both be set to update admin credentials.");
+    }
+
+    const targetAdmin = await prisma.adminUser.findUnique({ where: { email: adminEmail } });
+    const existingAdmin =
+      targetAdmin ?? (await prisma.adminUser.findFirst({ orderBy: { createdAt: "asc" } }));
+
+    if (!existingAdmin) {
+      throw new Error("No existing admin account was found; refusing to create or modify other data.");
+    }
+
+    await prisma.adminUser.update({
+      where: { id: existingAdmin.id },
+      data: {
+        email: adminEmail,
+        password: await bcrypt.hash(adminPassword, 10),
+        passwordChangedAt: new Date(),
+      },
+    });
+    console.log("Updated the existing admin credentials only.");
     return;
   }
 

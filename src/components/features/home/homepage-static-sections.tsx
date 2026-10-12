@@ -1,26 +1,16 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
-  Box,
   CheckCircle2,
   Gem,
   Globe2,
   Hand,
   PackageCheck,
   SearchCheck,
-  ShieldCheck,
   Truck,
 } from "@esmate/shadcn/pkgs/lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import type { PublicVideo } from "@/lib/video-utils";
-
-const trustItems = [
-  { icon: Gem, text: "Authentic beauty essentials" },
-  { icon: ShieldCheck, text: "Thoughtfully curated formulas" },
-  { icon: Truck, text: "Nationwide delivery in Pakistan" },
-  { icon: Box, text: "Gift-ready and premium packaging" },
-  { icon: CheckCircle2, text: "Skin-safe, quality-approved picks" },
-];
 
 const processSteps = [
   { icon: SearchCheck, title: "Curated Edit", text: "We handpick beauty essentials designed to elevate daily routines, from skincare to statement accessories." },
@@ -63,21 +53,6 @@ export const homepageFaqItems = [
     schemaAnswer: "Yes. You can explore limited-edition gift sets, beauty bundles, and complete looks designed for gifting, self-care, and seasonal refreshes.",
   },
 ];
-
-export function TrustStrip() {
-  return (
-    <section aria-label="Why shoppers choose Aurevia Elegance" className="border-y border-[#EA580C]/20 bg-[#fffaf5] px-3 py-4 sm:px-6 sm:py-5">
-      <div className="mx-auto grid max-w-7xl grid-cols-6 gap-x-2 gap-y-4 sm:gap-x-5 lg:grid-cols-5 lg:gap-6">
-        {trustItems.map(({ icon: Icon, text }) => (
-          <div key={text} className="col-span-2 flex min-w-0 items-center justify-center gap-1.5 text-[10px] font-semibold leading-tight text-gray-800 [&:nth-child(n+4)]:col-span-3 sm:gap-2.5 sm:text-xs lg:col-span-1 lg:justify-start lg:gap-3 lg:text-sm lg:[&:nth-child(n+4)]:col-span-1">
-            <Icon aria-hidden="true" className="h-4 w-4 shrink-0 text-[#EA580C] sm:h-5 sm:w-5" />
-            <span>{text}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 export function OurProcessSection() {
   return (
