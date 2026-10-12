@@ -91,7 +91,7 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
 
       <div
         ref={categoriesViewportRef}
-        className="relative flex gap-6 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab sm:gap-8"
+        className="relative flex cursor-grab overflow-x-auto overflow-y-hidden px-2 scrollbar-hide sm:px-3 lg:px-4"
         onPointerDown={handleCategoryPointerDown}
         onPointerMove={handleCategoryPointerMove}
         onPointerUp={handleCategoryPointerUp}
@@ -104,28 +104,33 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
           }
         }}
       >
-        <div className="category-marquee-track scrollbar-hide gap-6 px-2 sm:gap-8 sm:px-3 lg:gap-10 lg:px-4">
-           {[...mainCategories, ...mainCategories].map((category, idx) => (
-             <Link
-               key={`${category.id}-${idx}`}
-               href={`/category/${encodeURIComponent(category.slug)}`}
-              className="category-card group relative h-[12rem] w-[9rem] flex-shrink-0 overflow-hidden rounded-2xl bg-transparent text-white sm:h-[14rem] sm:w-[10.5rem] md:h-[16rem] md:w-[12rem]"
-             >
-              <div className="absolute inset-0">
-                <Image
-                  src={category.image || FALLBACK_IMAGE}
-                  alt={category.name}
-                  fill
-                  sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
-                  className="object-contain transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/65" />
-              </div>
-              <span className="absolute bottom-3 left-3 right-10 line-clamp-2 text-left text-xs font-semibold uppercase leading-tight text-white sm:bottom-4 sm:left-4 sm:right-12 sm:text-sm">{category.name}</span>
-              <span className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#d84967] text-base text-white sm:bottom-4 sm:right-4 sm:h-9 sm:w-9 sm:text-lg" aria-hidden="true">→</span>
-              </Link>
-            ))}
-          </div>
+        <div className="category-marquee-track scrollbar-hide">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="category-marquee-group" aria-hidden={copy === 1 || undefined}>
+              {mainCategories.map((category) => (
+                <Link
+                  key={`${copy}-${category.id}`}
+                  href={`/category/${encodeURIComponent(category.slug)}`}
+                  tabIndex={copy === 1 ? -1 : undefined}
+                  className="category-card group relative h-[12rem] w-[9rem] flex-shrink-0 overflow-hidden rounded-2xl bg-transparent text-white sm:h-[14rem] sm:w-[10.5rem] md:h-[16rem] md:w-[12rem]"
+                >
+                  <div className="absolute inset-0">
+                    <Image
+                      src={category.image || FALLBACK_IMAGE}
+                      alt={category.name}
+                      fill
+                      sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
+                      className="object-contain transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/65" />
+                  </div>
+                  <span className="absolute bottom-3 left-3 right-10 line-clamp-2 text-left text-xs font-semibold uppercase leading-tight text-white sm:bottom-4 sm:left-4 sm:right-12 sm:text-sm">{category.name}</span>
+                  <span className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#d84967] text-base text-white sm:bottom-4 sm:right-4 sm:h-9 sm:w-9 sm:text-lg" aria-hidden="true">→</span>
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
         </div>
     </section>
   );

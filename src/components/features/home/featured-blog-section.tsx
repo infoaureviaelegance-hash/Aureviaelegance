@@ -14,7 +14,7 @@ type FeaturedBlogSectionProps = {
 
 export function FeaturedBlogSection({ articles }: FeaturedBlogSectionProps) {
   return (
-    <section className="bg-white px-6 py-2 lg:px-4 lg:py-3">
+    <div className="bg-white">
       <div className="mx-auto max-w-7xl">
         <BlogSection
           articles={articles.map((article) => ({
@@ -28,6 +28,6 @@ export function FeaturedBlogSection({ articles }: FeaturedBlogSectionProps) {
           }))}
         />
       </div>
-    </section>
+    </div>
   );
 }

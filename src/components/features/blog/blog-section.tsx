@@ -99,13 +99,27 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
   if (!articles.length) return null
 
   return (
-    <section className="bg-white py-3 sm:py-4">
+    <section aria-labelledby="featured-journal-heading" className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Blog grid or horizontal scrollable carousel */}
+        <div className="mb-9 flex flex-col gap-5 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#a85460]">The Aurevia journal</p>
+            <h2 id="featured-journal-heading" className="mt-3 font-serif text-3xl font-semibold tracking-tight text-[#241b18] sm:text-4xl lg:text-5xl">
+              Ideas for elevated living
+            </h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-[#6f625d] sm:text-base">
+              Curated stories, practical guidance, and considered inspiration for beauty and everyday rituals.
+            </p>
+          </div>
+          <Link href="/blog" className="inline-flex w-fit items-center gap-2 border-b border-[#a85460]/40 pb-1 text-sm font-semibold text-[#8f4350] transition hover:border-[#a85460] hover:text-[#a85460]">
+            Explore the journal <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
         <div className="relative">
           <div
             ref={scrollRef}
-            className={`flex gap-4 overflow-x-auto pb-2 scrollbar-hide sm:gap-6 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"}`}
+            className={`flex gap-5 overflow-x-auto pb-5 scrollbar-hide sm:gap-7 ${isDragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"}`}
             onDragStart={(event) => event.preventDefault()}
             onPointerDown={(event) => {
               drag.current.moved = false
@@ -143,10 +157,10 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
               return (
                 <div
                   key={article.id}
-                  className="flex w-[88%] shrink-0 snap-start items-stretch sm:w-[calc((100%_-_1.5rem)/2)]"
+                  className="flex w-[88%] shrink-0 snap-start items-stretch sm:w-[calc((100%_-_1.75rem)/2)]"
                 >
-                  <article className="group relative flex w-full flex-col overflow-hidden rounded-2xl bg-[#faf9f7] transition duration-500 hover:-translate-y-0.5">
-                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#f5efeb]">
+                  <article className="group relative flex w-full flex-col overflow-hidden rounded-[1.75rem] border border-[#eee6e1] bg-[#fcfaf8] shadow-[0_16px_45px_rgba(73,47,38,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(73,47,38,0.10)]">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#f5efeb]">
                       {article.image?.url ? (
                         <Image
                           src={article.image.url}
@@ -162,8 +176,8 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
                       )}
                     </div>
 
-                    <div className="flex min-w-0 flex-col p-4 sm:px-5 sm:py-4">
-                      <h3 className="line-clamp-1 font-serif text-base font-bold leading-snug text-[#241b18] sm:text-xl">
+                    <div className="flex min-w-0 flex-1 flex-col p-5 sm:px-7 sm:py-6">
+                      <h3 className="line-clamp-2 font-serif text-lg font-semibold leading-snug text-[#241b18] sm:text-2xl">
                         <Link
                           href={`/blog/${article.handle}`}
                           className="transition-colors hover:text-[#a85460]"
@@ -172,11 +186,11 @@ export default function BlogSection({ articles: initialArticles }: BlogSectionPr
                         </Link>
                       </h3>
 
-                      <div className="mt-2 flex min-w-0 items-center justify-between gap-4">
-                        <p className="min-w-0 flex-1 truncate text-xs text-gray-600 sm:text-sm">{text}</p>
+                      <div className="mt-4 flex min-w-0 flex-1 flex-col items-start gap-5">
+                        <p className="line-clamp-2 text-sm leading-6 text-[#71635e] sm:text-[15px]">{text}</p>
                         <Link
                           href={`/blog/${article.handle}`}
-                          className="inline-flex shrink-0 items-center gap-1.5 text-xs font-bold text-[#9f4050] transition hover:gap-2.5 sm:text-sm"
+                          className="mt-auto inline-flex shrink-0 items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#9f4050] transition hover:gap-2.5 sm:text-sm"
                         >
                           Learn more <ArrowRight className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
                         </Link>
