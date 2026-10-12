@@ -2,9 +2,8 @@ import { prisma } from "@/lib/prisma"
 import { serializeVideo } from "@/lib/video-utils"
 import { FeaturedVideoSection } from "@/components/features/videos/featured-video-section"
 import { AboutPageContent } from "./_components/about-page-content"
-import { createSeoMetadata } from "@/lib/seo"
+import { absoluteUrl, breadcrumbSchema, createSeoMetadata } from "@/lib/seo"
 import { JsonLd } from "@/components/seo/json-ld"
-import { absoluteUrl, breadcrumbSchema } from "@/lib/seo"
 
 export const metadata = createSeoMetadata({
   title: "About Us",

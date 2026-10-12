@@ -127,7 +127,7 @@ export default function ContactClient() {
                   Reach Out to Us
                 </h2>
                 <p className="mt-3 text-gray-600">
-                  We're available 7 days a week. Drop by our showroom or get in touch online.
+                  We&apos;re available 7 days a week. Drop by our showroom or get in touch online.
                 </p>
               </div>
 
@@ -186,7 +186,7 @@ export default function ContactClient() {
                       Message Sent Successfully
                     </h2>
                     <p className="text-gray-600">
-                      We'll get back to you shortly.
+                      We&apos;ll get back to you shortly.
                     </p>
                   </div>
                 ) : (

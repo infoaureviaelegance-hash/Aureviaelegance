@@ -1,7 +1,6 @@
 import ContactClient from "./contact-client";
-import { createSeoMetadata } from "@/lib/seo";
+import { absoluteUrl, breadcrumbSchema, createSeoMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
-import { absoluteUrl, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata = createSeoMetadata({
   title: "Contact Us",
