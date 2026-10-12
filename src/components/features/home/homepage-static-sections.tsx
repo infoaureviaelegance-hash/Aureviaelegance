@@ -10,6 +10,7 @@ import {
   Truck,
 } from "@esmate/shadcn/pkgs/lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { LazyIframe } from "@/components/shared/lazy-iframe";
 import type { PublicVideo } from "@/lib/video-utils";
 
 const processSteps = [
@@ -132,13 +133,15 @@ export function PinkSaltWellnessSection({ video }: { video?: PublicVideo }) {
         <div className="relative z-10 overflow-hidden rounded-[1.5rem] border border-white bg-black shadow-[0_20px_45px_-28px_rgba(67,38,27,0.55)] ring-1 ring-[#ddcbbf]/70">
           {video?.embedUrl ? (
             <div className={video.format === "VERTICAL" ? "mx-auto aspect-[9/16] max-h-[640px]" : "aspect-video"}>
-              <iframe
+              <LazyIframe
                 src={video.embedUrl}
                 title={video.title}
                 className="h-full w-full"
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
+                fallback={<div className="h-full w-full animate-pulse bg-black/85" />}
+                rootMargin="250px 0px"
               />
             </div>
           ) : (

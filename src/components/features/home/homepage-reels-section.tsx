@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "@esmate/shadcn/pkgs/lucide-react";
 import type { PublicVideo } from "@/lib/video-utils";
+import { LazyIframe } from "@/components/shared/lazy-iframe";
 
 function ReelEmbed({ video }: { video: PublicVideo }) {
   if (!video.embedUrl) {
@@ -15,13 +16,15 @@ function ReelEmbed({ video }: { video: PublicVideo }) {
 
   return (
     <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-[#EA580C]/15 bg-black shadow-sm">
-      <iframe
+      <LazyIframe
         src={video.embedUrl}
         title=""
         className="h-full w-full border-0"
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
+        fallback={<div className="h-full w-full animate-pulse bg-black" />}
+        rootMargin="300px 0px"
       />
     </div>
   );
