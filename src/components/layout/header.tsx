@@ -91,7 +91,6 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
   const shopCategories = initialCategories;
 
   const openDrawer = useCallback((drawer: "cart" | "wishlist" | "profile") => {
-    window.dispatchEvent(new Event("close-mobile-nav-action"));
     setMobileMenuOpen(false);
     setMobileLegalOpen(false);
     setDesktopMoreOpen(false);
@@ -102,7 +101,6 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
   }, []);
 
   const openSearchPanel = useCallback(() => {
-    window.dispatchEvent(new Event("close-mobile-nav-action"));
     setMobileMenuOpen(false);
     setMobileLegalOpen(false);
     setDesktopMoreOpen(false);
@@ -121,7 +119,6 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
   }, [openSearchPanel, searchOpen]);
 
   const openMoreMenu = useCallback(() => {
-    window.dispatchEvent(new Event("close-mobile-nav-action"));
     setMobileMenuOpen(false);
     setMobileLegalOpen(false);
     setSearchOpen(false);
@@ -133,7 +130,6 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
 
   const handleMobileMenuChange = useCallback((open: boolean) => {
     if (open) {
-      window.dispatchEvent(new Event("close-mobile-nav-action"));
       setMobileLegalOpen(false);
       setDesktopMoreOpen(false);
       setSearchOpen(false);

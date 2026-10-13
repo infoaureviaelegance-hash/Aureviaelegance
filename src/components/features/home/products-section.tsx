@@ -143,12 +143,14 @@ function MovingProductRow({ row, products, productCard }: {
 }) {
   const [paused, setPaused] = useState(false);
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const dragState = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
   if (!products.length) return null;
 
   const minimumItems = 8;
   const repeatCount = Math.max(1, Math.ceil(minimumItems / products.length));
   const loopItems = Array.from({ length: repeatCount }, () => products).flat();
-  const movingItems = [...loopItems, ...loopItems];
+  const movingItems = row === 2 ? loopItems : [...loopItems, ...loopItems];
   const pauseTemporarily = () => {
     setPaused(true);
     if (resumeTimer.current) clearTimeout(resumeTimer.current);
@@ -158,16 +160,47 @@ function MovingProductRow({ row, products, productCard }: {
   return (
     <section aria-label={`Featured products row ${row}`}>
       <div
-        className="scrollbar-hide overflow-x-auto overflow-y-hidden py-1"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onPointerDown={pauseTemporarily}
-        onTouchStart={pauseTemporarily}
-        onScroll={pauseTemporarily}
+        ref={viewportRef}
+        className={`scrollbar-hide overflow-x-auto overflow-y-hidden py-1 ${row === 2 ? "cursor-grab touch-pan-y active:cursor-grabbing" : ""}`}
+        onMouseEnter={row === 2 ? undefined : () => setPaused(true)}
+        onMouseLeave={row === 2 ? undefined : () => setPaused(false)}
+        onPointerDown={row === 2 ? (event) => {
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          const viewport = viewportRef.current;
+          if (!viewport) return;
+          dragState.current = { active: true, startX: event.clientX, scrollLeft: viewport.scrollLeft, moved: false };
+          viewport.setPointerCapture(event.pointerId);
+        } : pauseTemporarily}
+        onPointerMove={row === 2 ? (event) => {
+          const viewport = viewportRef.current;
+          if (!viewport || !dragState.current.active) return;
+          const distance = event.clientX - dragState.current.startX;
+          if (Math.abs(distance) > 5) dragState.current.moved = true;
+          viewport.scrollLeft = dragState.current.scrollLeft - distance;
+        } : undefined}
+        onPointerUp={row === 2 ? (event) => {
+          dragState.current.active = false;
+          if (viewportRef.current?.hasPointerCapture(event.pointerId)) {
+            viewportRef.current.releasePointerCapture(event.pointerId);
+          }
+        } : undefined}
+        onPointerCancel={row === 2 ? () => { dragState.current.active = false; } : undefined}
+        onClickCapture={row === 2 ? (event) => {
+          if (!dragState.current.moved) return;
+          event.preventDefault();
+          event.stopPropagation();
+          dragState.current.moved = false;
+        } : undefined}
+        onTouchStart={row === 2 ? undefined : pauseTemporarily}
+        onScroll={row === 2 ? undefined : pauseTemporarily}
       >
         <div
-          className={`homepage-product-track flex w-max gap-3 sm:gap-6 ${row === 2 ? "homepage-product-track-reverse" : ""}`}
-          style={{ animationDuration: `${Math.max(42, loopItems.length * 7)}s`, animationPlayState: paused ? "paused" : "running" }}
+          className={`homepage-product-track flex w-max gap-3 sm:gap-6 ${row === 3 ? "homepage-product-track-reverse" : ""}`}
+          style={{
+            animation: row === 2 ? "none" : undefined,
+            animationDuration: `${Math.max(42, loopItems.length * 7)}s`,
+            animationPlayState: paused ? "paused" : "running",
+          }}
         >
           {movingItems.map((product, index) => (
             <div key={`${product.handle}-${index}`} className="w-[calc((100vw-2.75rem)/2)] shrink-0 sm:w-[14rem] lg:w-[16rem]">
@@ -206,14 +239,12 @@ function CollectionSlider({ collections }: { collections: Collection[] }) {
 
   return (
     <div className="relative">
-      <div
-        className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-3 sm:justify-items-center transition-opacity duration-1000 ease-in-out"
-      >
+      <div className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 transition-opacity duration-1000 ease-in-out sm:grid sm:grid-cols-3 sm:justify-items-center sm:gap-5 sm:overflow-visible sm:pb-0">
         {displayCollections.map((collection) => (
           <Link
             key={collection.id}
             href="/products"
-            className="group w-full max-w-[300px] overflow-hidden rounded-xl border border-[#C6A24A]/20 bg-white sm:max-w-[340px]"
+            className="group w-[78vw] max-w-[300px] shrink-0 snap-start overflow-hidden rounded-xl border border-[#C6A24A]/20 bg-white sm:w-full sm:max-w-[340px]"
           >
             <div className="relative aspect-[40/37]">
               <Image
