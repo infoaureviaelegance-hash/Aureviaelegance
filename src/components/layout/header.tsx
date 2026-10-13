@@ -26,7 +26,7 @@ import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { searchProducts } from "@/components/search/actions";
 import { search as trackSearch } from "@/lib/pixel";
 import { usePWAInstall } from "@/hooks/use-pwa-install";
@@ -90,18 +90,86 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
   const [profileOpen, setProfileOpen] = useState(false);
   const shopCategories = initialCategories;
 
-  useEffect(() => {
-    const handleOpenWishlist = () => setWishlistOpen(true);
-    const handleOpenProfile = () => setProfileOpen(true);
+  const openDrawer = useCallback((drawer: "cart" | "wishlist" | "profile") => {
+    window.dispatchEvent(new Event("close-mobile-nav-action"));
+    setMobileMenuOpen(false);
+    setMobileLegalOpen(false);
+    setDesktopMoreOpen(false);
+    setSearchOpen(false);
+    setCartOpen(drawer === "cart");
+    setWishlistOpen(drawer === "wishlist");
+    setProfileOpen(drawer === "profile");
+  }, []);
 
+  const openSearchPanel = useCallback(() => {
+    window.dispatchEvent(new Event("close-mobile-nav-action"));
+    setMobileMenuOpen(false);
+    setMobileLegalOpen(false);
+    setDesktopMoreOpen(false);
+    setCartOpen(false);
+    setWishlistOpen(false);
+    setProfileOpen(false);
+    setSearchOpen(true);
+  }, []);
+
+  const toggleSearchPanel = useCallback(() => {
+    if (searchOpen) {
+      setSearchOpen(false);
+    } else {
+      openSearchPanel();
+    }
+  }, [openSearchPanel, searchOpen]);
+
+  const openMoreMenu = useCallback(() => {
+    window.dispatchEvent(new Event("close-mobile-nav-action"));
+    setMobileMenuOpen(false);
+    setMobileLegalOpen(false);
+    setSearchOpen(false);
+    setCartOpen(false);
+    setWishlistOpen(false);
+    setProfileOpen(false);
+    setDesktopMoreOpen(true);
+  }, []);
+
+  const handleMobileMenuChange = useCallback((open: boolean) => {
+    if (open) {
+      window.dispatchEvent(new Event("close-mobile-nav-action"));
+      setMobileLegalOpen(false);
+      setDesktopMoreOpen(false);
+      setSearchOpen(false);
+      setCartOpen(false);
+      setWishlistOpen(false);
+      setProfileOpen(false);
+    }
+    setMobileMenuOpen(open);
+  }, []);
+
+  useEffect(() => {
+    const handleOpenCart = () => openDrawer("cart");
+    const handleOpenWishlist = () => openDrawer("wishlist");
+    const handleOpenProfile = () => openDrawer("profile");
+    const handleCloseOverlays = () => {
+      setMobileMenuOpen(false);
+      setMobileLegalOpen(false);
+      setDesktopMoreOpen(false);
+      setSearchOpen(false);
+      setCartOpen(false);
+      setWishlistOpen(false);
+      setProfileOpen(false);
+    };
+
+    window.addEventListener("open-cart-drawer", handleOpenCart);
     window.addEventListener("open-wishlist-drawer", handleOpenWishlist);
     window.addEventListener("open-profile-drawer", handleOpenProfile);
+    window.addEventListener("close-storefront-overlays", handleCloseOverlays);
 
     return () => {
+      window.removeEventListener("open-cart-drawer", handleOpenCart);
       window.removeEventListener("open-wishlist-drawer", handleOpenWishlist);
       window.removeEventListener("open-profile-drawer", handleOpenProfile);
+      window.removeEventListener("close-storefront-overlays", handleCloseOverlays);
     };
-  }, []);
+  }, [openDrawer]);
 
   const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
   const legalPageActive = legalMenuItems.some((item) => pathname === item.href);
@@ -191,12 +259,14 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
       {/* ───────── main nav ───────── */}
       <nav className="flex min-h-14 w-full items-center gap-2 px-2 sm:min-h-16 sm:px-4 lg:min-h-20 lg:gap-3 lg:px-5 xl:gap-4 xl:px-6">
         <div className="xl:hidden">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuChange}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-10 w-10 text-black hover:text-[#f97316]"
+                aria-label="Open navigation menu"
+                aria-pressed={mobileMenuOpen}
+                className={`h-9 w-9 sm:h-10 sm:w-10 ${mobileMenuOpen ? "bg-[#fff7ed] text-[#f97316]" : "text-black hover:text-[#f97316]"}`}
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -204,7 +274,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
 
             <SheetContent
               side="left"
-              className="w-[320px] border-r border-black/10 bg-white p-0"
+              className="w-[min(20rem,calc(100vw-1rem))] border-r border-black/10 bg-white p-0"
             >
               <SheetTitle className="sr-only">Mobile menu</SheetTitle>
               <div className="flex h-full flex-col">
@@ -290,7 +360,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
                           aria-controls="mobile-legal-menu"
                           onClick={() => setMobileLegalOpen((open) => !open)}
                           className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
-                            legalPageActive ? "bg-[#fff7ed] text-[#f97316]" : "text-black hover:bg-black/5"
+                            legalPageActive || mobileLegalOpen ? "bg-[#fff7ed] text-[#f97316]" : "text-black hover:bg-black/5"
                           }`}
                         >
                           Legal Pages
@@ -342,7 +412,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
                       className="h-10 w-10 text-black hover:text-[#f97316]"
                       onClick={() => {
                         setMobileMenuOpen(false);
-                        setSearchOpen(true);
+                        openSearchPanel();
                       }}
                     >
                       <Search className="h-5 w-5" />
@@ -352,8 +422,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
                       aria-label="Cart"
                       className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white"
                       onClick={() => {
-                        setMobileMenuOpen(false);
-                        setCartOpen(true);
+                        openDrawer("cart");
                       }}
                     >
                       <ShoppingCart className="h-6 w-6" />
@@ -381,7 +450,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               priority
             />
           </div>
-          <div className="relative h-9 w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] lg:h-16 lg:w-[210px]">
+          <div className="relative h-9 w-[92px] min-[360px]:w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] lg:h-16 lg:w-[210px]">
             <Image
               src="/logo/logotext.png"
               alt="Aurevia Elegance"
@@ -394,43 +463,43 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
 
         <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 xl:hidden">
           <button
+            type="button"
+            aria-label="Search"
+            aria-pressed={searchOpen}
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 ${
+              searchOpen
+                ? "bg-[#db2777] text-white"
+                : "bg-[#f5f5f5] text-black hover:bg-[#db2777] hover:text-white"
+            }`}
+            onClick={toggleSearchPanel}
+          >
+            <Search className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
+          <button
             aria-label="Wishlist"
-            className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white sm:h-10 sm:w-10"
-            onClick={() => setWishlistOpen(true)}
+            aria-pressed={wishlistOpen}
+            className={`relative flex h-9 w-9 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 ${
+              wishlistOpen
+                ? "bg-[#db2777] text-white"
+                : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"
+            }`}
+            onClick={() => wishlistOpen ? setWishlistOpen(false) : openDrawer("wishlist")}
           >
             <Heart className="h-4 w-4 sm:h-5 sm:w-5"/>
             {wishlistCount ? <Badge className="absolute -right-1 -top-1 h-4 min-w-4 rounded-full border-2 border-white bg-[#db2777] p-0 text-[10px] text-white sm:h-5 sm:min-w-5 sm:text-xs">{wishlistCount > 99 ? "99+" : wishlistCount}</Badge> : null}
           </button>
           <button
             aria-label="Profile"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white sm:h-10 sm:w-10"
-            onClick={() => setProfileOpen(true)}
+            aria-pressed={profileOpen}
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 ${
+              profileOpen
+                ? "bg-[#db2777] text-white"
+                : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"
+            }`}
+            onClick={() => profileOpen ? setProfileOpen(false) : openDrawer("profile")}
           >
             <UserRound className="h-4 w-4 sm:h-5 sm:w-5"/>
           </button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-9 w-9 rounded-full bg-[#f5f5f5] text-black hover:bg-[#f97316] hover:text-white transition-colors sm:h-10 sm:w-10"
-            onClick={() => setSearchOpen(true)}
-          >
-            <Search className="h-4 w-4 sm:h-5 sm:w-5" />
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Cart"
-            className="relative h-9 w-9 rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white sm:h-10 sm:w-10"
-            onClick={() => setCartOpen(true)}
-          >
-            <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
-            {!!totalQuantity && (
-              <Badge className="absolute -right-1 -top-1 h-4 min-w-4 rounded-full border-2 border-white bg-[#db2777] p-0 text-[10px] text-white sm:h-5 sm:min-w-5 sm:text-xs">
-                {totalQuantity > 99 ? "99+" : totalQuantity}
-              </Badge>
-            )}
-          </Button>
         </div>
 
         {/* ───────── nav links ───────── */}
@@ -442,7 +511,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
             Home
           </Link>
 
-          <div className="group/shop relative shrink-0">
+          <div className="group/shop relative shrink-0" onMouseEnter={() => setDesktopMoreOpen(false)}>
             <Link
               href="/products"
               className={`flex items-center gap-1.5 text-[15px] font-semibold transition-colors hover:text-[#f97316] ${isActive("/products") || isActive("/category") ? "text-[#f97316]" : "text-black"}`}
@@ -494,8 +563,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               aria-haspopup="menu"
               aria-expanded={desktopMoreOpen}
               aria-controls="desktop-more-menu"
-              onClick={() => setDesktopMoreOpen((open) => !open)}
-              onMouseEnter={() => setDesktopMoreOpen(true)}
+              onClick={() => desktopMoreOpen ? setDesktopMoreOpen(false) : openMoreMenu()}
               className={`flex items-center gap-1.5 text-[15px] font-semibold transition-colors hover:text-[#f97316] ${desktopMoreOpen ? "text-[#f97316]" : "text-black"}`}
             >
               More <ChevronDown aria-hidden="true" className={`h-3.5 w-3.5 transition-transform ${desktopMoreOpen ? "rotate-180" : ""}`} />
@@ -548,14 +616,14 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
         {/* ───────── search + icons ───────── */}
         <div className="hidden shrink-0 items-center justify-end gap-1 xl:flex 2xl:gap-2">
           <div className="relative w-[128px] 2xl:w-[160px]">
-            <div className="flex h-9 items-center overflow-hidden rounded-full border border-black/15 bg-white">
+            <div className={`flex h-9 items-center overflow-hidden rounded-full border bg-white ${searchOpen ? "border-[#db2777]" : "border-black/15"}`}>
               <Search className="ml-3 h-4 w-4 shrink-0 text-black/70" />
               <input
                 type="search"
                 placeholder="Search products"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => setSearchOpen(true)}
+                onFocus={openSearchPanel}
                 onBlur={() => setTimeout(() => setSearchOpen(false), 150)}
                 className="min-w-0 flex-1 bg-transparent px-2 py-2 text-xs text-black outline-none placeholder:text-black/50"
               />
@@ -613,8 +681,9 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
             variant="ghost"
             size="icon"
             aria-label="Wishlist"
-            className="relative h-8 w-8 rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white 2xl:h-9 2xl:w-9"
-            onClick={() => setWishlistOpen(true)}
+            aria-pressed={wishlistOpen}
+            className={`relative h-8 w-8 rounded-full transition-colors 2xl:h-9 2xl:w-9 ${wishlistOpen ? "bg-[#db2777] text-white" : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"}`}
+            onClick={() => wishlistOpen ? setWishlistOpen(false) : openDrawer("wishlist")}
           >
             <Heart className="h-[18px] w-[18px]" />
             {wishlistCount ? <Badge className="absolute -right-1 -top-1 h-5 min-w-5 rounded-full border-2 border-white bg-[#db2777] p-0 text-xs text-white">{wishlistCount > 99 ? "99+" : wishlistCount}</Badge> : null}
@@ -623,8 +692,9 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
             variant="ghost"
             size="icon"
             aria-label="Profile"
-            className="h-8 w-8 rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white 2xl:h-9 2xl:w-9"
-            onClick={() => setProfileOpen(true)}
+            aria-pressed={profileOpen}
+            className={`h-8 w-8 rounded-full transition-colors 2xl:h-9 2xl:w-9 ${profileOpen ? "bg-[#db2777] text-white" : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"}`}
+            onClick={() => profileOpen ? setProfileOpen(false) : openDrawer("profile")}
           >
             <UserRound className="h-[18px] w-[18px]" />
           </Button>
@@ -632,8 +702,9 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
             variant="ghost"
             size="icon"
             aria-label="Cart"
-            className="relative h-8 w-8 rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white 2xl:h-9 2xl:w-9"
-            onClick={() => setCartOpen(true)}
+            aria-pressed={cartOpen}
+            className={`relative h-8 w-8 rounded-full transition-colors 2xl:h-9 2xl:w-9 ${cartOpen ? "bg-[#db2777] text-white" : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"}`}
+            onClick={() => cartOpen ? setCartOpen(false) : openDrawer("cart")}
           >
             <ShoppingCart className="h-[18px] w-[18px]" />
             {!!totalQuantity && (
@@ -648,7 +719,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
       </nav>
 
       {searchOpen && (
-        <div className="absolute left-0 right-0 top-16 z-30 border-b border-black/10 bg-white lg:hidden">
+        <div className="absolute left-0 right-0 top-full z-30 border-b border-black/10 bg-white xl:hidden">
           <div className="px-4 py-3">
             <div className="flex items-center overflow-hidden rounded-lg border-2 border-black/10 bg-white">
               <Search className="ml-3 h-4 w-4 shrink-0 text-black/60" />
@@ -660,7 +731,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
                 onBlur={() => {
                   setTimeout(() => setSearchOpen(false), 150);
                 }}
-                onFocus={() => setSearchOpen(true)}
+                onFocus={openSearchPanel}
                 className="flex-1 bg-transparent px-3 py-2.5 text-sm text-black outline-none placeholder:text-black/50"
                 autoFocus
               />

@@ -104,13 +104,13 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             <div
               key={slide.id}
               aria-hidden={!isActive}
-              className={`absolute inset-0 flex items-center px-5 py-6 transition-all duration-700 ease-out sm:px-8 sm:py-8 md:px-12 lg:px-16 xl:px-20 max-md:items-end max-md:pb-20 ${
+              className={`absolute inset-0 flex items-center px-5 py-6 transition-all duration-700 ease-out sm:px-8 sm:py-8 md:px-12 lg:px-16 xl:px-20 ${
                 isActive
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none translate-y-5 opacity-0"
               }`}
             >
-              <div className="w-full max-w-162.5 md:-translate-y-1 max-md:rounded-3xl max-md:bg-white/72 max-md:p-5 max-md:shadow-[0_18px_50px_rgba(47,24,31,0.14)] max-md:backdrop-blur-[3px] max-[380px]:p-4">
+              <div className="w-full max-w-162.5 md:-translate-y-1">
                 {slide.eyebrow && (
                   <div className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#34343a] sm:mb-5 sm:gap-3 sm:text-[11px] sm:tracking-[0.24em]">
                     <span aria-hidden="true" className="h-px w-8 shrink-0 bg-[#c97a42] sm:w-9" />

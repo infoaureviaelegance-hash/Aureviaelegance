@@ -1,23 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Grid3X3, MessageCircle, UserRound } from "@esmate/shadcn/pkgs/lucide-react";
+import { Home, Grid3X3, MessageCircle, ShoppingCart } from "@esmate/shadcn/pkgs/lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { contact as trackContact } from "@/lib/pixel";
+import { useCart } from "@/lib/commerce";
 
 const PHONE_NUMBER = "923179517939";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const { totalQuantity } = useCart();
   const [selectedAction, setSelectedAction] = useState<"whatsapp" | null>(null);
   const [whatsappMessage, setWhatsappMessage] = useState("");
+
+  useEffect(() => {
+    const closeAction = () => setSelectedAction(null);
+    window.addEventListener("close-mobile-nav-action", closeAction);
+    return () => window.removeEventListener("close-mobile-nav-action", closeAction);
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const toggleAction = (action: "whatsapp") => {
+    window.dispatchEvent(new Event("close-storefront-overlays"));
     setSelectedAction((current) => current === action ? null : action);
   };
 
@@ -31,11 +40,13 @@ export function MobileBottomNav() {
 
   const openChatAgent = () => {
     setSelectedAction(null);
+    window.dispatchEvent(new Event("close-storefront-overlays"));
     window.dispatchEvent(new CustomEvent("open-mobile-chat"));
   };
 
-  const openProfileDrawer = () => {
-    window.dispatchEvent(new CustomEvent("open-profile-drawer"));
+  const openCartDrawer = () => {
+    setSelectedAction(null);
+    window.dispatchEvent(new CustomEvent("open-cart-drawer"));
   };
 
   const homeActive = selectedAction === null && isActive("/");
@@ -106,13 +117,19 @@ export function MobileBottomNav() {
             <Home className="h-5 w-5" />
           </Link>
 
-          {/* Profile */}
+          {/* Cart */}
           <button
-            aria-label="Profile"
-            onClick={openProfileDrawer}
+            type="button"
+            aria-label={`Cart${totalQuantity ? `, ${totalQuantity} ${totalQuantity === 1 ? "item" : "items"}` : ""}`}
+            onClick={openCartDrawer}
             className={`${navItemClass} ${inactiveItemClass}`}
           >
-            <UserRound className="h-5 w-5" />
+            <ShoppingCart className="h-5 w-5" />
+            {totalQuantity > 0 ? (
+              <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full border border-[#1a1308] bg-[#db2777] px-1 text-[9px] font-bold leading-none text-white">
+                {totalQuantity > 99 ? "99+" : totalQuantity}
+              </span>
+            ) : null}
           </button>
 
           {/* WhatsApp */}
