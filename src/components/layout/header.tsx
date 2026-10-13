@@ -257,8 +257,8 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
       </div>
 
       {/* ───────── main nav ───────── */}
-      <nav className="flex min-h-14 w-full items-center gap-2 px-2 sm:min-h-16 sm:px-4 lg:min-h-20 lg:gap-3 lg:px-5 xl:gap-4 xl:px-6">
-        <div className="xl:hidden">
+      <nav className="flex min-h-14 w-full items-center gap-1 px-2 sm:min-h-16 sm:px-4 lg:min-h-20 lg:gap-3 lg:px-5 xl:gap-4 xl:px-6">
+        <div className="md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuChange}>
             <SheetTrigger asChild>
               <Button
@@ -441,7 +441,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
 
         {/* ───────── logo — kept tight to the left edge ───────── */}
         <Link href="/" className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-1.5 sm:gap-2">
-          <div className="relative h-9 w-9 sm:h-11 sm:w-11 lg:h-15 lg:w-15">
+          <div className="relative h-8 w-8 sm:h-11 sm:w-11 lg:h-15 lg:w-15">
             <Image
               src="/logo/icon.png"
               alt=""
@@ -450,7 +450,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               priority
             />
           </div>
-          <div className="relative h-9 w-[92px] min-[360px]:w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] lg:h-16 lg:w-[210px]">
+          <div className="relative h-8 w-[92px] min-[360px]:w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] md:h-10 md:w-[126px] lg:h-16 lg:w-[165px] xl:w-[210px]">
             <Image
               src="/logo/logotext.png"
               alt="Aurevia Elegance"
@@ -461,7 +461,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
           </div>
         </Link>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 xl:hidden">
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 md:hidden">
           <button
             type="button"
             aria-label="Search"
@@ -503,10 +503,10 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
         </div>
 
         {/* ───────── nav links ───────── */}
-        <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 xl:flex 2xl:gap-5">
+        <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 md:flex lg:gap-3 xl:gap-4 2xl:gap-5">
           <Link
             href="/"
-            className={`shrink-0 text-[15px] font-semibold transition-colors hover:text-[#f97316] ${pathname === "/" ? "text-[#f97316]" : "text-black"}`}
+            className={`shrink-0 text-xs font-semibold transition-colors hover:text-[#f97316] lg:text-sm xl:text-[15px] ${pathname === "/" ? "text-[#f97316]" : "text-black"}`}
           >
             Home
           </Link>
@@ -514,7 +514,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
           <div className="group/shop relative shrink-0" onMouseEnter={() => setDesktopMoreOpen(false)}>
             <Link
               href="/products"
-              className={`flex items-center gap-1.5 text-[15px] font-semibold transition-colors hover:text-[#f97316] ${isActive("/products") || isActive("/category") ? "text-[#f97316]" : "text-black"}`}
+              className={`flex items-center gap-1 text-xs font-semibold transition-colors hover:text-[#f97316] lg:text-sm xl:gap-1.5 xl:text-[15px] ${isActive("/products") || isActive("/category") ? "text-[#f97316]" : "text-black"}`}
             >
               Shop
               <ChevronDown aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover/shop:rotate-180 group-focus-within/shop:rotate-180" />
@@ -551,7 +551,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               key={item.id}
               href={`/category/${item.slug}`}
               title={item.name}
-              className={`max-w-[82px] truncate text-sm font-semibold transition-colors hover:text-[#f97316] 2xl:max-w-[110px] 2xl:text-[15px] ${isActive(`/category/${item.slug}`) ? "text-[#f97316]" : "text-black"}`}
+              className={`hidden max-w-[82px] truncate text-sm font-semibold transition-colors hover:text-[#f97316] xl:block 2xl:max-w-[110px] 2xl:text-[15px] ${isActive(`/category/${item.slug}`) ? "text-[#f97316]" : "text-black"}`}
             >
               {item.name}
             </Link>
@@ -564,7 +564,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               aria-expanded={desktopMoreOpen}
               aria-controls="desktop-more-menu"
               onClick={() => desktopMoreOpen ? setDesktopMoreOpen(false) : openMoreMenu()}
-              className={`flex items-center gap-1.5 text-[15px] font-semibold transition-colors hover:text-[#f97316] ${desktopMoreOpen ? "text-[#f97316]" : "text-black"}`}
+              className={`flex items-center gap-1 text-xs font-semibold transition-colors hover:text-[#f97316] lg:gap-1.5 lg:text-sm xl:text-[15px] ${desktopMoreOpen ? "text-[#f97316]" : "text-black"}`}
             >
               More <ChevronDown aria-hidden="true" className={`h-3.5 w-3.5 transition-transform ${desktopMoreOpen ? "rotate-180" : ""}`} />
             </button>
@@ -614,8 +614,8 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
         </div>
 
         {/* ───────── search + icons ───────── */}
-        <div className="hidden shrink-0 items-center justify-end gap-1 xl:flex 2xl:gap-2">
-          <div className="relative w-[128px] 2xl:w-[160px]">
+        <div className="hidden shrink-0 items-center justify-end gap-1 md:flex lg:gap-1.5 2xl:gap-2">
+          <div className="relative hidden w-[128px] xl:block 2xl:w-[160px]">
             <div className={`flex h-9 items-center overflow-hidden rounded-full border bg-white ${searchOpen ? "border-[#db2777]" : "border-black/15"}`}>
               <Search className="ml-3 h-4 w-4 shrink-0 text-black/70" />
               <input
@@ -677,6 +677,16 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
             )}
           </div>
 
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Search"
+            aria-pressed={searchOpen}
+            className={`h-8 w-8 rounded-full transition-colors xl:hidden ${searchOpen ? "bg-[#db2777] text-white" : "bg-[#f5f5f5] text-black hover:bg-[#db2777] hover:text-white"}`}
+            onClick={toggleSearchPanel}
+          >
+            <Search className="h-[18px] w-[18px]" />
+          </Button>
           <Button
             variant="ghost"
             size="icon"
