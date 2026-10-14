@@ -189,8 +189,8 @@
 }
 
 .category-marquee-track {
-  --category-loop-gap: 1.5rem;
-  --category-loop-offset: 0.75rem;
+  --category-loop-gap: 1rem;
+  --category-loop-offset: 0.5rem;
   display: flex;
   gap: var(--category-loop-gap);
   width: max-content;

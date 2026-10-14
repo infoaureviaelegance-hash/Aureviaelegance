@@ -87,7 +87,7 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
   };
 
   return (
-    <section className="storefront-categories relative z-20 mt-6 bg-white lg:mx-auto lg:max-w-7xl sm:mt-9">
+    <section className="storefront-categories relative z-20 mt-4 bg-white sm:mt-9 lg:mx-auto lg:max-w-7xl">
 
       <div
         ref={categoriesViewportRef}
@@ -112,19 +112,19 @@ export function CategoriesSection({ categories }: { categories: Category[] }) {
                   key={`${copy}-${category.id}`}
                   href={`/category/${encodeURIComponent(category.slug)}`}
                   tabIndex={copy === 1 ? -1 : undefined}
-                  className="category-card group relative h-[12rem] w-[9rem] flex-shrink-0 overflow-hidden rounded-2xl bg-transparent text-white sm:h-[14rem] sm:w-[10.5rem] md:h-[16rem] md:w-[12rem]"
+                  className="category-card group relative h-[10.5rem] w-32 flex-shrink-0 overflow-hidden rounded-xl bg-transparent text-white sm:h-[14rem] sm:w-[10.5rem] sm:rounded-2xl md:h-[16rem] md:w-[12rem]"
                 >
                   <div className="absolute inset-0">
                     <Image
                       src={category.image || FALLBACK_IMAGE}
                       alt={category.name}
                       fill
-                      sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
+                      sizes="(max-width: 640px) 128px, (max-width: 768px) 168px, 192px"
                       className="object-contain transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/65" />
                   </div>
-                  <span className="absolute bottom-3 left-3 right-10 line-clamp-2 text-left text-xs font-semibold uppercase leading-tight text-white sm:bottom-4 sm:left-4 sm:right-12 sm:text-sm">{category.name}</span>
+                  <span className="absolute right-8 bottom-2.5 left-2.5 line-clamp-2 text-left text-[11px] font-semibold uppercase leading-tight text-white sm:right-12 sm:bottom-4 sm:left-4 sm:text-sm">{category.name}</span>
                   <span className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#d84967] text-base text-white sm:bottom-4 sm:right-4 sm:h-9 sm:w-9 sm:text-lg" aria-hidden="true">→</span>
                 </Link>
               ))}

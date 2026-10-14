@@ -52,7 +52,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     <section
       aria-label="Featured collections"
       aria-roledescription="carousel"
-      className="relative aspect-video h-auto min-h-0 w-full overflow-hidden bg-[#fffdf8] md:aspect-auto md:h-[calc(100svh-4rem)] md:min-h-[30rem] lg:h-[calc(100svh-7.5rem)]"
+      className="relative h-[52vw] min-h-[10.5rem] max-h-56 w-full overflow-hidden bg-[#fffdf8] md:h-[calc(100svh-4rem)] md:max-h-none md:min-h-[30rem] lg:h-[calc(100svh-7.5rem)]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -71,7 +71,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           <div
             key={slide.id}
             aria-hidden={!isActive}
-            className={`absolute inset-x-0 top-0 aspect-video overflow-hidden transition-opacity duration-1000 ease-in-out md:inset-0 md:aspect-auto ${
+            className={`absolute inset-0 overflow-hidden transition-opacity duration-1000 ease-in-out ${
               isActive ? "z-0 opacity-100" : "pointer-events-none opacity-0"
             }`}
           >
@@ -104,7 +104,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             <div
               key={slide.id}
               aria-hidden={!isActive}
-              className={`absolute inset-x-0 top-0 flex aspect-video items-center px-5 py-0 transition-all duration-700 ease-out sm:px-8 md:inset-0 md:aspect-auto md:px-12 md:py-8 lg:px-16 xl:px-20 ${
+              className={`absolute inset-0 flex items-center px-5 py-0 transition-all duration-700 ease-out sm:px-8 md:px-12 md:py-8 lg:px-16 xl:px-20 ${
                 isActive
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none translate-y-5 opacity-0"
@@ -175,7 +175,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             type="button"
             onClick={prev}
             aria-label="Previous slide"
-            className="group absolute top-[calc(56.25vw-2.5rem)] left-3 z-30 flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-white/85 text-[#a83f55] transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#d34c65]/25 md:top-1/2 md:left-6 md:h-10 md:w-10 md:-translate-y-1/2"
+            className="group absolute top-1/2 left-2 z-30 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/85 text-[#a83f55] shadow-sm transition-[background-color,transform] duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#d34c65]/25 md:left-6 md:h-10 md:w-10"
           >
             <ChevronLeft className="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-0.5" />
           </button>
@@ -184,7 +184,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
             type="button"
             onClick={next}
             aria-label="Next slide"
-            className="group absolute top-[calc(56.25vw-2.5rem)] right-3 z-30 flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-white/85 text-[#a83f55] transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#d34c65]/25 md:top-1/2 md:right-6 md:h-10 md:w-10 md:-translate-y-1/2"
+            className="group absolute top-1/2 right-2 z-30 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-white/85 text-[#a83f55] shadow-sm transition-[background-color,transform] duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#d34c65]/25 md:right-6 md:h-10 md:w-10"
           >
             <ChevronRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </button>
