@@ -13,8 +13,11 @@ export function MobileBottomNav() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const openCartDrawer = () => {
+    window.dispatchEvent(new CustomEvent("toggle-cart-drawer"));
+  };
+
+  const closeOverlays = () => {
     window.dispatchEvent(new Event("close-storefront-overlays"));
-    window.dispatchEvent(new CustomEvent("open-cart-drawer"));
   };
 
   const homeActive = isActive("/");
@@ -41,6 +44,7 @@ export function MobileBottomNav() {
             href="/"
             aria-label="Home"
             aria-current={homeActive ? "page" : undefined}
+            onClick={closeOverlays}
             className={`${navItemClass} ${homeActive ? activeItemClass : inactiveItemClass}`}
           >
             <Home className={iconClass} />
@@ -52,6 +56,7 @@ export function MobileBottomNav() {
             href="/products"
             aria-label="Products"
             aria-current={productsActive ? "page" : undefined}
+            onClick={closeOverlays}
             className={`${navItemClass} ${productsActive ? activeItemClass : inactiveItemClass}`}
           >
             <Grid3X3 className={iconClass} />
@@ -78,7 +83,7 @@ export function MobileBottomNav() {
             href="/wishlist"
             aria-label="Wishlist"
             aria-current={isActive("/wishlist") ? "page" : undefined}
-            onClick={() => window.dispatchEvent(new Event("close-storefront-overlays"))}
+            onClick={closeOverlays}
             className={`${navItemClass} ${isActive("/wishlist") ? activeItemClass : inactiveItemClass}`}
           >
             <Heart className={iconClass} />
@@ -90,7 +95,7 @@ export function MobileBottomNav() {
             href="/profile"
             aria-label="Profile"
             aria-current={isActive("/profile") ? "page" : undefined}
-            onClick={() => window.dispatchEvent(new Event("close-storefront-overlays"))}
+            onClick={closeOverlays}
             className={`${navItemClass} ${isActive("/profile") ? activeItemClass : inactiveItemClass}`}
           >
             <UserRound className={iconClass} />

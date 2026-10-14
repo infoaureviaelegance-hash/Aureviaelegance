@@ -34,9 +34,12 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/15"
-            onClick={() => onOpenChange(false)}
+            onPointerDown={() => onOpenChange(false)}
           />
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shopping cart"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}

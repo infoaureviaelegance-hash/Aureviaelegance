@@ -143,6 +143,13 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
 
   useEffect(() => {
     const handleOpenCart = () => openDrawer("cart");
+    const handleToggleCart = () => {
+      if (cartOpen) {
+        setCartOpen(false);
+      } else {
+        openDrawer("cart");
+      }
+    };
     const handleOpenWishlist = () => openDrawer("wishlist");
     const handleOpenProfile = () => openDrawer("profile");
     const handleCloseOverlays = () => {
@@ -156,17 +163,29 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
     };
 
     window.addEventListener("open-cart-drawer", handleOpenCart);
+    window.addEventListener("toggle-cart-drawer", handleToggleCart);
     window.addEventListener("open-wishlist-drawer", handleOpenWishlist);
     window.addEventListener("open-profile-drawer", handleOpenProfile);
     window.addEventListener("close-storefront-overlays", handleCloseOverlays);
 
     return () => {
       window.removeEventListener("open-cart-drawer", handleOpenCart);
+      window.removeEventListener("toggle-cart-drawer", handleToggleCart);
       window.removeEventListener("open-wishlist-drawer", handleOpenWishlist);
       window.removeEventListener("open-profile-drawer", handleOpenProfile);
       window.removeEventListener("close-storefront-overlays", handleCloseOverlays);
     };
-  }, [openDrawer]);
+  }, [cartOpen, openDrawer]);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setMobileLegalOpen(false);
+    setDesktopMoreOpen(false);
+    setSearchOpen(false);
+    setCartOpen(false);
+    setWishlistOpen(false);
+    setProfileOpen(false);
+  }, [pathname]);
 
   const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
   const legalPageActive = legalMenuItems.some((item) => pathname === item.href);
