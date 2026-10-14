@@ -1,11 +1,13 @@
-const CACHE_NAME = 'auerviamaison-v3';
+const CACHE_NAME = 'aurevia-elegance-v4';
 const OFFLINE_URL = '/offline.html';
 
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
   '/offline.html',
-  '/icons/icon.svg',
+  '/logo/icon.png',
+  '/logo/icon-192x192.png',
+  '/logo/icon-512x512.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -66,7 +68,7 @@ self.addEventListener('fetch', (event) => {
         return networkResponse;
       }).catch(() => {
         if (event.request.destination === 'image') {
-          return caches.match('/icons/icon.svg');
+          return caches.match('/logo/icon-192x192.png');
         }
       });
     })

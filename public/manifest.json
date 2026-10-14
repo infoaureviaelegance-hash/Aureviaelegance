@@ -2,6 +2,7 @@
   "name": "Aurevia Elegance",
   "short_name": "Aurevia Elegance",
   "description": "Premium beauty, skincare, makeup, fragrance, watches, and lifestyle essentials for modern living.",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fffaf5",
@@ -10,10 +11,16 @@
   "scope": "/",
   "icons": [
     {
-      "src": "/icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "src": "/logo/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "categories": ["shopping", "beauty", "fashion"],
@@ -23,13 +30,8 @@
       "name": "Shop Products",
       "short_name": "Shop",
       "description": "Browse our products",
-      "url": "/products"
-    },
-    {
-      "name": "My Cart",
-      "short_name": "Cart",
-      "description": "View your cart",
-      "url": "/cart"
+      "url": "/products",
+      "icons": [{ "src": "/logo/icon-192x192.png", "sizes": "192x192" }]
     }
   ]
 }

@@ -26,11 +26,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo/icon.png", type: "image/png" },
+      { url: "/logo/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/logo/icon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: [{ url: "/logo/icon.png", type: "image/png" }],
+    shortcut: [{ url: "/logo/icon-192x192.png", sizes: "192x192", type: "image/png" }],
     apple: [
-      { url: "/logo/icon.png", type: "image/png" },
+      { url: "/logo/icon.png", sizes: "1254x1254", type: "image/png" },
     ],
   },
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? {
