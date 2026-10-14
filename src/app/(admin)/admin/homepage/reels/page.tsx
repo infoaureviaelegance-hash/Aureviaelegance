@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Plus, Trash2 } from "@esmate/shadcn/pkgs/lucide-react";
+import { AdminImageUpload } from "@/components/admin/image-upload";
 import { buildVideoEmbedUrl, detectVideoPlatform } from "@/lib/video-utils";
 import type { AdminVideo } from "../../videos/_components/types";
 
@@ -12,6 +14,7 @@ const inputClass =
 type ReelDraft = {
   title: string;
   videoUrl: string;
+  thumbnail: string;
   displayOrder: number;
   active: boolean;
 };
@@ -19,6 +22,7 @@ type ReelDraft = {
 const emptyDraft = (): ReelDraft => ({
   title: "",
   videoUrl: "",
+  thumbnail: "",
   displayOrder: 0,
   active: true,
 });
@@ -58,6 +62,11 @@ export default function HomepageReelsAdminPage() {
       setSaving(false);
       return;
     }
+    if (!draft.thumbnail) {
+      setError("Upload a reel thumbnail so visitors see the video cover before playback.");
+      setSaving(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/admin/videos", {
@@ -66,6 +75,7 @@ export default function HomepageReelsAdminPage() {
         body: JSON.stringify({
           title: draft.title.trim() || "Homepage reel",
           videoUrl: draft.videoUrl.trim(),
+          thumbnail: draft.thumbnail || null,
           platform: "TIKTOK",
           placement: "HOMEPAGE_REELS",
           format: "VERTICAL",
@@ -157,6 +167,18 @@ export default function HomepageReelsAdminPage() {
                   required
                 />
               </label>
+              <div className="rounded-xl border border-gray-100 p-3">
+                <AdminImageUpload
+                  label="Reel thumbnail"
+                  folder="auerviamaison/videos"
+                  usedIn="homepage reel thumbnail"
+                  value={draft.thumbnail}
+                  onChange={(thumbnail) => setDraft((current) => ({ ...current, thumbnail }))}
+                />
+                <p className="mt-2 text-xs text-gray-500">
+                  Upload a cover image to show before visitors click play. TikTok may not provide thumbnails for every video.
+                </p>
+              </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block space-y-1.5">
                   <span className="text-sm font-semibold text-gray-800">Display order</span>
@@ -228,6 +250,13 @@ export default function HomepageReelsAdminPage() {
           <ul className="divide-y divide-gray-100">
             {reels.map((reel) => (
               <li key={reel.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
+                <div className="relative flex h-16 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md bg-gray-100 text-center text-[9px] text-gray-500">
+                  {reel.thumbnail ? (
+                    <Image src={reel.thumbnail} alt="" fill sizes="48px" className="object-cover" />
+                  ) : (
+                    <span>No cover</span>
+                  )}
+                </div>
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold text-[#0a0a0a]">{reel.title}</p>
                   <p className="truncate text-xs text-gray-500">{reel.videoUrl}</p>
