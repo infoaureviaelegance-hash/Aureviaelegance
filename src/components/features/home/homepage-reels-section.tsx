@@ -1,30 +1,104 @@
 "use client";
 
-import { useRef, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Play } from "@esmate/shadcn/pkgs/lucide-react";
 import type { PublicVideo } from "@/lib/video-utils";
 
-function ReelLink({
+function reelPlayerUrl(embedUrl: string) {
+  const url = new URL(embedUrl);
+  url.searchParams.set("autoplay", "1");
+  url.searchParams.set("controls", "1");
+  url.searchParams.set("description", "0");
+  url.searchParams.set("music_info", "0");
+  url.searchParams.set("rel", "0");
+  url.searchParams.set("loop", "1");
+  return url.toString();
+}
+
+function ReelPlayer({
   video,
   onClick,
 }: {
   video: PublicVideo;
-  onClick: (event: MouseEvent<HTMLAnchorElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }) {
+  const [playing, setPlaying] = useState(false);
+  const [thumbnail, setThumbnail] = useState(video.thumbnail);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (thumbnail || playing || !cardRef.current) return;
+
+    const controller = new AbortController();
+    const loadThumbnail = () => {
+      void fetch(`/api/videos/tiktok-thumbnail?url=${encodeURIComponent(video.videoUrl)}`, {
+        signal: controller.signal,
+      })
+        .then(async (response) => {
+          if (!response.ok) throw new Error(`Unable to load reel thumbnail (${response.status})`);
+          const data: unknown = await response.json();
+          if (!data || typeof data !== "object" || !("thumbnailUrl" in data) || typeof data.thumbnailUrl !== "string") {
+            throw new Error("TikTok returned an invalid thumbnail response");
+          }
+          setThumbnail(data.thumbnailUrl);
+        })
+        .catch((error: unknown) => {
+          if (!controller.signal.aborted) console.error("Unable to load TikTok reel thumbnail", error);
+        });
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      loadThumbnail();
+      return () => controller.abort();
+    }
+
+    const card = cardRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        loadThumbnail();
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(card);
+
+    return () => {
+      observer.disconnect();
+      controller.abort();
+    };
+  }, [playing, thumbnail, video.videoUrl]);
+
   return (
-    <a
-      href={video.videoUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Play TikTok video in a new tab"
-      className="group flex aspect-[9/16] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-[#EA580C]/15 bg-black text-white shadow-sm transition hover:border-[#EA580C]/50 hover:bg-gray-950"
-      onClick={onClick}
-    >
-      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black transition group-hover:scale-105">
-        <Play aria-hidden="true" className="ml-1 h-6 w-6 fill-current" />
-      </span>
-      <span className="text-xs font-semibold">Play video</span>
-    </a>
+    <div ref={cardRef} className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-[#EA580C]/15 bg-black shadow-sm">
+      {playing && video.embedUrl ? (
+        <iframe
+          src={reelPlayerUrl(video.embedUrl)}
+          title="TikTok video"
+          className="h-full w-full border-0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <button
+          type="button"
+          aria-label="Play TikTok video"
+          className="group relative flex h-full w-full items-center justify-center bg-gray-950 text-white"
+          onClick={(event) => {
+            onClick(event);
+            if (!event.defaultPrevented) setPlaying(true);
+          }}
+        >
+          {thumbnail ? (
+            <Image src={thumbnail} alt="" fill unoptimized sizes="220px" className="object-cover" />
+          ) : null}
+          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white text-black shadow-md transition group-hover:scale-105">
+            <Play aria-hidden="true" className="ml-1 h-6 w-6 fill-current" />
+          </span>
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -32,7 +106,7 @@ export function HomepageReelsSection({ reels }: { reels: PublicVideo[] }) {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false, moved: false });
-  const activeReels = reels.filter((reel) => reel.active && reel.videoUrl);
+  const activeReels = reels.filter((reel) => reel.active && reel.videoUrl && reel.embedUrl);
   if (!activeReels.length) return null;
 
   function scroll(direction: -1 | 1) {
@@ -83,7 +157,7 @@ export function HomepageReelsSection({ reels }: { reels: PublicVideo[] }) {
                 data-reel-card
                 className="w-[168px] shrink-0 snap-start sm:w-[200px] md:w-[220px]"
               >
-                <ReelLink
+                <ReelPlayer
                   video={reel}
                   onClick={(event) => {
                     if (dragState.current.moved) {
