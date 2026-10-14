@@ -26,16 +26,16 @@ export function CustomerVoicesSection({ reviews }: { reviews: HomepageReview[] }
   };
 
   return (
-    <section id="customer-reviews" aria-labelledby="customer-voices-heading" className="scroll-mt-24 bg-[#f5f0eb] px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-      <div className="mx-auto max-w-[1500px]">
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
-          <span className="inline-block rounded-full border border-[#f0be8d] bg-[#f7e7d8] px-5 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#d9873b] sm:text-[11px]">
+    <section id="customer-reviews" aria-labelledby="customer-voices-heading" className="scroll-mt-24 overflow-hidden bg-[#f4f5f7] px-4 py-12 sm:px-6 sm:py-16 lg:py-13">
+      <div className="mx-auto max-w-[1512px]">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <span className="inline-block rounded-full bg-[#fff0dc] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wide text-[#f05a00] sm:text-xs">
             Customer Voices
           </span>
-          <h2 id="customer-voices-heading" className="mt-5 text-[clamp(3rem,5vw,7rem)] font-black leading-[0.95] tracking-[-0.07em] text-[#1b1716]">
+          <h2 id="customer-voices-heading" className="mt-3 font-serif text-4xl font-extrabold leading-tight tracking-[-0.025em] text-[#071a32] sm:text-5xl">
             What Our Customers Say
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#5d514d] sm:text-[1.2rem]">
+          <p className="mx-auto mt-2 max-w-2xl text-base leading-7 text-[#30435a] sm:text-lg">
             Trusted by buyers who value performance, reliability, and support.
           </p>
         </div>
@@ -43,7 +43,7 @@ export function CustomerVoicesSection({ reviews }: { reviews: HomepageReview[] }
         <div className="relative">
           <button
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e7ddd1] bg-white/90 text-[#221b18] shadow-[0_10px_24px_rgba(40,28,22,0.08)] transition-all hover:scale-105 hover:bg-white disabled:opacity-30 disabled:hover:scale-100"
+            className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-x-1/3 -translate-y-1/2 items-center justify-center rounded-full border border-[#eee7dc] bg-[#fffaf2] text-[#071a32] shadow-[0_2px_8px_rgba(15,23,42,0.12)] transition-all hover:scale-105 hover:bg-white disabled:opacity-30 disabled:hover:scale-100"
             disabled={currentIndex === 0}
             aria-label="Previous reviews"
           >
@@ -52,7 +52,7 @@ export function CustomerVoicesSection({ reviews }: { reviews: HomepageReview[] }
 
           <div
             ref={viewportRef}
-            className="scrollbar-hide flex cursor-grab snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-4 pb-2 pt-1 active:cursor-grabbing sm:px-8 lg:px-12"
+            className="scrollbar-hide flex cursor-grab snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-1 active:cursor-grabbing"
             onPointerDown={(event) => {
               const viewport = viewportRef.current;
               if (!viewport) return;
@@ -72,23 +72,23 @@ export function CustomerVoicesSection({ reviews }: { reviews: HomepageReview[] }
             onPointerCancel={() => { drag.current.active = false; }}
           >
             {reviews.map((review) => (
-              <article key={review.id} data-review-card className="relative flex min-h-[240px] w-[90vw] max-w-[420px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.65rem] border border-[#e8dfd5] bg-[#efe9e2] px-5 py-5 shadow-[0_8px_30px_rgba(73,47,38,0.06)] sm:min-h-[260px] sm:w-[380px] sm:px-6 sm:py-6 lg:w-[390px]">
+              <article key={review.id} data-review-card className="relative flex min-h-[190px] w-[86vw] shrink-0 snap-start flex-col rounded-2xl border border-[#efd8ab] bg-[#f7f4ec] px-6 py-7 sm:w-[calc((100%_-_1.5rem)/2)] lg:w-[calc((100%_-_3rem)/3)]">
                 <div className="relative flex gap-1" aria-label={`${review.rating} out of 5 stars`}>
                   {Array.from({ length: 5 }, (_, index) => (
                     <Star
                       key={index}
                       aria-hidden="true"
-                      className={`h-5 w-5 ${index < review.rating ? "fill-[#d8a33a] text-[#d8a33a]" : "fill-[#d7d0c7] text-[#d7d0c7]"}`}
+                      className={`h-4 w-4 ${index < review.rating ? "fill-[#dca313] text-[#dca313]" : "fill-[#d7d0c7] text-[#d7d0c7]"}`}
                     />
                   ))}
                 </div>
 
-                <p className="relative mt-6 line-clamp-4 text-base leading-7 tracking-[-0.02em] text-[#211c1a] sm:text-[1.08rem]">
+                <p className="relative mt-4 line-clamp-3 text-sm leading-6 text-[#5d625f]">
                   &ldquo;{review.content}&rdquo;
                 </p>
 
-                <div className="mt-auto pt-6">
-                  <p className="text-[1.05rem] font-semibold tracking-[-0.03em] text-[#221b18]">{review.authorName}</p>
+                <div className="mt-auto pt-4">
+                  <p className="text-base font-semibold text-[#171717]">{review.authorName}</p>
                 </div>
               </article>
             ))}
@@ -96,7 +96,7 @@ export function CustomerVoicesSection({ reviews }: { reviews: HomepageReview[] }
 
           <button
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 z-10 flex h-11 w-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e7ddd1] bg-white/90 text-[#221b18] shadow-[0_10px_24px_rgba(40,28,22,0.08)] transition-all hover:scale-105 hover:bg-white disabled:opacity-30 disabled:hover:scale-100"
+            className="absolute right-0 top-1/2 z-10 flex h-10 w-10 translate-x-1/3 -translate-y-1/2 items-center justify-center rounded-full border border-[#eee7dc] bg-[#fffaf2] text-[#071a32] shadow-[0_2px_8px_rgba(15,23,42,0.12)] transition-all hover:scale-105 hover:bg-white disabled:opacity-30 disabled:hover:scale-100"
             disabled={currentIndex >= reviews.length - 1}
             aria-label="Next reviews"
           >

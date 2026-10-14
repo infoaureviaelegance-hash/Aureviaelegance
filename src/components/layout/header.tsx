@@ -12,6 +12,7 @@ import {
 import {
   ChevronDown,
   ChevronRight,
+  Bell,
   Download,
   Menu,
   Phone,
@@ -251,10 +252,14 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
           </div>
         </div>
       </div>
+      <div className="flex h-7 items-center justify-center bg-black px-2 text-[10px] font-medium text-white lg:hidden sm:h-8 sm:text-xs">
+        <Truck aria-hidden="true" className="mr-1.5 h-3 w-3 shrink-0 text-[#f97316] sm:mr-2 sm:h-3.5 sm:w-3.5" />
+        <span className="truncate">{topBarLeft[0].text}</span>
+      </div>
 
       {/* ───────── main nav ───────── */}
-      <nav className="flex min-h-14 w-full items-center gap-1 px-2 sm:min-h-16 sm:px-4 lg:min-h-20 lg:gap-3 lg:px-5 xl:gap-4 xl:px-6">
-        <div className="md:hidden">
+      <nav className="flex min-h-16 w-full items-center gap-1 px-1 sm:min-h-[4.5rem] sm:px-2 lg:min-h-20 lg:gap-3 lg:px-5 xl:gap-4 xl:px-6">
+        <div className="order-3 md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuChange}>
             <SheetTrigger asChild>
               <Button
@@ -436,7 +441,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
         </div>
 
         {/* ───────── logo — kept tight to the left edge ───────── */}
-        <Link href="/" className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-1.5 sm:gap-2">
+        <Link href="/" className="order-1 flex min-w-0 shrink-0 items-center gap-1 sm:gap-1.5 sm:gap-2 md:order-none">
           <div className="relative h-8 w-8 sm:h-11 sm:w-11 lg:h-15 lg:w-15">
             <Image
               src="/logo/icon.png"
@@ -457,7 +462,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
           </div>
         </Link>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 md:hidden">
+        <div className="order-2 ml-auto flex shrink-0 items-center gap-1 sm:gap-2 md:hidden">
           <button
             type="button"
             aria-label="Search"
@@ -472,29 +477,12 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
             <Search className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
           <button
-            aria-label="Wishlist"
-            aria-pressed={wishlistOpen}
-            className={`relative flex h-9 w-9 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 ${
-              wishlistOpen
-                ? "bg-[#db2777] text-white"
-                : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"
-            }`}
-            onClick={() => wishlistOpen ? setWishlistOpen(false) : openDrawer("wishlist")}
+            type="button"
+            aria-label="Notifications"
+            title="Notifications"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white sm:h-10 sm:w-10"
           >
-            <Heart className="h-4 w-4 sm:h-5 sm:w-5"/>
-            {wishlistCount ? <Badge className="absolute -right-1 -top-1 h-4 min-w-4 rounded-full border-2 border-white bg-[#db2777] p-0 text-[10px] text-white sm:h-5 sm:min-w-5 sm:text-xs">{wishlistCount > 99 ? "99+" : wishlistCount}</Badge> : null}
-          </button>
-          <button
-            aria-label="Profile"
-            aria-pressed={profileOpen}
-            className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors sm:h-10 sm:w-10 ${
-              profileOpen
-                ? "bg-[#db2777] text-white"
-                : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"
-            }`}
-            onClick={() => profileOpen ? setProfileOpen(false) : openDrawer("profile")}
-          >
-            <UserRound className="h-4 w-4 sm:h-5 sm:w-5"/>
+            <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
@@ -697,16 +685,6 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Profile"
-            aria-pressed={profileOpen}
-            className={`h-8 w-8 rounded-full transition-colors 2xl:h-9 2xl:w-9 ${profileOpen ? "bg-[#db2777] text-white" : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"}`}
-            onClick={() => profileOpen ? setProfileOpen(false) : openDrawer("profile")}
-          >
-            <UserRound className="h-[18px] w-[18px]" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
             aria-label="Cart"
             aria-pressed={cartOpen}
             className={`relative h-8 w-8 rounded-full transition-colors 2xl:h-9 2xl:w-9 ${cartOpen ? "bg-[#db2777] text-white" : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"}`}
@@ -719,8 +697,25 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               </Badge>
             )}
           </Button>
-
-
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Notifications"
+            title="Notifications"
+            className="h-8 w-8 rounded-full bg-[#fdf2f8] text-[#db2777] transition-colors hover:bg-[#db2777] hover:text-white 2xl:h-9 2xl:w-9"
+          >
+            <Bell className="h-[18px] w-[18px]" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Profile"
+            aria-pressed={profileOpen}
+            className={`h-8 w-8 rounded-full transition-colors 2xl:h-9 2xl:w-9 ${profileOpen ? "bg-[#db2777] text-white" : "bg-[#fdf2f8] text-[#db2777] hover:bg-[#db2777] hover:text-white"}`}
+            onClick={() => profileOpen ? setProfileOpen(false) : openDrawer("profile")}
+          >
+            <UserRound className="h-[18px] w-[18px]" />
+          </Button>
         </div>
       </nav>
 
