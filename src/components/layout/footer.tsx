@@ -54,8 +54,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-9 border-t border-[#dfd3cb] pt-5 text-center text-xs text-[#786a62] lg:mt-12">
-          &copy; {new Date().getFullYear()} Aurevia Elegance. All rights reserved.
+        <div className="mt-9 flex flex-col items-center justify-between gap-3 border-t border-[#dfd3cb] pt-5 text-center text-xs text-[#786a62] sm:flex-row sm:text-left lg:mt-12">
+          <span>&copy; {new Date().getFullYear()} Aurevia Elegance. All rights reserved.</span>
+          <Link
+            href="/admin/login"
+            className="rounded-full border border-[#cdbdb3] bg-white px-4 py-2 font-semibold text-[#5f4a40] transition hover:border-[#EA580C] hover:text-[#EA580C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EA580C] focus-visible:ring-offset-2"
+          >
+            Admin
+          </Link>
         </div>
       </div>
     </footer>

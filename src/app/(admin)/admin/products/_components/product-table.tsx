@@ -57,12 +57,23 @@ function ProductRow({ product, onDelete }: { product: Product; onDelete: (id: st
       </td>
       <td className="px-2 py-2 text-xs sm:text-sm md:px-4 md:py-3">{product.inventory}</td>
       <td className="px-2 py-2 text-right md:px-4 md:py-3">
-        <div className="flex items-center justify-end gap-1">
-          <Link href={`/admin/products/${product.id}/edit`} className="p-1 text-gray-400 hover:text-[#C6A24A]">
+        <div className="flex items-center justify-end gap-2">
+          <Link
+            href={`/admin/products/${product.id}/edit`}
+            aria-label={`Edit ${product.title}`}
+            className="inline-flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-700 transition hover:border-amber-300 hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+          >
             <FiEdit className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span>Edit</span>
           </Link>
-          <button onClick={() => onDelete(product.id)} className="p-1 text-gray-400 hover:text-red-500">
+          <button
+            type="button"
+            onClick={() => onDelete(product.id)}
+            aria-label={`Delete ${product.title}`}
+            className="inline-flex items-center gap-1 rounded-md border border-red-200 bg-red-50 px-2 py-1 text-xs font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+          >
             <FiTrash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span>Delete</span>
           </button>
         </div>
       </td>
