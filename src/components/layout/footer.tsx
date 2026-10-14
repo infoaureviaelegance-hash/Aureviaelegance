@@ -24,13 +24,13 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#f8f3ef] text-[#352821]">
+    <footer className="min-w-0 max-w-full overflow-x-clip bg-[#f8f3ef] text-[#352821]">
       <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-11 lg:px-8 lg:py-14">
         <div className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-[1.35fr_0.75fr_0.9fr_1.1fr] lg:gap-10">
           <div className="col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2" aria-label="Aurevia Elegance home">
+            <Link href="/" className="inline-flex max-w-full items-center gap-2" aria-label="Aurevia Elegance home">
               <span className="relative h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16"><Image src="/logo/icon.png" alt="" fill sizes="64px" className="object-contain" /></span>
-              <span className="relative h-12 w-[166px] sm:h-14 sm:w-[190px] lg:h-16 lg:w-[215px]"><Image src="/logo/logotext.png" alt="Aurevia Elegance" fill sizes="215px" className="object-contain object-left" /></span>
+              <span className="relative h-12 w-[166px] max-w-[calc(100vw-6.5rem)] sm:h-14 sm:w-[190px] lg:h-16 lg:w-[215px]"><Image src="/logo/logotext.png" alt="Aurevia Elegance" fill sizes="215px" className="object-contain object-left" /></span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-[#6a5b53]">Aurevia Elegance brings together premium beauty, skincare, fragrance, accessories, and modern lifestyle essentials for confident everyday living.</p>
             <div className="mt-5 flex flex-wrap gap-2.5">

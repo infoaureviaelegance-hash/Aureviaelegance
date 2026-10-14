@@ -53,11 +53,11 @@ export default async function PublicLayout({ children }: { children: ReactNode }
   const headerCategories = await getHeaderCategories();
 
   return (
-    <div className="public-site flex min-h-screen flex-col">
+    <div className="public-site flex min-h-screen min-w-0 max-w-full flex-col overflow-x-clip">
       <a href="#main-content" className="sr-only z-[100] rounded bg-white px-4 py-2 text-black focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to main content</a>
       <JsonLd data={businessSchemas} />
       <Header initialCategories={headerCategories} />
-      <main id="main-content" tabIndex={-1} className="flex-grow bg-white pb-16 outline-none md:pb-0 safe-area-bottom">{children}</main>
+      <main id="main-content" tabIndex={-1} className="min-w-0 max-w-full flex-grow overflow-x-clip bg-white pb-16 outline-none md:pb-0 safe-area-bottom">{children}</main>
       <Footer />
       <MobileBottomNav />
       <ChatIntegrations />

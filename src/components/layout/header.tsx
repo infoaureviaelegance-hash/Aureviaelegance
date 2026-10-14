@@ -271,13 +271,8 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
           </div>
         </div>
       </div>
-      <div className="flex h-7 items-center justify-center bg-black px-2 text-[10px] font-medium text-white lg:hidden sm:h-8 sm:text-xs">
-        <Truck aria-hidden="true" className="mr-1.5 h-3 w-3 shrink-0 text-[#f97316] sm:mr-2 sm:h-3.5 sm:w-3.5" />
-        <span className="truncate">{topBarLeft[0].text}</span>
-      </div>
-
       {/* ───────── main nav ───────── */}
-      <nav className="flex min-h-16 w-full items-center gap-1 px-1 sm:min-h-[4.5rem] sm:px-2 lg:min-h-20 lg:gap-3 lg:px-5 xl:gap-4 xl:px-6">
+      <nav className="flex min-h-16 w-full min-w-0 items-center gap-1 overflow-hidden px-1 sm:min-h-[4.5rem] sm:px-2 lg:min-h-20 lg:gap-3 lg:overflow-visible lg:px-5 xl:gap-4 xl:px-6">
         <div className="order-3 md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuChange}>
             <SheetTrigger asChild>

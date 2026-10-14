@@ -26,12 +26,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo/icon-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/logo/icon-512x512.png", sizes: "512x512", type: "image/png" },
+      { url: "/logo/appicon.png", sizes: "1254x1254", type: "image/png" },
     ],
-    shortcut: [{ url: "/logo/icon-192x192.png", sizes: "192x192", type: "image/png" }],
+    shortcut: [{ url: "/logo/appicon.png", sizes: "1254x1254", type: "image/png" }],
     apple: [
-      { url: "/logo/icon.png", sizes: "1254x1254", type: "image/png" },
+      { url: "/logo/appicon.png", sizes: "1254x1254", type: "image/png" },
     ],
   },
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? {
@@ -54,9 +53,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" type="image/png" href="/logo/icon.png" />
-        <link rel="shortcut icon" type="image/png" href="/logo/icon.png" />
-        <link rel="apple-touch-icon" href="/logo/icon.png" />
+        <link rel="icon" type="image/png" href="/logo/appicon.png" />
+        <link rel="shortcut icon" type="image/png" href="/logo/appicon.png" />
+        <link rel="apple-touch-icon" href="/logo/appicon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Aurevia Elegance" />
