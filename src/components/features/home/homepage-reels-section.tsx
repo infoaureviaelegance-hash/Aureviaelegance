@@ -1,40 +1,38 @@
 "use client";
 
-import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "@esmate/shadcn/pkgs/lucide-react";
+import { useRef, type MouseEvent } from "react";
+import { ChevronLeft, ChevronRight, Play } from "@esmate/shadcn/pkgs/lucide-react";
 import type { PublicVideo } from "@/lib/video-utils";
-import { LazyIframe } from "@/components/shared/lazy-iframe";
 
-function ReelEmbed({ video }: { video: PublicVideo }) {
-  if (!video.embedUrl) {
-    return (
-      <div className="flex aspect-[9/16] w-full items-center justify-center rounded-2xl bg-gray-900 text-center text-xs text-white/80">
-        Unavailable
-      </div>
-    );
-  }
-
+function ReelLink({
+  video,
+  onClick,
+}: {
+  video: PublicVideo;
+  onClick: (event: MouseEvent<HTMLAnchorElement>) => void;
+}) {
   return (
-    <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-[#EA580C]/15 bg-black shadow-sm">
-      <LazyIframe
-        src={video.embedUrl}
-        title=""
-        className="h-full w-full border-0"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        fallback={<div className="h-full w-full animate-pulse bg-black" />}
-        rootMargin="300px 0px"
-      />
-    </div>
+    <a
+      href={video.videoUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Play TikTok video in a new tab"
+      className="group flex aspect-[9/16] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-[#EA580C]/15 bg-black text-white shadow-sm transition hover:border-[#EA580C]/50 hover:bg-gray-950"
+      onClick={onClick}
+    >
+      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black transition group-hover:scale-105">
+        <Play aria-hidden="true" className="ml-1 h-6 w-6 fill-current" />
+      </span>
+      <span className="text-xs font-semibold">Play video</span>
+    </a>
   );
 }
 
 export function HomepageReelsSection({ reels }: { reels: PublicVideo[] }) {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false, moved: false });
 
-  const activeReels = reels.filter((reel) => reel.active && reel.embedUrl);
+  const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false, moved: false });
+  const activeReels = reels.filter((reel) => reel.active && reel.videoUrl);
   if (!activeReels.length) return null;
 
   function scroll(direction: -1 | 1) {
@@ -61,18 +59,19 @@ export function HomepageReelsSection({ reels }: { reels: PublicVideo[] }) {
                 dragging: true,
                 moved: false,
               };
-              slider.setPointerCapture(event.pointerId);
             }}
             onPointerMove={(event) => {
               const slider = sliderRef.current;
               if (!slider || !dragState.current.dragging) return;
               const distance = event.clientX - dragState.current.startX;
-              if (Math.abs(distance) > 5) dragState.current.moved = true;
+              if (Math.abs(distance) > 5) {
+                dragState.current.moved = true;
+                event.preventDefault();
+              }
               slider.scrollLeft = dragState.current.scrollLeft - distance;
             }}
-            onPointerUp={(event) => {
+            onPointerUp={() => {
               dragState.current.dragging = false;
-              sliderRef.current?.releasePointerCapture(event.pointerId);
             }}
             onPointerCancel={() => {
               dragState.current.dragging = false;
@@ -84,7 +83,15 @@ export function HomepageReelsSection({ reels }: { reels: PublicVideo[] }) {
                 data-reel-card
                 className="w-[168px] shrink-0 snap-start sm:w-[200px] md:w-[220px]"
               >
-                <ReelEmbed video={reel} />
+                <ReelLink
+                  video={reel}
+                  onClick={(event) => {
+                    if (dragState.current.moved) {
+                      event.preventDefault();
+                      dragState.current.moved = false;
+                    }
+                  }}
+                />
               </div>
             ))}
           </div>
