@@ -456,7 +456,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
 
         {/* ───────── logo — kept tight to the left edge ───────── */}
         <Link href="/" className="order-1 flex min-w-0 shrink-0 items-center gap-1 sm:gap-1.5 sm:gap-2 md:order-none">
-          <div className="relative h-8 w-8 sm:h-11 sm:w-11 lg:h-15 lg:w-15">
+          <div className="relative h-10 w-10 sm:h-11 sm:w-11 lg:h-15 lg:w-15">
             <Image
               src="/logo/icon.png"
               alt=""
@@ -465,7 +465,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               priority
             />
           </div>
-          <div className="relative h-8 w-[92px] min-[360px]:w-[112px] min-[400px]:w-[124px] sm:h-13 sm:w-[176px] md:h-10 md:w-[126px] lg:h-16 lg:w-[165px] xl:w-[210px]">
+          <div className="relative h-10 w-[100px] min-[360px]:w-[120px] min-[400px]:w-[132px] sm:h-13 sm:w-[176px] md:h-10 md:w-[126px] lg:h-16 lg:w-[165px] xl:w-[210px]">
             <Image
               src="/logo/logotext.png"
               alt="Aurevia Elegance"
