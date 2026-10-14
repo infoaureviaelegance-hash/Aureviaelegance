@@ -35,7 +35,7 @@ export function MobileBottomNav() {
 
   return (
     <nav aria-label="Mobile navigation" className="fixed inset-x-0 bottom-0 z-50 md:hidden">
-      <div className="mx-auto max-w-md rounded-t-[1.4rem] border-x border-t border-black/10 bg-white/95 px-1.5 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] shadow-[0_-8px_28px_rgba(28,16,24,0.12)] backdrop-blur-xl">
+      <div className="mx-auto max-w-md rounded-t-[1.4rem] border-x border-t border-black/10 bg-white/95 px-1.5 pt-1.5 pb-[max(0.125rem,env(safe-area-inset-bottom))] shadow-[0_-8px_28px_rgba(28,16,24,0.12)] backdrop-blur-xl">
         <div className="grid h-14 grid-cols-5 items-center gap-1">
           <Link
             href="/"
