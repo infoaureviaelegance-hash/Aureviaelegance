@@ -66,11 +66,7 @@ export async function GET(request: Request) {
       },
     });
 
-    const categoryIds = [...new Set(products.flatMap((product) => [product.categoryId, product.subcategoryId]).filter((id): id is string => Boolean(id)))];
-    const categories = categoryIds.length
-      ? await prisma.category.findMany({ where: { id: { in: categoryIds } }, select: { id: true, name: true } })
-      : [];
-    const xml = buildMetaCatalogXml(products, getBaseUrl(request), new Map(categories.map((category) => [category.id, category.name])));
+    const xml = buildMetaCatalogXml(products, getBaseUrl(request), new Map());
     const etag = `"${createHash("sha256").update(xml).digest("base64url")}"`;
 
     if (request.headers.get("if-none-match") === etag) {
