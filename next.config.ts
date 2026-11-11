@@ -6,6 +6,9 @@ const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.ANALYZE === "tr
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
+  experimental: {
+    cpus: 2,
+  },
   serverExternalPackages: ["dompurify"],
   images: {
     formats: ["image/avif", "image/webp"],
