@@ -465,7 +465,7 @@ export function Header({ initialCategories = [] }: { initialCategories?: HeaderC
               priority
             />
           </div>
-          <div className="relative h-10 w-[100px] min-[360px]:w-[120px] min-[400px]:w-[132px] sm:h-13 sm:w-[176px] md:h-10 md:w-[126px] lg:h-16 lg:w-[165px] xl:w-[210px]">
+          <div className="relative h-8 w-[82px] min-[360px]:w-[96px] min-[400px]:w-[106px] sm:h-10 sm:w-[140px] md:h-8 md:w-[104px] lg:h-12 lg:w-[132px] xl:w-[168px]">
             <Image
               src="/logo/logotext.png"
               alt="Aurevia Elegance"

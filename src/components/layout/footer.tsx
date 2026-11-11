@@ -30,7 +30,7 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex max-w-full items-center gap-2" aria-label="Aurevia Elegance home">
               <span className="relative h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16"><Image src="/logo/icon.png" alt="" fill sizes="64px" className="object-contain" /></span>
-              <span className="relative h-12 w-[166px] max-w-[calc(100vw-6.5rem)] sm:h-14 sm:w-[190px] lg:h-16 lg:w-[215px]"><Image src="/logo/logotext.png" alt="Aurevia Elegance" fill sizes="215px" className="object-contain object-left" /></span>
+              <span className="relative h-9 w-[128px] max-w-[calc(100vw-6.5rem)] sm:h-10 sm:w-[150px] lg:h-12 lg:w-[170px]"><Image src="/logo/logotext.png" alt="Aurevia Elegance" fill sizes="170px" className="object-contain object-left" /></span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-[#6a5b53]">Aurevia Elegance brings together premium beauty, skincare, fragrance, accessories, and modern lifestyle essentials for confident everyday living.</p>
             <div className="mt-5 flex flex-wrap gap-2.5">

@@ -1,13 +1,10 @@
-const CACHE_NAME = 'aurevia-elegance-v4';
+const CACHE_NAME = 'aurevia-elegance-v5';
 const OFFLINE_URL = '/offline.html';
 
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
   '/offline.html',
-  '/logo/icon.png',
-  '/logo/icon-192x192.png',
-  '/logo/icon-512x512.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -33,6 +30,12 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.origin === self.location.origin && requestUrl.pathname.startsWith('/logo/')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request).catch(() => {
